@@ -1,4 +1,4 @@
-<!-- Images, Tables , Forms-->
+<!-- Images, Tables , Forms, Links-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,12 +7,14 @@
     <title>Session2</title>
   </head>
   <body>
+    <!-- IMAGES-->
     <img src="../imgs/B15A1275.JPG" alt="shirt" width="0" height="0" />
     <!-- img tag is self closing means we put a / at the end of the opening tag-->
     <!-- src attribute represents the src file of the image the alt attribute specifies alternative incase of the src doesnt work, represenst info of the img  -->
     <!-- we can add attribute width and height to adjust size of the img (in pixels)-->
     <!-- .. represents go out of the current folder you are in ../.. means go out of sub,sub folder -->
 
+    <!-- TABLES-->
     <table border>
       <!-- border means create a border for the table -->
       <!-- the table element/structure consists of 2 sub elements a thead and a tbody same idea as our main structure but we add a t in the beggining-->
@@ -51,6 +53,7 @@
       </tbody>
     </table>
 
+    <!-- FORMS-->
     <form onsubmit="testmethod()">
       <!-- Form consists of container of labels and corresponding inputs-->
       <!-- Any Button/ input will take data or save data has to be inside a form. Place an action on the entire form 
@@ -93,6 +96,7 @@
       <br />
 
       <button>Sign in</button>
+      <!-- Since this button is in the form, it will have action on the inputs of the form aka show validation message based on type, its best practice to include buttons regarding inputs INSIDE A FORM-->
       <button type="reset">reset</button>
       <!-- reset type means clear the input fields again if its not part of the form it will not have any functionality over the input fields-->
       <!-- button tag represents a button, the text of the button can be written in the middle of it, we can add an onlick method so when pressed it does a specifc thing & add a css class in the opening tag-->
@@ -100,9 +104,22 @@
 
       <br />
 
-      <a href="forgetpassword.html"> forgetpassword</a>
+      <!-- LINKS-->>
+      <a href="forgetpassword.html" target="_blank"> forgetpassword</a>
       <!-- The <a> tag defines a hyperlink, which is used to link from one page to another. 
-        The most important attribute of the <a> element is the href attribute, which indicates the link's destination. -->
+        The most important attribute of the <a> element is the href attribute, which indicates the link's destination. Coudl be a page, email .. any link 
+          To Make the link open in a new tab we use the attribute target. target="_blank"-->
+
+      <!-- LINKS: TO SPECIFIC PART OF THE SAME PAGE -->
+
+      <a href="#myButton">Go to My Button</a>
+      <!-- Some content to create a scrollable page -->
+      <p style="margin-top: 1000px">Scroll down to find the button</p>
+
+      <button id="myButton">Click Me</button>
+      <!--To link to an element that uses an id attribute you use the <a> element again, but the value of the href attribute starts with the # symbol,
+          followed by the value of the id attribute of the element you want to link to.-->
+      <!-- Example: if this was a button aka linking to an element thats a button, when we click on the link it will redirect us to that element aka the button with id mybutton -->
     </form>
   </body>
 </html>
