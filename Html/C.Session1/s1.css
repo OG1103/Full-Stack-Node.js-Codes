@@ -1,0 +1,76 @@
+/* Structure: 
+1) SELECTOR: defines the element that the style belongs to 
+2) DECLARATION BLOCK:  - Contains a bunch of Declarations. Declaration contains 1)Property: is the style(what we are styling). 2)Value: is the value of the property. 
+                        -Each declaration is seperated by ;
+                        ex of a single declaration: property=, color, value= black. 
+                        Declaration block=> {color: black ; <another declaration>;}
+*/
+/*
+BASIC SYNTAX: we identify the selector(element) then { include declaration block} EX: P{declaration block [my declarations]}
+    selector{
+      PROPRTY:VALUE;
+      PROPRTY:VALUE;
+      }
+*/
+
+p {
+  color: aqua;
+  font-size: 12px;
+}
+/* Any P element will have that style*/
+
+/*"Instead of defining styles directly for an element, we can create classes and assign those classes to specific elements. 
+This way, the style is applied only to the elements with the assigned class, rather than every instance of that element type. 
+Using classes allows us to apply styles selectively to specific elements as needed*/
+/*For class we write: .(class_name)*/
+.test {
+  color: red;
+}
+
+/*IDs (denoted by #) are used to apply styles to a single, unique element. Each ID should be unique within an HTML document, 
+meaning no two elements should share the same ID. This ensures that the styles applied to an ID only affect that particular element.*/
+/*For assigning style to a specifc element: #elementid {}*/
+/*Nothing can override the style if its identified used element id*/
+
+#div1 {
+  color: red;
+}
+/*this style will only apply to element with id div1*/
+
+/*We can specify the class by including a parent for example this style applies to a class .. however that class is used in 2 different cases and 
+i want to afar2 mabenhom. In this case i include parent. (Multiple selector/ Decendant Selector [BEST PRACTICE TO USE, To give simalr blocks same class and uniquely identify them using parent]) 
+
+SYNTAX: .parentclass .subparentclass. .. .class (we start from the most unique parent and go down to each sub parent until we reach our child/dest element)
+usually only necessary in complex nested elements, which can have the same class name as other elemnts */
+
+.parent-1 .div-2 {
+  color: blue;
+  font-size: 30px;
+  border: 1px solid red;
+}
+
+.parent-2 .div-2 {
+  color: brown;
+  font-size: 60px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  border: 1px solid black;
+}
+/*We do this when two elements have the same class however i want different implementation or something small, so to differentiate i specify parent class on top of that class. 
+if parent class is repeated and i want to differntiate i identify the parent above it and so on.*/
+/*However we can always identify unique class names for each class however this is more efficient to reduce the css file and we dont get confused*/
+/* In html u can check both divs have div-2, however cuz i specified class of parent as well i can differentiate between them in terms of styling one is blue and one is browm */
+
+#l1 {
+  color: blueviolet;
+}
+
+.div-2 {
+  color: darkolivegreen;
+  border: 2px solid blue;
+}
+/* 
+Since this is the only class named 'div-2' that does not include any parent class selectors, 
+any element with the class 'div-2' will inherit this style, 
+unless another class is specified that includes more specific parent class selectors.
+*/
