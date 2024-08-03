@@ -27,8 +27,9 @@ Using classes allows us to apply styles selectively to specific elements as need
   color: red;
 }
 
+
 /*IDs (denoted by #) are used to apply styles to a single, unique element. Each ID should be unique within an HTML document, 
-meaning no two elements should share the same ID. This ensures that the styles applied to an ID only affect that particular element.*/
+meaning no two elements should share the same ID. This ensures that the styles applied to an ID only affect that particular element with that corresponding id.*/
 /*For assigning style to a specifc element: #elementid {}*/
 /*Nothing can override the style if its identified used element id*/
 
