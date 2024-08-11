@@ -1,6 +1,9 @@
 .header {
   text-align: center;
 }
+.nav {
+    background-color: beige;
+}
 .video {
   width: 30%;
   margin-left: 700px;
