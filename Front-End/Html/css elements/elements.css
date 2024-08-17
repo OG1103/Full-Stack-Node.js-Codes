@@ -1,0 +1,200 @@
+/* COLOR */
+.story {
+  color: rgba(29, 190, 190, 0.8);
+  color: black;
+  color: #336640;
+}
+/* we can represent color as color : <colorname> / rgb(red value, greenvalue, blue value) / Hexadecimal (#hexa value) / rgba(red,green,blue,alpha) alpha= opacity of the color */
+/* Note, css reads the last elements, so here will take the last color */
+
+/* TEXT ALLIGN */
+.text-center {
+  text-align: center;
+  /* defines the position of the TEXT ONLY TEXT */
+}
+/* VALUES:
+left: Aligns the text to the left.
+right: Aligns the text to the right.
+center: Centers the text.
+justify: Stretches the lines so that each line has equal width.
+start: Aligns the text to the start of the element (left for left-to-right languages, right for right-to-left languages).
+end: Aligns the text to the end of the element (right for left-to-right languages, left for right-to-left languages).
+*/
+
+/* TEXT TRANSFORM */
+/* The text-transform property in CSS is used to control the capitalization of text. */
+.text-transform {
+  text-transform: capitalize;
+}
+/* VALUES:
+none: No capitalization. The text renders as it is.
+capitalize: Transforms the first character of each word to uppercase.
+uppercase: Transforms all characters to uppercase.
+lowercase: Transforms all characters to lowercase.
+ */
+
+/* TEXT SHADOW */
+/* The text-shadow property in CSS is used to apply shadow effects to text. It accepts a set of values that define the appearance of the shadow. Here are the values and an explanation for each: */
+.text-shadow-single {
+  text-shadow: 2px 2px 4px #000000;
+}
+/* 
+1)Horizontal Offset (required): Specifies the horizontal distance of the shadow. Positive values move the shadow to the right, while negative values move it to the left.
+2)Vertical Offset (required): Specifies the vertical distance of the shadow. Positive values move the shadow down, while negative values move it up.
+3)Blur Radius (optional): Defines the blur radius. The higher the number, the more blurred the shadow will be. If not specified, the default is 0, which means the shadow is sharp.
+Color (optional): Specifies the color of the shadow. It can be defined using any valid CSS color value (e.g., hex, rgb, rgba, named colors).
+ */
+/* 
+ Adds shadow to text, the blur acts like opacity to the shadow (the mirrored/shadowed text)
+*/
+
+/*TEXT INDENT*/
+/* 
+The text-indent property in CSS is used to specify the indentation of the FIRST LINE of text in a block-level element. Here’s a detailed look at its values and usage:
+ */
+.indent-px {
+  text-indent: 20px;
+}
+/* 
+ Length: Specifies the indentation in units such as pixels (px), ems (em), or percentages (%).
+*/
+
+/* TEXT DECORATION */
+/* The text-decoration property in CSS is used to specify the decoration added to text, such as underlining, overlining, or line-through */
+.text-dec {
+  text-decoration: underline;
+}
+/* 
+none: No decoration is applied.
+underline: Underlines the text.
+overline: Adds a line above the text.
+line-through: Adds a line through the text.
+ */
+
+/* LINE HEIGHT */
+/* The line-height property in CSS is used to set the height of a line box. It's commonly used to control the amount of space between lines of text. */
+/* Adds vertical spacing between each line in the text/paragraph */
+.line-number {
+  /* line-height: 50px;  */
+  /* line-height: 35%;  */
+  line-height: 1.5;
+}
+/* 
+Normal: Sets the line height to a reasonable value for the element's font size. This is the default value.
+Number: Sets the line height as a number that will be multiplied by the element's font size. This value does not have units.
+Length: Specifies a fixed line height using units such as pixels (px), ems (em), or other CSS units.
+Percentage: Sets the line height as a percentage of the element's font size.
+ */
+
+/* LETTER&WORD SPACING */
+/* The letter-spacing property in CSS is used to control the space between characters in a text */
+.letter-space {
+  /* letter-spacing: normal; */
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  /* word spacing adds space to each word in comparison to letter spacing which adds space between letters */
+}
+/* 
+Normal: This is the default value which sets the spacing to the normal space between characters.
+Length: Specifies the space between characters using units such as pixels (px), ems (em), rems (rem), or other CSS length units.
+ */
+
+/* FONT SIZE */
+/* The font-size property in CSS is used to specify the size of the font.*/
+.font-px {
+  font-size: 12px;
+}
+/* 
+Absolute Size Keywords: These are predefined sizes relative to the default font size. Example (small , medium) 
+Relative Size Keywords: These are relative to the parent element’s font size. (smaller , larger) 
+Length: Specifies the font size using units such as pixels (px), ems (em), rems (rem), or other CSS length units.
+px: Absolute length unit
+em: Relative to the font size of the parent element
+rem: Relative to the font size of the root element (<html>)
+Percentage: Specifies the font size as a percentage of the parent element’s font size.
+ */
+
+/*FONT WEIGHT*/
+/* The font-weight property in CSS is used to set the thickness or boldness of the font */
+.font-weight {
+  font-weight: 100;
+}
+/* 
+Numeric Values: Numeric values range from 100 to 900 in increments of 100. These values represent the weight of the font, where 400 is typically the normal weight, and 700 is typically bold.
+Name keywords: bold , bolder , lighter
+ */
+
+/* FONT FAMILY */
+/* The font-family property in CSS specifies the typeface to be used for the text. It allows you to define one or more font names and fallback options, ensuring that text is rendered using the most suitable font available.  */
+.font-name {
+  /* font-family: Arial; */
+  font-family: Arial, Helvetica, sans-serif;
+  /* the above is a font stack, it will take the first one and the others are incase the first doest work */
+}
+/* 
+Font Names: Specific Font Names: You can specify a particular font that you want to use, such as "Arial", "Times New Roman", or "Courier New".
+Generic Font Families: set of predefined font types that are used to ensure consistent typography across different browsers and operating systems
+Font Stack: A list of fonts separated by commas. The browser will use the first available font in the list. If the specified font is not available, it will fallback to the next font in the list.
+Web Fonts: Custom fonts that can be included using @font-face or loaded from a service like Google Fonts. The name given to the font in the font-family property should match the name defined in the @font-face rule or provided by the font service.
+*/
+
+/* FONT STYLE */
+/* The font-style property in CSS is used to set the style of the font, such as whether it is italic or normal */
+.font-style {
+  font-style: italic;
+}
+/* 
+VALUES:
+Normal: The default font style, which displays the text in the regular, upright position.
+Italic: Renders the text in italics, which typically means the text is slanted to the right.
+Oblique:  Renders the text in an oblique style, which is similar to italic but can be less stylized. Some fonts may look very similar to italics, while others may not.
+*/
+
+/* BOX SIZING */
+
+/* WIDTH */
+/* The width property in CSS sets the width of an element. It can take a variety of values, each serving different purposes depending on the design needs. */
+.width-px {
+  width: 200px;
+}
+/* Playing with width, the lower the width, the less space i have to move the content in it */
+/* example text allignment, center: will take the center based on the width or size of the box */
+/*
+VALUES:
+Absolute Units: Pixels 
+Relative Units: Percentages, viewport width (vw), viewport height (vh).
+Auto:  Width is determined by content or container size.
+Max/Min Width:  Constraints on width size.
+Fit-content/Max-content:  Width adjusts based on content.
+Calc:  Calculation 
+ */
+
+/* HEIGHT */
+/* In CSS, the height property is used to set the height of an element. The height can be specified in various units and value */
+.height-px {
+  height: 20px;
+}
+/* Playing with with sizes -> also same example in width applies. */
+/* Absolute Units: Pixels 
+Relative Units: Percentages, viewport width (vw), viewport height (vh).
+Auto:  Width is determined by content or container size.
+Max/Min Height:  Constraints on width size */
+
+/* CSS BACKGROUND */
+
+/* BACKGROUND-COLOR */
+/* 
+The background-color property in CSS sets the background color of an element.
+ */
+.background-color {
+  /* background-color: #336640; */
+  background-color: blue;
+}
+/* 
+VALUES EX:
+Color names  : white , red , green
+RGB: rgb(255, 87, 51)
+RGBA: rgba(255, 87, 51, 0.5)
+6-digit Hex: #ff5733 
+8-digit Hex: #ff573350 
+*/
