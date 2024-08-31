@@ -81,9 +81,11 @@ you can structure your CSS by targeting the tag within the class. Here's how you
 
 .special-box {
   /* css for container*/
+  color: aliceblue;
 }
 
 .special-box p {
   /* css for the element p inside the container that has class special-box */
   /* so for any p inside that container wiht class special-box IT WILL TAKE THE STYLE SPECIFIED IN THIS SECTION  */
+  color: black;
 }
