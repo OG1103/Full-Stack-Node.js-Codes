@@ -7,70 +7,134 @@
   </head>
 
   <body>
-    <!-- Body consists of a nav bar, main and footer -->
+    <!-- The body consists of three main parts: a header (with a navigation bar), a main content area, and a footer. -->
+
+    <!-- HEADER SECTION -->
     <header>
-      <!-- consists of the very top of the website usually only conists of nav so we dont need a header but if u will put extra elements/ components put in header-->
+      <!-- 
+        The <header> element represents a container for introductory content or a set of navigational links.
+        It usually contains elements like a logo, site name, navigation links, etc.
+        - Here, it includes a navigation bar (<nav>) and a placeholder for additional elements (e.g., a logo).
+      -->
+
+      <!-- NAVIGATION BAR -->
       <nav>
-        <!--Here we place our navigation bar (contains links that take us to somewhere)-->
+        <!-- 
+          The <nav> element represents a section of a page that links to other pages or to parts within the page.
+          It is typically used to group a set of navigation links. 
+        -->
         <span>Home</span>
-        <span>about</span>
-        <span>account</span>
-        <a href="/">test</a>
+        <!-- The <span> tag is an inline container typically used for styling purposes. Here, it represents a non-clickable text for navigation. -->
+        <span>About</span>
+        <span>Account</span>
+        <a href="/">Test</a>
+        <!-- 
+          The <a> (anchor) tag defines a hyperlink. 
+          - href="/": The link points to the homepage (root directory).
+        -->
       </nav>
+
+      <!-- OPTIONAL HEADER CONTENT -->
       <div>
-        <!-- can take logo / anything in the header incase we don't want a nav bar only-->
+        <!-- 
+          The <div> element is a block-level container used for grouping elements.
+          This <div> can be used for additional content in the header, such as a logo or search bar.
+        -->
       </div>
     </header>
 
+    <!-- MAIN CONTENT SECTION -->
     <main>
-      <!-- contains the main content of the page-->
-      <section>
-        <h2>Clothe</h2>
-        <!-- We dont include headers in divs -->
+      <!-- 
+        The <main> element represents the dominant content of the <body> of a document. 
+        There should be only one <main> element in a document, and it should not be a descendant of an <article>, <aside>, <footer>, <header>, or <nav>.
+        It is used to encapsulate the central content of the page.
+      -->
 
+      <!-- CLOTHES SECTION -->
+      <section>
+        <!-- 
+          The <section> tag defines a section in a document, such as a chapter, header, footer, or any other thematic grouping of content.
+          This section is dedicated to displaying different types of clothes.
+        -->
+        <h2>Clothes</h2>
+        <!-- The <h2> tag defines a second-level heading, used to label the section content -->
+
+        <!-- PANTS -->
         <div>
+          <!-- 
+            Each <div> here groups content related to a specific clothing item. 
+            It allows for easy styling and manipulation of each clothing item block.
+          -->
           <h3>Pants</h3>
-          <p>This is a Pants Paraphraph</p>
+          <!-- The <h3> tag defines a third-level heading, used to label sub-content within a section -->
+          <p>This is a Pants Paragraph</p>
+          <!-- The <p> tag defines a paragraph, used here for a description of the item -->
           <h5>1000 EGP</h5>
+          <!-- The <h5> tag defines a fifth-level heading, used to display the price -->
         </div>
+
+        <!-- SHIRTS -->
         <div>
           <h3>Shirts</h3>
-          <p>this is a shirts Paraphraph</p>
+          <p>This is a Shirts Paragraph</p>
           <h5>1000 EGP</h5>
         </div>
+
+        <!-- SHORTS -->
         <div>
           <h3>Shorts</h3>
-          <p>this is a shorts Paraphraph</p>
+          <p>This is a Shorts Paragraph</p>
           <h5>1000 EGP</h5>
         </div>
       </section>
+
       <br />
+
+      <!-- CARS SECTION -->
       <section>
+        <!-- 
+          This section is dedicated to displaying different types of cars.
+        -->
         <h2>Cars</h2>
+
+        <!-- CAR 1 -->
         <div>
           <h3>Car1</h3>
-          <p>Car1 paraprah</p>
+          <p>Car1 paragraph</p>
           <h5>2000000 EGP</h5>
         </div>
+
+        <!-- CAR 2 -->
         <div>
           <h3>Car2</h3>
-          <p>Car2 paraprah</p>
+          <p>Car2 paragraph</p>
           <h5>2000000 EGP</h5>
         </div>
       </section>
     </main>
 
+    <!-- FOOTER SECTION -->
     <footer>
-      <!-- contains the footer content, places it at the end of the page (footer) doesn't contain main content-->
+      <!-- 
+        The <footer> element represents a footer for its nearest sectioning content or sectioning root element.
+        It typically contains information about the author of the document, copyright information, links to related documents, etc.
+        This footer contains contact information.
+      -->
       <h3>Contact Us</h3>
+      <!-- The <h3> tag defines a third-level heading, used here for the footer title -->
 
       <div>
-        <!--place elements-->
-        <!-- its best pracitice to include elememts in div and playe with the style of the div -->
+        <!-- 
+          The <div> element is used to group the footer content, such as contact information.
+          This grouping helps in applying styles and layouts.
+        -->
         <ul>
+          <!-- The <ul> tag defines an unordered (bulleted) list. Used here to list contact details. -->
           <li>055827272</li>
-          <li>address</li>
-          <li>test</li>
+          <!-- The <li> tag defines a list item. Used here to display a contact number. -->
+          <li>Address</li>
+          <li>Test</li>
         </ul>
       </div>
     </footer>

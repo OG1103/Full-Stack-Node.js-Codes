@@ -74,3 +74,16 @@ Since this is the only class named 'div-2' that does not include any parent clas
 any element with the class 'div-2' will inherit this style, 
 unless another class is specified that includes more specific parent class selectors.
 */
+
+/* 
+To give a specific tag (like a <p>, <a>, or <div>) custom styles within a class, 
+you can structure your CSS by targeting the tag within the class. Here's how you can do it: */
+
+.special-box {
+  /* css for container*/
+}
+
+.special-box p {
+  /* css for the element p inside the container that has class special-box */
+  /* so for any p inside that container wiht class special-box IT WILL TAKE THE STYLE SPECIFIED IN THIS SECTION  */
+}

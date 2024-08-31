@@ -1,0 +1,148 @@
+<!-- Images, Tables, Forms, Links-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session2</title>
+  </head>
+  <body>
+    <!-- IMAGES-->
+    <img src="../imgs/B15A1275.JPG" alt="shirt" width="300" height="200" />
+    <!-- The <img> tag is self-closing, meaning it does not have a closing tag.
+         - src: Specifies the path to the image file.
+         - alt: Provides alternative text if the image cannot be displayed. It's important for accessibility and SEO.
+         - width and height: Control the size of the image in pixels.
+         Note: "../" means to go up one directory level. "../../" would go up two levels, and so on. -->
+
+    <!-- TABLES-->
+    <table border="1">
+      <!-- The <table> element defines a table.
+           - border: Adds a border to the table. The value "1" sets a visible border. -->
+
+      <!-- A table structure includes two main parts:
+           1. <thead>: Contains the table header (column names).
+           2. <tbody>: Contains the table body (data rows). -->
+
+      <thead>
+        <!-- The <thead> contains the table headers (columns). -->
+        <tr>
+          <!-- The <tr> tag defines a row in the table. -->
+          <th>Names</th>
+          <th>Age</th>
+          <!-- The <th> tag defines a table header cell, which is usually bold and centered. -->
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- The <tbody> contains the table data rows. -->
+        <tr>
+          <!-- Start of the first data row -->
+          <td>Omar</td>
+          <!-- The <td> tag defines a standard cell in the table (data for "Names" column). -->
+          <td>21</td>
+          <!-- The <td> tag (data for "Age" column). -->
+        </tr>
+        <tr>
+          <!-- Start of the second data row -->
+          <td>Ahmed</td>
+          <td>21</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- FORMS-->
+    <form onsubmit="testmethod()">
+      <!-- A <form> element represents a form that collects user input. The "onsubmit" attribute calls a JavaScript function when the form is submitted.
+           - All interactive elements like buttons or inputs that collect or manipulate data should be inside a form for proper functionality. -->
+
+      <!-- LABELS AND INPUTS -->
+      <label for="emailinput">Email</label>
+      <!-- The <label> tag defines a label for an <input> element.
+           - for: Specifies which input the label is associated with (matches the input's id). Clicking the label focuses the input. -->
+
+      <input
+        id="emailinput"
+        type="email"
+        placeholder="Enter your email"
+        required
+      />
+
+      <br />
+
+      <label for="mobileinput">Mobile</label>
+      <input
+        id="mobileinput"
+        type="number"
+        placeholder="Enter your mobile number"
+        required
+      />
+      <br />
+
+      <label for="passwordinput">Password</label>
+      <input
+        id="passwordinput"
+        type="password"
+        placeholder="Enter your password"
+        required
+        minlength="2"
+        maxlength="7"
+      />
+
+      <br />
+      <br />
+
+      <!-- BUTTONS -->
+      <button type="submit">Sign in</button>
+      <!-- <button> elements inside a form default to type="submit", meaning clicking it will submit the form.
+           - Including buttons inside a form is best practice for form control and input validation. -->
+
+      <button type="reset">Reset</button>
+      <!-- type="reset": Resets all form inputs to their default values. -->
+
+      <br />
+      <br />
+
+      <!-- ENABLED AND DISABLED INPUTS -->
+      <label for="disabledinput">Disabled Input</label>
+      <input
+        id="disabledinput"
+        type="text"
+        placeholder="This input is disabled"
+        disabled
+      />
+      <!-- Adding the "disabled" attribute makes the input non-interactive (grayed out and uneditable). -->
+
+      <br />
+
+      <label for="enabledinput">Enabled Input</label>
+      <input
+        id="enabledinput"
+        type="text"
+        placeholder="This input is enabled"
+      />
+      <!-- By default, inputs are enabled if the "disabled" attribute is not present. -->
+
+      <br />
+      <br />
+
+      <!-- LINKS-->
+      <a href="forgetpassword.html" target="_blank">Forget Password</a>
+      <!-- The <a> tag defines a hyperlink to another page or location.
+           - href: Specifies the destination URL.
+           - target="_blank": Opens the link in a new tab or window. -->
+
+      <!-- LINK TO A SPECIFIC PART OF THE SAME PAGE -->
+      <a href="#myButton">Go to My Button</a>
+      <!-- This link will scroll the page to the element with the id "myButton". -->
+
+      <!-- Some content to create a scrollable page -->
+      <p style="margin-top: 1000px">Scroll down to find the button</p>
+
+      <!-- BUTTON TO SCROLL TO -->
+      <button id="myButton">Click Me</button>
+      <!-- The id attribute is used to create an anchor point for links. 
+           When the above link is clicked, the page will scroll to this button. -->
+    </form>
+  </body>
+</html>

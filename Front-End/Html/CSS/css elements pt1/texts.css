@@ -198,3 +198,43 @@ RGBA: rgba(255, 87, 51, 0.5)
 6-digit Hex: #ff5733 
 8-digit Hex: #ff573350 
 */
+
+/* BACKGROUND IMAGES */
+
+/* BACKGROUND IMAGE */
+/* The background-image property in CSS is used to set one or more background images for an element. */
+.image {
+  /* background-image: url("link"); */
+  background-image: linear-gradient(to right, red, green);
+}
+/* 
+VALUES:
+URL:  Sets a background image from a specified URL. This is the most common way to add background images.
+Linear Gradient: Creates a gradient background that transitions smoothly between colors in a specified direction.
+ */
+
+/* BACKGROUND SIZE */
+/* The background-size property in CSS specifies the size of the background images */
+.size {
+  /* background-image: url("link"); */
+  background-size: auto;
+}
+/* 
+auto:  The background image is displayed at its original size.
+cover: The background image is scaled to cover the entire element. The image will fill the element while maintaining its aspect ratio, which may cause parts of the image to be cropped.
+contain: The background image is scaled to fit within the element. The entire image will be visible, maintaining its aspect ratio, which may result in empty spaces (padding) within the element.
+length : Specifies the width and height of the background image. You can use any CSS length units (px, em, %, etc.).
+ */
+
+/* BACKGROUND POSITION */
+/* The background-position property in CSS specifies the initial position of a background image. It allows you to place the background image in a specific location within the element. */
+.position {
+  /* background-image: url("link"); */
+  background-position: center center; /* vertical and horizontal centering*/
+  background-position: left 10px top 20px; /* 10 px from left and 20 px from top*/
+}
+/*
+Keywords:  left, center, right, top, bottom for simple alignment.
+Length values: Use pixels, ems, etc., for precise placement.
+Combination of Keywords: Allows mixing keywords with length or percentage values. 
+ */

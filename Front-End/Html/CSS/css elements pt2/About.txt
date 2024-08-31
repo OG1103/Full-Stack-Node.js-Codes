@@ -1,0 +1,6 @@
+In this folder we are looking at the css elements:
+    1- Padding
+    2- Margin
+    3- Border
+    4- Display
+    5- Opacity & visibility

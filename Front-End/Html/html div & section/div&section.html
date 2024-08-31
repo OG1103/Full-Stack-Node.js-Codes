@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session3</title>
+  </head>
+  <body>
+    <!-- Heading and Input Field -->
+    <h1>Hello</h1>
+    <!-- A main heading for the page -->
+
+    <br />
+    <input type="text" placeholder="Enter text here" />
+    <!-- A text input field with a placeholder -->
+
+    <br />
+
+    <!-- Spans for inline text elements -->
+    <span>Hey</span>
+    <span>how</span>
+    <span>is</span>
+    <span>everything</span>
+    <!-- 
+      The <span> tag is an inline container used to mark up a part of a text or a part of a document.
+      - It doesn't start a new line; it stays within the line of text, making it useful for styling specific words differently.
+    -->
+
+    <!-- Section Element: Grouping related content -->
+    <section>
+      <!-- 
+        The <section> tag defines sections in a document, such as chapters, headers, footers, or any other sections of the document.
+        - It is used here to group related <div> elements as if it is a chapter of a book.
+      -->
+
+      <!-- First Div: Contains a map and heading -->
+      <div class="map-container">
+        <!-- 
+          The <div> tag is a block-level container that is used to group elements together.
+          - It helps in applying CSS styles and managing the layout of the box.
+          - Here, each <div> groups elements that work together to serve one purpose.
+        -->
+        <h2>Div1</h2>
+        <!-- Secondary heading for the first content section -->
+
+        <!-- Embedded Google Map -->
+        <iframe
+          width="400"
+          height="400"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0"
+          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+          ><a href="https://www.gps.ie/">gps systems</a></iframe
+        >
+        <!-- 
+          The <iframe> tag specifies an inline frame. It is used to embed another document within the current HTML document.
+          - src: The URL of the page to embed.
+          - width and height: Size of the frame.
+        -->
+      </div>
+
+      <!-- Second Div: Contains additional content -->
+      <div class="content-container">
+        <h2>Div2</h2>
+        <!-- Secondary heading for the second content section -->
+        <p>This is the second div</p>
+        <!-- A paragraph inside the second div -->
+      </div>
+    </section>
+
+    <!-- Adding spacing for clarity -->
+    <p style="margin-top: 100px"></p>
+
+    <!-- Practice Section: Clothes -->
+    <section>
+      <h2>Clothes</h2>
+      <!-- A section dedicated to different types of clothes -->
+
+      <!-- Div for Pants -->
+      <div class="clothing-item">
+        <h3>Pants</h3>
+        <!-- Tertiary heading for Pants -->
+        <p>This is a Pants Paragraph</p>
+        <!-- Description for Pants -->
+        <h5>1000 EGP</h5>
+        <!-- Price for Pants -->
+      </div>
+
+      <!-- Div for Shirts -->
+      <div class="clothing-item">
+        <h3>Shirts</h3>
+        <p>This is a Shirts Paragraph</p>
+        <h5>1000 EGP</h5>
+      </div>
+
+      <!-- Div for Shorts -->
+      <div class="clothing-item">
+        <h3>Shorts</h3>
+        <p>This is a Shorts Paragraph</p>
+        <h5>1000 EGP</h5>
+      </div>
+    </section>
+
+    <br />
+
+    <!-- Practice Section: Cars -->
+    <section>
+      <h2>Cars</h2>
+      <!-- A section dedicated to different types of cars -->
+
+      <!-- Div for Car1 -->
+      <div class="car-item">
+        <h3>Car1</h3>
+        <!-- Tertiary heading for Car1 -->
+        <p>Car1 description</p>
+        <!-- Description for Car1 -->
+        <h5>2000000 EGP</h5>
+        <!-- Price for Car1 -->
+      </div>
+
+      <!-- Div for Car2 -->
+      <div class="car-item">
+        <h3>Car2</h3>
+        <p>Car2 description</p>
+        <h5>2000000 EGP</h5>
+      </div>
+    </section>
+  </body>
+</html>

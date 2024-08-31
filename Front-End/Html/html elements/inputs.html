@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inputs Explained</title>
+  </head>
+  <body>
+    <!-- The <input> element is one of the most used elements in HTML forms.
+         It is used to create various interactive controls for forms to accept data from the user.
+         The type of data that <input> accepts is defined by its 'type' attribute.
+         Below, we explore different types of inputs and their attributes. -->
+
+    <h1>HTML Input Types and Attributes</h1>
+
+    <!-- TEXT INPUT -->
+    <h2>Text Input</h2>
+    <!-- 
+      type="text" is the default input type. It allows the user to enter a single line of text.
+      Attributes:
+        - placeholder: Provides a hint to the user about what to enter.
+        - maxlength: Specifies the maximum number of characters allowed.
+        - minlength: Specifies the minimum number of characters allowed.
+        - required: Specifies that the input must be filled out before submitting the form.
+    -->
+    <input
+      type="text"
+      placeholder="Enter your name"
+      maxlength="20"
+      minlength="3"
+      required
+    />
+    <br /><br />
+
+    <!-- PASSWORD INPUT -->
+    <h2>Password Input</h2>
+    <!-- 
+      type="password" is used for entering passwords or other sensitive information.
+      The characters typed are masked (displayed as dots or asterisks) for security.
+      Attributes:
+        - Similar to 'text' input, such as placeholder, maxlength, minlength, required.
+    -->
+    <input
+      type="password"
+      placeholder="Enter your password"
+      minlength="6"
+      required
+    />
+    <br /><br />
+
+    <!-- EMAIL INPUT -->
+    <h2>Email Input</h2>
+    <!-- 
+      type="email" is used for input fields that should contain an e-mail address.
+      It automatically validates the input to ensure it follows the standard email format.
+      Attributes:
+        - placeholder, required
+    -->
+    <input type="email" placeholder="Enter your email" required />
+    <br /><br />
+
+    <!-- NUMBER INPUT -->
+    <h2>Number Input</h2>
+    <!-- 
+      type="number" allows the user to enter a numeric value.
+      Attributes:
+        - min: Specifies the minimum value allowed.
+        - max: Specifies the maximum value allowed.
+        - step: Specifies the legal number intervals for the input field.
+    -->
+    <input
+      type="number"
+      placeholder="Enter a number"
+      min="0"
+      max="100"
+      step="1"
+    />
+    <br /><br />
+
+    <!-- TEL INPUT -->
+    <h2>Telephone Input</h2>
+    <!-- 
+      type="tel" is used for entering a telephone number.
+      It does not perform automatic validation of the input.
+      Attributes:
+        - pattern: Allows for a specific pattern to match (useful for formatting numbers).
+        - placeholder
+    -->
+    <input
+      type="tel"
+      placeholder="Enter your phone number"
+      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+    />
+    <!-- Example format: 123-456-7890 -->
+    <br /><br />
+
+    <!-- URL INPUT -->
+    <h2>URL Input</h2>
+    <!-- 
+      type="url" is used for entering a URL.
+      It automatically validates that the input is a valid URL format.
+      Attributes:
+        - placeholder, required
+    -->
+    <input type="url" placeholder="Enter a website URL" required />
+    <br /><br />
+
+    <!-- DATE INPUT -->
+    <h2>Date Input</h2>
+    <!-- 
+      type="date" allows the user to select a date from a date picker.
+      Attributes:
+        - min: Specifies the earliest date allowed.
+        - max: Specifies the latest date allowed.
+    -->
+    <input type="date" min="2022-01-01" max="2024-12-31" />
+    <br /><br />
+
+    <!-- RADIO BUTTON INPUT -->
+    <h2>Radio Button Input</h2>
+    <!-- 
+      type="radio" allows the user to select only one option from a group.
+      Attributes:
+        - name: Groups radio buttons together. Only one radio button in the same group can be selected at a time.
+        - value: Defines the value that will be sent when the form is submitted.
+        - checked: Specifies that the radio button should be pre-selected when the page loads.
+    -->
+    <input type="radio" name="gender" value="male" checked /> Male
+    <input type="radio" name="gender" value="female" /> Female <br /><br />
+
+    <!-- CHECKBOX INPUT -->
+    <h2>Checkbox Input</h2>
+    <!-- 
+      type="checkbox" allows the user to select one or more options.
+      Attributes:
+        - value: Defines the value that will be sent when the form is submitted.
+        - checked: Specifies that the checkbox should be pre-selected when the page loads.
+    -->
+    <input type="checkbox" name="subscribe" value="newsletter" checked />
+    Subscribe to newsletter <br /><br />
+
+    <!-- FILE INPUT -->
+    <h2>File Input</h2>
+    <!-- 
+      type="file" allows the user to select a file from their device to upload.
+      Attributes:
+        - accept: Specifies the types of files that the server accepts (e.g., image/*, .pdf).
+        - multiple: Allows the user to select multiple files.
+    -->
+    <input type="file" accept="image/*" multiple />
+    <br /><br />
+
+    <!-- RANGE INPUT -->
+    <h2>Range Input</h2>
+    <!-- 
+      type="range" allows the user to select a value from a range of values.
+      Typically displayed as a slider.
+      Attributes:
+        - min, max, step: Same as number input.
+    -->
+    <input type="range" min="0" max="100" step="5" />
+    <br /><br />
+
+    <!-- COLOR INPUT -->
+    <h2>Color Input</h2>
+    <!-- 
+      type="color" allows the user to select a color from a color picker.
+    -->
+    <input type="color" />
+    <br /><br />
+
+    <!-- HIDDEN INPUT -->
+    <h2>Hidden Input</h2>
+    <!-- 
+      type="hidden" is used to store data that should be sent with the form but is not visible to the user.
+      Attributes:
+        - value: Specifies the data to be sent with the form submission.
+    -->
+    <input type="hidden" name="userid" value="12345" />
+    <!-- This input will be submitted with the form, but it is not visible to the user. -->
+    <br /><br />
+
+    <!-- SUBMIT BUTTON -->
+    <h2>Submit Button</h2>
+    <!-- 
+      type="submit" creates a button that submits the form data to the server.
+    -->
+    <input type="submit" value="Submit Form" />
+    <br /><br />
+
+    <!-- RESET BUTTON -->
+    <h2>Reset Button</h2>
+    <!-- 
+      type="reset" creates a button that resets all form fields to their default values.
+    -->
+    <input type="reset" value="Reset Form" />
+    <br /><br />
+
+    <!-- BUTTON INPUT -->
+    <h2>Button Input</h2>
+    <!-- 
+      type="button" creates a clickable button, often used with JavaScript.
+      Does not submit the form data by default.
+    -->
+    <input type="button" value="Click Me" onclick="alert('Button clicked!')" />
+    <br /><br />
+  </body>
+</html>

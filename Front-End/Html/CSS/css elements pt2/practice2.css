@@ -1,0 +1,85 @@
+/* Practice */
+.header {
+  display: flex;
+  justify-content: start; /* Space out items in the header */
+  align-items: center; /* Vertically center the items */
+  border: 1px solid black;
+  padding: 10px 20px; /* Add some padding to the header */
+  background-color: #f8f9fa; /* Light gray background */
+  height: fit-content;
+  gap: 20px;
+  background-color: blueviolet;
+  position: fixed;
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  gap: 15px;
+  background-color: aqua; /* Space between nav items */
+  font-family: "Courier New", Courier, monospace;
+  font-size: larger;
+}
+
+/* Add attribute feature, inside this nav class add extra/specific css to the <a> element */
+.nav a {
+  text-decoration: none;
+  color: red; /* add color to the a tag which is inside the div */
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.box-pad {
+  border: 1px solid black;
+  padding: 20px;
+  width: fit-content;
+  background-color: aqua;
+  margin: 20px;
+}
+.box-pad .span {
+  border: 1px solid black;
+  padding: 10px;
+  width: 50%;
+  text-align: center;
+  background-color: brown;
+  display: inline;
+}
+.box-marg {
+  border: 1px solid black;
+  padding: 20px;
+  width: fit-content;
+  margin-top: 10px;
+}
+.box-marg .span {
+  border: 1px solid black;
+  padding: 10px;
+  width: 50%;
+  text-align: center;
+  display: inline;
+}
+
+.parent1 {
+  border: 1px solid black;
+  padding: 10px;
+  margin-top: 30px;
+  display: flex; /* giving the parent flex, allowed the sub divs inside this div to be next to each other instead of under each other */
+  flex-direction: row-reverse; /*giving direction to the flex display so we make content inside the div that has the flex display here we make them next to each other in reverse order*/
+  justify-content: center; /*Property only specific to flex, enables us to determine position of content inside the container thats displayed as flex, WE DETERMINE The position of the content inside the container*/
+  /* justify content: we use space between mostly especially in a nav bar */
+  align-items: center; /*centers the items according to direction ONLY, if its a column we center according to x axis and row we center according to y axis. Align-items is dependatant on direction*/
+  /* Align items doesnt place it in the middle of x axis and y axis, it only places it in a specifc direction based on flex direction. There fore it works hand in hand with justify content 
+    example above if we remover justify content, since thjey r in a row, it will center according to the y axis however it will be at the far end, with justify content i represent the x axis
+    If they were placed as a column, we reverse; align items will place it according to x axis bas can be at the far top, there fore justify content yezabatha menahyt el y */
+  /* Therefore to position elemnts in a flex according to X&Y axis we use them both hand in hand */
+}
+.parent1 .div1 {
+  border: 1px solid blue;
+  margin: 5px;
+}
+.parent1 .div2 {
+  border: 1px solid red;
+  margin: 5px;
+}
+.space {
+  height: 2000px;
+}

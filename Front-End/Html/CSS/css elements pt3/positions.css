@@ -1,0 +1,111 @@
+/* Positions enable you to control the positions of elements on the webpage */
+
+/* Direct positions that are used along side the (postion: --[except static] ) attribute
+TOP, BOTTOM, RIGHT, LEFT
+
+TOP
+What it Does: The top property specifies the vertical distance between the top edge of an element and the top edge of its containing element (its nearest positioned ancestor).
+Values:
+Length Values: (px, em, rem, etc.) For example, top: 20px; moves the element 20 pixels down from the top of its containing element.
+Percentage: top: 50%; moves the element 50% down from the top of its containing element, based on the height of the containing element.
+Auto: The browser calculates the top position based on other properties.
+Negative Values: top: -10px; moves the element 10 pixels up from its original position.
+
+BOTTOM:
+What it Does: The bottom property specifies the vertical distance between the bottom edge of an element and the bottom edge of its containing element.
+Values:
+Length Values: For example, bottom: 30px; moves the element 30 pixels up from the bottom of its containing element.
+Percentage: bottom: 20%; moves the element 20% up from the bottom of its containing element.
+Auto: The browser calculates the bottom position.
+Negative Values: bottom: -15px; moves the element 15 pixels down from its original position.
+
+RIGHT: 
+What it Does: The right property specifies the horizontal distance between the right edge of an element and the right edge of its containing element.
+Values:
+Length Values: For example, right: 50px; moves the element 50 pixels left from the right edge of its containing element.
+Percentage: right: 10%; moves the element 10% left from the right edge of its containing element.
+Auto: The browser calculates the right position.
+Negative Values: right: -20px; moves the element 20 pixels right from its original position.
+
+LEFT
+What it Does: The left property specifies the horizontal distance between the left edge of an element and the left edge of its containing element.
+Values:
+Length Values: For example, left: 100px; moves the element 100 pixels right from the left edge of its containing element.
+Percentage: left: 25%; moves the element 25% right from the left edge of its containing element.
+Auto: The browser calculates the left position.
+Negative Values: left: -30px; moves the element 30 pixels left from its original position
+*/
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------ */
+
+/* POSITION VALUES */
+/* Note by default everything is given a static position unless specified other wise, 
+so to use direct positions have to first specifiy a NON STATIC postion type other wise direct positions won't have an affect*/
+
+/* STATIC
+position: Static; 
+means the element stays in its default place in the document flow, with no special positioning applied. 
+Direct positions can not be applied aka wont work with static postion.
+*/
+.static {
+  position: static;
+  top: 50px; /*Note direct postions here won't have any effect since we have a static postion*/
+}
+
+/* RELATIVE
+position: relative;
+means the element stays in its default place in the document flow.
+However, you can use direct positions along side it (top, bottom, left, right) to adjust its position RELATIVE to its original spot in the document, without affecting the layout of surrounding elements.
+*/
+.relative {
+  position: relative;
+  top: 50px;
+}
+
+/* ABSOLUTE
+position: absolue;
+what it does is that takes my elements out of its working space. example if an element is inside a div, it takes it out of the div. 
+
+An element with position: absolute; will position itself relative to its nearest parent that has a position value RELATIVE. 
+If there’s no such ancestor, the element will position itself relative to the document's initial containing block (typically the viewport or the <html> element).
+aka:  it looks for the nearest parent element that has postiotn relative and uses that as a reference point for its own position. 
+if i wanna keep it absolute, then we can make the parent relative so it stays in the workspace, & we can use dirtect positions to place it wherever
+*/
+.absolute {
+  position: absolute;
+  top: 50px;
+}
+/* relative positions an element relative to its normal position in the document flow, while absolute positions an element relative to nearest ancestor with position: relative; or the viewport, removing it from the normal flow. */
+
+/* FIXED
+position: fixed;
+means  positions an element relative to the browser window (viewport), rather than any parent element. This means the element stays in the same position on the screen even when the page is scrolled.
+example: having a nav bar fixed at the top even when scrolling down. or a side bar to the side, stuck on the page even if i scroll down
+
+if you want a fixed element to span the entire width of the screen, you need to manually set the width to 100%. By default, a fixed element does not automatically take up the full width of the viewport it actually reduces the width to 50% thats why we need to manually specify a width
+we have to give the width we want along side position fixed or by defult it will reduce the width. Thats why we specify width.
+
+When you apply position: fixed;  regardless of whether it is nested inside a div or any other container. The element will be fixed at the top-left corner of the viewport unless you specify top, right, bottom, or left properties.
+By using the top, right, bottom, and left properties, you can control exactly where the element should be fixed on the screen.
+ */
+.fixed {
+  position: fixed;
+  width: 100%;
+}
+
+/* STICKY
+position:sticky;
+
+ */
+
+/* ------------------------------------------------------------------------------ */
+
+/* Z INDEX
+ lets me control the stacking order of elements that overlap. elements with higher z-index value will appear infront of elements with lower z index value. 
+ This only works with elements that have a postion other than static
+ */
+.element {
+  position: relative;
+  z-index: 5; /* higher number means element appaers infront in comparison to element with lower number*/
+  z-index: -1;
+}

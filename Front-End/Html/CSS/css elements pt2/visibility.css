@@ -1,0 +1,29 @@
+/*To not show an element there are no ways : display node & visibility hidden*/
+/* 
+display: none;
+What it Does: When you set an element's CSS property to display: none;, the element is completely removed from the page's layout. It's as if the element doesn't exist in the HTML document at all.
+Effect: The element doesn't take up any space on the page. It's not visible, and the space it would have occupied is freed up, allowing other elements to move in or occupy that space.
+Use Cases: This is commonly used in situations where you want to hide elements completely. For example, you might use display: none; in JavaScript to hide a dropdown menu until a button is clicked, or in responsive design to hide elements on smaller screens.
+
+visibility: hidden;
+What it Does: When you set an element's CSS property to visibility: hidden;, the element is still present in the HTML document, but it’s invisible.
+Effect: The element still takes up space on the page, just as it would if it were visible. The only difference is that the content inside the element is hidden from view. Other elements do not move into the space it occupies.
+Use Cases: This is useful when you want to keep the layout consistent but hide specific content. For example, you might want to hide a loading spinner while the page is loading without shifting other content.
+
+Key Differences:
+Space in Layout:
+display: none; removes the element entirely, so it doesn’t occupy any space.
+visibility: hidden; hides the element but keeps the space it occupies, meaning other elements around it won’t shift or move into that space.
+Interaction with JavaScript/Animations:
+display: none; is often used with JavaScript to dynamically show or hide elements based on user actions.
+visibility: hidden; can be used when you need to make something invisible without affecting the layout, like hiding an error message while keeping space for it.
+ */
+
+.display {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* visibility hidden & opacity=0 behave the same in keeping the element invisible, however visibility hidden makes the element non-interactive while opacity 0 keeps it interactive*/
+/* 1= fully opaque and 0 is fully transparent */

@@ -1,0 +1,110 @@
+/* Pseudo-classes are keywords added to selectors that specify a special state of the selected elements. They allow you to apply styles to elements based on their position in the document, user interaction, or other specific conditions. */
+
+/* MULTIPLE SELECTORS (:nth-child()/:last-child/:first-child)
+To style specific child elements within a container, you can use multiple selectors with pseudo-classes like :nth-child(). This method lets you apply styles based on the position of elements within their parent container.*/
+
+.special-box div:nth-child(2) {
+  /* This CSS targets the second <div> element inside a container with the class "special-box." 
+  It only applies styles to the second <div>, not to all <div> elements within the container since i used :nth-child(2). 
+  The order of the child elements is sequential, meaning the first <div> is 1, the second is 2, and so on. */
+  color: #0066cc;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+
+/* Syntax */
+.class tag:pseudo-class {
+  /* CSS styles */
+  color: #a0a0a0;
+}
+
+/* ===============================
+   :hover
+   Applies styles when the user hovers over an element.
+   Use Case: Change the appearance of links, buttons, or any element when a user hovers over them to indicate interactivity.
+================================== */
+.class button:hover {
+  background-color: #ffcc00; /* Change background color on hover */
+  color: white; /* Change text color on hover */
+}
+
+/* ===============================
+     :active
+     Applies styles when the element is being activated, such as during a click.
+     Use Case: Provide visual feedback to users that a button or link has been clicked.
+  ================================== */
+.class a:active {
+  background-color: #0066cc; /* Change background color when link is clicked */
+  color: white; /* Change text color when link is clicked */
+}
+
+/* ===============================
+     :focus
+     Applies styles to an element when it is focused, like when a user tabs to or clicks an input.
+     Use Case: Highlight form fields to indicate they are selected or ready for input.
+  ================================== */
+.class input:focus {
+  border: 2px solid #4caf50; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* ===============================
+     :first-child
+     Applies styles to an element that is the first child of its parent.
+  ================================== */
+.container p:first-child {
+  font-weight: bold; /* Make the first paragraph bold inside the section with class container*/
+}
+
+/* ===============================
+     :last-child
+     Applies styles to an element that is the last child of its parent.
+  ================================== */
+.class ul li:last-child {
+  color: red; /* Change text color of the last list item to red */
+}
+
+/* ===============================
+     :nth-child(n)
+     Matches an element that is the nth child of its parent.
+  ================================== */
+.class table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Apply background color to even rows in a table */
+}
+
+/* ===============================
+     :nth-of-type(n)
+     Matches an element that is the nth child of its type in its parent.
+  ================================== */
+.container p:nth-of-type(3) {
+  font-style: italic; /* Make the third paragraph italic */
+}
+
+/* ===============================
+     :not(selector)
+     Selects every element that does not match the given selector.
+     Use Case: Apply styles to all elements except those that match a certain condition.
+     The condition in this example is .special, which means "has the class special."
+     Therefore, the style background-color: grey; will be applied to all <button> elements except those that have the class special.
+  ================================== */
+button:not(.special) {
+  background-color: grey; /* Apply grey background to all buttons except those with class 'special' */
+}
+
+/* ===============================
+     :checked
+     Applies styles to checkboxes or radio buttons that are checked.
+  ================================== */
+.class input[type="checkbox"]:checked {
+  background-color: #4caf50; /* Change background color when checkbox is checked */
+  border: 2px solid #4caf50; /* Change border color when checkbox is checked */
+}
+
+/* ===============================
+     :disabled
+     Applies styles to elements that are disabled, such as form inputs.
+  ================================== */
+.class input:disabled {
+  background-color: #e0e0e0; /* Apply a grey background to disabled input */
+  color: #a0a0a0; /* Change text color for disabled input */
+}

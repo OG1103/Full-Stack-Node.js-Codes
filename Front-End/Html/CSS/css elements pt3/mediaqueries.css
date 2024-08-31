@@ -1,0 +1,78 @@
+/* 
+Media queries are a fundamental part of responsive web design. They allow you to apply different styles to different devices or screen sizes, ensuring your website looks great on all devices, from desktops to smartphones.
+A media query is a CSS technique that allows you to apply styles based on the result of one or more queries about the device on which the document is being displayed. Media queries can check for various characteristics, such as:
+- Width and height of the viewport
+- Width and height of the device
+- Orientation (landscape or portrait)
+- Resolution
+*/
+/* SYNTAX */
+@media (condition) {
+  /* CSS rules go here */
+}
+
+/* EXAMPLES */
+/* For example, to apply styles only when the viewport width is 600 pixels or less, you would write:*/
+@media (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
+
+/* For example, to apply styles only when the viewport width is 600 pixels or more, you would write: */
+@media (min-width: 600px) {
+  body {
+    background-color: lightgreen;
+  }
+}
+
+/* USE CASES */
+/*1. Targeting Different Screen Sizes */
+/* You can use media queries to create responsive designs that look good on all devices by targeting specific screen sizes. */
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Styles for medium devices (tablets) */
+@media (min-width: 601px) and (max-width: 768px) {
+  .container {
+    width: 80%;
+    padding: 20px;
+  }
+}
+
+/* Styles for large devices (desktops) */
+@media (min-width: 769px) {
+  .container {
+    width: 60%;
+    padding: 30px;
+  }
+}
+
+/* 2. Targeting Device Orientation */
+/* Media queries can also target the orientation of the device. This is useful for changing styles depending on whether a device is in landscape or portrait mode. */
+@media (orientation: landscape) {
+  .image {
+    width: 50%;
+  }
+}
+
+/* Styles for devices in portrait orientation */
+@media (orientation: portrait) {
+  .image {
+    width: 100%;
+  }
+}
+
+/* Combining Media Queries */
+/* You can combine multiple conditions in a single media query using logical operators such as and, or, and not. */
+/* Styles for devices with a minimum width of 600px and a maximum width of 1200px */
+@media (min-width: 600px) and (max-width: 1200px) {
+  .sidebar {
+    display: none;
+  }
+}
+/* The .sidebar will be hidden (i.e., not displayed) only if the viewport width is between 600px and 1200px. */

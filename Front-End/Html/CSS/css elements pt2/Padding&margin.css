@@ -1,0 +1,45 @@
+/* Padding */
+/* Padding generates space around an elemnts content. INSIDE OF ANY DEFINED BORDER/CONTAINER */
+/* Inner space to not make the the content inside the box stuck to the edge */
+/* hawamesh dakheleya */
+.padding {
+    border: 1px solid black;
+    padding: 20px;
+    width: fit-content;
+  }
+  .padding-1 {
+    border: 1px solid black;
+    padding: 10px;
+    width: 50%;
+    text-align: center;
+  }
+  /* Two ways:
+  padding: adds padding value specified in all sides of the box(top left, right bottom)
+  padding-(top/bottom/right/left): adds padding value specified to only the direction specified. so if top, will only add inner space between the edge and the content inside the box from the top
+   */
+  /* 
+   Given padding: (value)
+   VALUES:
+   1) SINGLE VALUE; applies padding to all directions
+   2) Two Values ex 10px 10px: the first value represents top and bottom padding, seconf value, represents left and right
+   3) Four values: ex padding: 10px 10px 10px 10px; 
+      the order of padding value represent: (top -> right->bottom->left)
+      value1 = padding top, second value: padding right and so on ..
+    */
+  
+  /* Margin */
+  /* Margin generates space outside of the container/box/border */
+  /* gives space from the outside of the border of the section to move the entire section left/right/bottom/top */
+  /* hamesh kharegy */
+  /* only give margins to entire section/box/container to give space from outside of the container. To sperate 2 boxes from being stuch to each other
+       Inside the container to give space we add padding */
+  .margin {
+    /* margin: 10px; */
+    margin: 10px 20px;
+  }
+  /* same types[margin: values or margin-top/bottom/..: single value] and value rules as padding apply here as well */
+  
+  /* BORDER */
+  /* TAKES 1) SIZE IN PX 2) TYPE OF BORDER 3) COLOR */
+  /* I CAN SPECIFY IF I WANT A BORDER IN A SPECIFIC PLACE EX BORDER-LEFT ..  */
+  /* BORDER ALONE SETS A BORDER ALL AROUND */

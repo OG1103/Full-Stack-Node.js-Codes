@@ -1,0 +1,80 @@
+/* DISPLAY FLEX 
+ display: flex; turns an element into a flexible container that lets you easily arrange and align its CHILD elements. It provides freedom to control their layout, spacing, and sizing, making it versatile for creating responsive and dynamic designs. 
+ To control easily child elements we give parent div and control child elements, we can further control each child by giving it specififc atts that are given to flex children 
+
+Flex Container Properties (apply to the parent element with display: flex):
+    flex-direction: Defines the direction of the flex items (row, row-reverse, column, column-reverse).
+    flex-wrap: Controls whether the flex items should wrap or not (nowrap, wrap, wrap-reverse).
+    flex-flow: A shorthand for flex-direction and flex-wrap.
+    justify-content: Aligns the flex items along the main axis (start, end, center, space-between, space-around, space-evenly).
+    align-items: Aligns the flex items along the cross axis (stretch, start, end, center, baseline).
+    align-content: Aligns the flex lines when there's extra space on the cross axis (stretch, start, end, center, space-between, space-around).
+    gap: Defines the space between flex items. You can also use row-gap and column-gap for more control.
+Flex Item Properties (apply to the children of a flex container):
+    order: Controls the order of the flex items (default is 0).
+    flex-grow: Specifies how much a flex item will grow relative to the rest (default is 0).
+    flex-shrink: Specifies how much a flex item will shrink relative to the rest (default is 1).
+    flex-basis: Specifies the initial size of a flex item before it's adjusted (can be a length or auto).
+    flex: A shorthand for flex-grow, flex-shrink, and flex-basis.
+    align-self: Allows individual flex items to override the align-items value (auto, stretch, start, end, center, baseline).
+These properties are specifically designed for use with flexbox layouts and won't have any effect outside of a flex container (display: flex).
+
+Given a flex-direction: For horizontal arrangements (rows): the main axis is horizontal, and the cross axis is vertical. 
+For vertical arrangements (columns): the main axis is vertical, and the cross axis is horizontal. 
+Use justify-content to align along the main axis. Use align-items to align along the cross axis. 
+
+Example of using flex as parent and children. .class{ display: flex} .class p{ align-self: end}
+
+in justfiy-content and align items: 
+ For horizontal arrangements (rows): the main axis is horizontal, and the cross axis is vertical. 
+For vertical arrangements (columns): the main axis is vertical, and the cross axis is horizontal. 
+Use justify-content to align along the main axis. Use align-items to align along the cross axis.
+ */
+/* -------------------------------------------------------------------------------------------------------------------------- */
+
+/* Display Block */
+/* 
+The display: block; CSS property value makes an element behave as a block-level element. Here's what it does:
+
+Takes Up Full Width: The element will take up the full width of its parent container, stretching from the left to the right (by default, unless otherwise constrained by width settings or its container).
+
+Starts on a New Line: A block-level element starts on a new line and forces any content that follows to start on a new line as well.
+
+Respects Margin and Padding: You can apply margin and padding to block elements, and they will be respected all around the element (top, right, bottom, and left).
+
+Can Have Width and Height: Block-level elements can have their width and height explicitly set, unlike inline elements which only respect width and height for specific cases (like images).
+
+Example of Block-Level Elements:
+<div>
+<p>
+<h1> to <h6>
+<section>
+<article> */
+/* ---------------------------------------------------------------------------------------- */
+/* Display Inline */
+/* The display: inline; CSS property value makes an element behave as an inline element. Here’s what it does:
+
+Flows with Text:
+
+The element is placed in line with surrounding text and other inline elements. It does not start on a new line and does not cause any line breaks before or after it.
+Takes Up Only Necessary Space:
+The element only takes up as much width as it needs, based on its content. It doesn’t stretch to fill the width of its container like block-level elements do.
+
+Width and Height Ignored:
+Inline elements do not respect width and height properties. Any width or height set on an inline element will be ignored, and the element will only be as wide and tall as its content.
+
+Padding and Margin:
+Only the horizontal margin (left and right) are respected and applied. Vertical margin (top and bottom) will be ignored.
+
+Examples of Inline Elements:
+<span>
+<a>
+<strong>
+<em>
+<img> (though images can be treated differently depending on the context) */
+/* ---------------------------------------------------------------------------------------------------- */
+/* Display Inline-block */
+/* 
+display: inline-block; combines the inline flow of display: inline;, allowing elements to sit next to each other without starting on a new line,
+ with the layout flexibility of display: block;, enabling the element to have defined width, height, and respect all margin and padding values.
+ */
