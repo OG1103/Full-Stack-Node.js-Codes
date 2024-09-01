@@ -19,14 +19,10 @@ Flex Item Properties (apply to the children of a flex container):
     align-self: Allows individual flex items to override the align-items value (auto, stretch, start, end, center, baseline).
 These properties are specifically designed for use with flexbox layouts and won't have any effect outside of a flex container (display: flex).
 
-Given a flex-direction: For horizontal arrangements (rows): the main axis is horizontal, and the cross axis is vertical. 
-For vertical arrangements (columns): the main axis is vertical, and the cross axis is horizontal. 
-Use justify-content to align along the main axis. Use align-items to align along the cross axis. 
-
 Example of using flex as parent and children. .class{ display: flex} .class p{ align-self: end}
 
 in justfiy-content and align items: 
- For horizontal arrangements (rows): the main axis is horizontal, and the cross axis is vertical. 
+For horizontal arrangements (rows): the main axis is horizontal, and the cross axis is vertical. 
 For vertical arrangements (columns): the main axis is vertical, and the cross axis is horizontal. 
 Use justify-content to align along the main axis. Use align-items to align along the cross axis.
  */

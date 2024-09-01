@@ -95,7 +95,11 @@ By using the top, right, bottom, and left properties, you can control exactly wh
 
 /* STICKY
 position:sticky;
+- It behaves like `position: relative;` by default, meaning it stays in its original place within the normal document flow.
+   - Once the user scrolls and the element reaches a specified offset from the top, bottom, left, or right, it switches to `position: fixed;`.
+   - The element then stays fixed in the viewport at that position until the parent container's boundary is passed.
 
+   This is particularly useful for elements that need to stay visible in a fixed position as a user scrolls, such as a navigation menu, sidebar, or table headers.
  */
 
 /* ------------------------------------------------------------------------------ */

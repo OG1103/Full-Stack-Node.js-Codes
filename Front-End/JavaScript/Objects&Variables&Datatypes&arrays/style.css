@@ -1,0 +1,63 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  background-color: navy;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  width: 98%;
+  padding: 0px 5px;
+  height: fit-content;
+}
+.header div:first-child {
+  display: inline;
+  height: fit-content;
+  width: fit-content;
+  color: white;
+  position: relative;
+  left: 2%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  font-size: 25px;
+}
+.header nav {
+  display: flex;
+  position: relative;
+  right: 2%;
+  gap: 10px;
+}
+
+.header nav a {
+  color: white;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  height: 50px;
+  width: 60px;
+  line-height: 50px; /* Centers text vertically within the box, since i gave the entire element a height */
+  text-align: center;
+  border-radius: 5px;
+  margin: 4px;
+  font-weight: bold;
+}
+
+.header nav a:hover {
+  background-color: orangered;
+  color: white;
+}
+/* Focus means it applies style when it has been clicked */
+.header nav a:focus {
+  background-color: orangered;
+  color: white;
+}
+/* active applies style during the clicking as visual feed back */
+.header nav a:active {
+  background-color: lightblue;
+  color: white;
+  outline: 1px solid white;
+}
+
+main {
+  padding-top: 70px;
+}
