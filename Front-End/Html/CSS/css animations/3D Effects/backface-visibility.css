@@ -1,0 +1,27 @@
+/* 
+  6. backface-visibility: Defines whether the back face of an element is visible when it is rotated.
+  
+  The 'backface-visibility' property determines if the back side of a transformed element is visible when facing the viewer.
+  This property is useful in 3D rotations to hide the backside of an element.
+  
+  Syntax:
+    backface-visibility: visible | hidden;
+  
+  Parameters:
+  - visible: The back face is visible when the element is rotated.
+  - hidden: The back face is not visible when the element is rotated.
+  
+  Examples of using 'backface-visibility':
+*/
+
+/* Example 1: Hide Back Face */
+.example-backface1 {
+  backface-visibility: hidden; /* Hides the back face during a 3D rotation */
+  transform: rotateY(180deg); /* Rotates element to its back face */
+}
+
+/* Example 2: Show Back Face (Default) */
+.example-backface2 {
+  backface-visibility: visible; /* Shows the back face during a 3D rotation */
+  transform: rotateY(180deg); /* Rotates element to its back face */
+}

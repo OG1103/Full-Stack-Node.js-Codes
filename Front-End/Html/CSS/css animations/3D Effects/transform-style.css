@@ -1,0 +1,33 @@
+/* 
+  5. transform-style: Specifies how nested elements are rendered in 3D space.
+  
+  The 'transform-style' property specifies whether child elements are positioned in 3D space or are flattened.
+  
+  Syntax:
+    transform-style: flat | preserve-3d;
+  
+  Parameters:
+  - flat: The child elements will be flattened into the plane of the parent.
+  - preserve-3d: The child elements will maintain their 3D position in space relative to the parent.
+  
+  Examples of using 'transform-style':
+*/
+
+/* Example 1: Preserve 3D */
+.example-transform-style1 {
+  transform-style: preserve-3d; /* Child elements maintain 3D transformations */
+}
+
+/* Example 2: Flat (Default) */
+.example-transform-style2 {
+  transform-style: flat; /* Child elements are flattened (no 3D space is preserved) */
+}
+
+/* Example 3: 3D Rotation with preserve-3d */
+.example-transform-style3 {
+  transform-style: preserve-3d;
+}
+
+.example-transform-style3-child {
+  transform: rotateY(45deg); /* Rotates child element in 3D space */
+}

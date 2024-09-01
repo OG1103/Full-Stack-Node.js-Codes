@@ -1,0 +1,113 @@
+/* 
+  2. transform: Applies a 2D or 3D transformation to an element.
+  
+  The 'transform' property allows you to visually manipulate an element by rotating, scaling, skewing, or translating it in 2D or 3D space.
+  
+  Common transformations include:
+  - scale: Resizes the element.
+  - rotate: Rotates the element.
+  - translate: Moves the element from its current position.
+  - skew: Skews the element along the X or Y axis.
+  - matrix: Combines all 2D transform methods into one.
+  - perspective: Applies perspective to an element.
+  - rotateX, rotateY, rotateZ: Rotates an element around the X, Y, or Z-axis (3D).
+  - scaleX, scaleY, scaleZ: Scales an element along the X, Y, or Z-axis (3D).
+  - translateX, translateY, translateZ: Moves an element along the X, Y, or Z-axis (3D).
+
+  Examples of each 'transform' value:
+*/
+
+/* Example 1: scale */
+.example-scale {
+    transform: scale(1.2); /* Scales the element to 120% of its original size */
+  }
+  
+  /* Example 2: scaleX and scaleY */
+  .example-scaleX {
+    transform: scaleX(1.5); /* Scales the element horizontally by 150% */
+  }
+  
+  .example-scaleY {
+    transform: scaleY(0.75); /* Scales the element vertically by 75% */
+  }
+  
+  /* Example 3: rotate */
+  .example-rotate {
+    transform: rotate(45deg); /* Rotates the element 45 degrees clockwise */
+  }
+  
+  /* Example 4: rotateX, rotateY, rotateZ */
+  .example-rotateX {
+    transform: rotateX(45deg); /* Rotates the element 45 degrees around the X-axis */
+  }
+  
+  .example-rotateY {
+    transform: rotateY(30deg); /* Rotates the element 30 degrees around the Y-axis */
+  }
+  
+  .example-rotateZ {
+    transform: rotateZ(60deg); /* Rotates the element 60 degrees around the Z-axis (same as rotate in 2D) */
+  }
+  
+  /* Example 5: translate */
+  .example-translate {
+    transform: translate(50px, 100px); /* Moves the element 50px to the right and 100px down */
+  }
+  
+  /* Example 6: translateX and translateY */
+  .example-translateX {
+    transform: translateX(100px); /* Moves the element 100px to the right */
+  }
+  
+  .example-translateY {
+    transform: translateY(-50px); /* Moves the element 50px up */
+  }
+  
+  /* Example 7: translateZ */
+  .example-translateZ {
+    transform: translateZ(30px); /* Moves the element 30px closer to the viewer (3D) */
+  }
+  
+  /* Example 8: skew */
+  .example-skew {
+    transform: skew(20deg, 10deg); /* Skews the element 20 degrees along the X-axis and 10 degrees along the Y-axis */
+  }
+  
+  /* Example 9: skewX and skewY */
+  .example-skewX {
+    transform: skewX(30deg); /* Skews the element 30 degrees along the X-axis */
+  }
+  
+  .example-skewY {
+    transform: skewY(15deg); /* Skews the element 15 degrees along the Y-axis */
+  }
+  
+  /* Example 10: matrix */
+  .example-matrix {
+    transform: matrix(1, 0.3, 0.3, 1, 0, 0); /* Applies a 2D transformation matrix combining skew and scale */
+  }
+  
+  /* Example 11: perspective */
+  .example-perspective {
+    transform: perspective(500px) translateZ(50px); /* Applies a perspective effect and moves the element 50px along the Z-axis */
+  }
+  
+  /* Example 12: Multiple transforms */
+  .example-multiple {
+    transform: translate(50px, 50px) rotate(45deg) scale(1.2); /* Combines multiple transforms: moves, rotates, and scales */
+  }
+  
+  /* 
+    Notes on Transform Values:
+  
+    - scale: Accepts one or two values. One value scales uniformly (same scale for both axes), while two values scale separately along the X and Y axes (scaleX, scaleY).
+    - rotate: Accepts an angle in degrees (deg), radians (rad), gradians (grad), or turns (turn). Rotates clockwise or counterclockwise.
+    - translate: Accepts length values in px, %, em, etc., and moves the element in 2D space. translateX and translateY are the horizontal and vertical movements, respectively.
+    - skew: Accepts an angle to skew the element along the X or Y axis. SkewX and skewY apply the skew on one axis.
+    - matrix: Accepts six parameters representing a 2D matrix transformation combining translate, scale, skew, and rotate.
+    - perspective: Accepts a length value that determines the distance between the viewer and the z=0 plane. It is used to create a sense of depth in 3D transforms.
+    - 3D transforms (rotateX, rotateY, rotateZ, scaleX, scaleY, scaleZ, translateX, translateY, translateZ): 
+      Use these to create transformations in 3D space, adding depth and perspective to elements.
+  */
+  
+  

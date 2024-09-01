@@ -1,0 +1,33 @@
+/* 
+  4. perspective: Defines the perspective from which a 3D element is viewed.
+  
+  The 'perspective' property is used to give a 3D-positioned element some perspective, making the element look like it’s closer or farther away from the viewer.
+  It affects the appearance of child elements that are transformed in 3D space.
+  
+  Syntax:
+    perspective: [value];
+  
+  Parameters:
+  - Value: Defines the distance from the viewer to the z=0 plane. A smaller value results in a more pronounced 3D effect, while a larger value results in a flatter appearance.
+  
+  Examples of using 'perspective':
+*/
+
+/* Example 1: Simple Perspective */
+.example-perspective1 {
+  perspective: 600px; /* Moderate perspective distance for 3D child elements */
+}
+
+/* Example 2: Strong Perspective Effect */
+.example-perspective2 {
+  perspective: 200px; /* Strong perspective effect, making 3D transformations more pronounced */
+}
+
+/* Example 3: Combined with Rotate */
+.example-perspective3 {
+  perspective: 800px; /* Adds perspective to a container */
+}
+
+.example-perspective3-child {
+  transform: rotateY(30deg); /* Rotates child element in 3D space */
+}

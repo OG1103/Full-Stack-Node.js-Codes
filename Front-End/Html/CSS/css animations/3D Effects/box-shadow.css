@@ -1,0 +1,44 @@
+/* 
+  3. box-shadow: Adds shadow effects around an element's frame.
+  
+  The 'box-shadow' property allows you to create shadow effects around the border of an element's box.
+  It can be used to create a sense of depth, making elements appear elevated or lifted off the page.
+  
+  Syntax: 
+    box-shadow: [horizontal offset] [vertical offset] [blur radius] [spread radius] [color];
+  
+  Parameters:
+  - Horizontal Offset (x-offset): Moves the shadow horizontally from the element. Positive values move it to the right, negative to the left.
+  - Vertical Offset (y-offset): Moves the shadow vertically from the element. Positive values move it down, negative up.
+  - Blur Radius: Controls how blurry the shadow is. The larger the value, the more blurred the shadow. A value of 0 makes a sharp shadow.
+  - Spread Radius: Expands or contracts the shadow. Positive values expand the shadow, negative values shrink it.
+  - Color: Specifies the color of the shadow. Can use any valid CSS color format (e.g., rgba, hex, named colors).
+  
+  Examples of different 'box-shadow' uses:
+*/
+
+/* Example 1: Simple Shadow */
+.example-box-shadow1 {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Shadow with a 5px right and down offset, 10px blur, and 30% opacity */
+}
+
+/* Example 2: Inset Shadow */
+.example-box-shadow2 {
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5); /* Inset shadow appears inside the element's frame */
+}
+
+/* Example 3: Multiple Shadows */
+.example-box-shadow3 {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2),
+    -2px -2px 5px rgba(255, 255, 255, 0.5); /* Multiple shadows create a layered effect */
+}
+
+/* Example 4: Hard Shadow */
+.example-box-shadow4 {
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.4); /* Hard shadow with no blur */
+}
+
+/* Example 5: Spread Shadow */
+.example-box-shadow5 {
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.5); /* Shadow with spread radius to make it bigger */
+}
