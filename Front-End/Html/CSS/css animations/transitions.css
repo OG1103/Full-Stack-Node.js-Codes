@@ -1,0 +1,178 @@
+/* 
+  1. transition: Defines the transition effect for a property when it changes from one state to another.
+  
+  The 'transition' property in CSS allows you to change property values smoothly (over a given duration) instead of abruptly. 
+  It is a shorthand property for four individual transition properties:
+  
+  - transition-property: Specifies the CSS property to which the transition is applied (e.g., 'transform', 'opacity', 'width', 'height').
+  - transition-duration: Specifies the duration over which the transition takes place (e.g., '0.3s' for 0.3 seconds, '500ms' for 500 milliseconds).
+  - transition-timing-function: Specifies the speed curve of the transition effect (e.g., 'ease', 'linear', 'ease-in', 'ease-out', 'ease-in-out', 'cubic-bezier').
+  - transition-delay: Specifies a delay before the transition effect starts (e.g., '0.5s' means the transition will start half a second after the triggering event).
+*/
+
+/* 
+  Example usage of transition:
+*/
+
+.example1 {
+  /* Applies a transition effect to both 'transform' and 'box-shadow' properties */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 
+    Breakdown of 'transition' properties:
+    
+    - transform 0.3s ease:
+      - transform: The CSS property to which the transition is applied (e.g., scaling, rotating, translating).
+      - 0.3s: The duration of the transition effect (0.3 seconds).
+      - ease: The timing function that defines the acceleration curve. 'ease' starts slowly, speeds up in the middle, and slows down at the end.
+    
+    - box-shadow 0.3s ease:
+      - box-shadow: Another CSS property to which the transition is applied (e.g., changing shadow depth or color).
+      - 0.3s: The duration of the transition effect (0.3 seconds).
+      - ease: The timing function for a smooth transition effect.
+  */
+
+/* 
+    More examples of using 'transition':
+  */
+
+/* Example 1: Transition on Background Color */
+.button {
+  background-color: #4caf50;
+  transition: background-color 0.4s ease-in-out; /* Smooth transition on hover */
+}
+
+.button:hover {
+  background-color: #3e8e41;
+}
+
+/* 
+    - In this example, the 'background-color' of the button smoothly transitions over 0.4 seconds 
+      from green to a darker shade when hovered.
+  */
+
+/* Example 2: Transition on Multiple Properties */
+.card {
+  width: 200px;
+  height: 300px;
+  transition: width 0.5s ease, height 0.5s ease, transform 0.5s ease; /* Apply transition to width, height, and transform */
+}
+
+.card:hover {
+  width: 220px; /* Width expands smoothly */
+  height: 330px; /* Height expands smoothly */
+  transform: scale(1.05); /* Scale up the card slightly */
+}
+
+/* 
+    - This example demonstrates a smooth transition effect on multiple properties 
+      (width, height, transform) when the card is hovered over.
+  */
+
+/* Example 3: Transition with Delay */
+.image {
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in 0.2s; /* Delay transition start by 0.2s */
+}
+
+.image:hover {
+  opacity: 1; /* Fade in to full opacity */
+}
+
+/* 
+    - Here, the opacity transition has a 0.2-second delay before starting, 
+      creating a fade-in effect when the image is hovered over.
+  */
+
+/* 
+    Timing Functions in Depth:
+    
+    - linear: Constant speed from start to end.
+      Example: 
+      .box {
+        transition: all 0.3s linear;
+      }
+  
+      .box:hover { 
+        transform: translateX(100px); 
+      }
+  
+    - ease: Default value, starts slow, speeds up, and then slows down.
+      Example: 
+      .box {
+        transition: all 0.3s ease;
+      }
+  
+      .box:hover { 
+        transform: translateX(100px); 
+      }
+  
+    - ease-in: Starts slowly and speeds up.
+      Example: 
+      .box {
+        transition: all 0.3s ease-in;
+      }
+  
+      .box:hover { 
+        transform: translateX(100px); 
+      }
+  
+    - ease-out: Starts quickly and slows down towards the end.
+      Example: 
+      .box {
+        transition: all 0.3s ease-out;
+      }
+  
+      .box:hover { 
+        transform: translateX(100px); 
+      }
+  
+    - ease-in-out: Starts slowly, speeds up, then slows down.
+      Example: 
+      .box {
+        transition: all 0.3s ease-in-out;
+      }
+  
+      .box:hover { 
+        transform: translateX(100px); 
+      }
+  
+    - cubic-bezier(n, n, n, n): Defines your own values in a cubic-bezier function to create a custom transition effect.
+      Example: 
+      .box {
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      }
+  
+      .box:hover { 
+        transform: translateX(100px); 
+      }
+  */
+
+/* 
+    Other Related Properties:
+    
+    - transition-property: Specifies one or more properties to transition (default is 'all').
+      Example: 
+      .element {
+        transition-property: background-color, transform;
+      }
+  
+    - transition-duration: Specifies the duration of the transition (default is '0s').
+      Example: 
+      .element {
+        transition-duration: 0.3s;
+      }
+  
+    - transition-timing-function: Specifies the speed curve of the transition (default is 'ease').
+      Example: 
+      .element {
+        transition-timing-function: ease-in-out;
+      }
+  
+    - transition-delay: Specifies when the transition effect will start (default is '0s').
+      Example: 
+      .element {
+        transition-delay: 0.2s;
+      }
+  */

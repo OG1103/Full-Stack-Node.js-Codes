@@ -1,0 +1,96 @@
+/* 
+  Applying 3D effects with CSS 
+  This file explains the CSS properties used to create 3D effects and smooth transitions.
+*/
+
+/* 
+  1. transition: Defines the transition effect for a property when it changes state.EX:
+  - transform 0.3s ease: 
+    - Specifies the 'transform' property to transition over 0.3 seconds with an 'ease' timing function.
+    - 'ease' timing function starts the transition slowly, accelerates in the middle, and slows down at the end.
+  - box-shadow 0.3s ease: 
+    - Specifies the 'box-shadow' property to transition over 0.3 seconds with an 'ease' timing function.
+    - Both properties together create a smooth visual effect when an element is hovered or focused.
+*/
+
+.example1 {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 
+    2. transform: Applies a 2D or 3D transformation to an element.
+    - Common transformations include scale, rotate, translate, and skew.
+    - Example: transform: scale(1.05); increases the size of the element to 105% of its original size.
+    - Transformations can be combined: transform: rotate(10deg) scale(1.1);
+  */
+
+.example2 {
+  transform: scale(
+    1.05
+  ); /* Scales the element by 1.05 times to create a "pop-out" effect */
+}
+
+/* 
+    3. box-shadow: Adds shadow effects around an element's frame.
+    - Syntax: box-shadow: [horizontal offset] [vertical offset] [blur radius] [spread radius] [color];
+    - Example: box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      - 0px: No horizontal offset
+      - 8px: 8 pixels vertical offset (shadow appears below the element)
+      - 16px: Blur radius (how much the shadow spreads out)
+      - rgba(0, 0, 0, 0.2): Color of the shadow (black with 20% opacity)
+    - Can be used to create a lifting effect by increasing offsets and blur radius on hover.
+  */
+
+.example3 {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Creates a subtle shadow effect */
+}
+
+/* 
+    4. perspective: Defines the perspective from which a 3D element is viewed.
+    - Only applies to 3D transforms (rotateX, rotateY).
+    - The perspective property defines how far the object is from the user; the lower the value, the more pronounced the 3D effect.
+    - Example: perspective: 1000px;
+      - Affects child elements that are transformed in 3D space.
+  */
+
+.example4 {
+  perspective: 1000px; /* Adds perspective to parent container for 3D child elements */
+}
+
+/* 
+    5. transform-style: Specifies how nested elements are rendered in 3D space.
+    - Values: flat (default) or preserve-3d.
+    - Example: transform-style: preserve-3d;
+      - Allows child elements to be positioned in 3D space relative to the parent element.
+  */
+
+.example5 {
+  transform-style: preserve-3d; /* Ensures child elements maintain 3D positioning */
+}
+
+/* 
+    6. backface-visibility: Defines whether the back face of an element is visible when it is rotated.
+    - Values: visible (default) or hidden.
+    - Example: backface-visibility: hidden;
+      - When an element is rotated, the back face will not be visible.
+      - Useful for rotating cards or elements to show only the front side in 3D.
+  */
+
+.example6 {
+  backface-visibility: hidden; /* Hides the back face of an element during 3D rotation */
+}
+
+/* 
+    Example of using these properties together for a card-like 3D effect:
+  */
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card:hover {
+  transform: scale(1.05) rotateY(10deg);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}

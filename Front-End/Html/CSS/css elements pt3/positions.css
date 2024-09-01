@@ -88,6 +88,10 @@ we have to give the width we want along side position fixed or by defult it will
 When you apply position: fixed;  regardless of whether it is nested inside a div or any other container. The element will be fixed at the top-left corner of the viewport unless you specify top, right, bottom, or left properties.
 By using the top, right, bottom, and left properties, you can control exactly where the element should be fixed on the screen.
  */
+/* When an element has position: fixed;, it is positioned relative to the viewport, not relative to other elements. 
+As a result, the following content does not recognize the space occupied by the fixed element and starts at the top of the page, causing overlap. 
+By adding a margin to the main content, 
+you manually create space to prevent this overlap. */
 .fixed {
   position: fixed;
   width: 100%;
