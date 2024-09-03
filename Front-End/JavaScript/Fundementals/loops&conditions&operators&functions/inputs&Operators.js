@@ -102,6 +102,18 @@ if (emptyString) {
 // - These include: false, 0, "", null, undefined, and NaN.
 
 /**
+ * LOGICAL OPERATORS
+ * -------------------------------
+ * Logical operators are used to combine or invert boolean values.
+ * The result of a logical operation is always a boolean value: true or false.
+ *
+ * Common Logical Operators:
+ * - Logical AND (&&)
+ * - Logical OR (||)
+ * - Logical NOT (!)
+ */
+
+/**
  * SUMMARY
  * -------------------------------
  * - Use 'if' to execute code blocks based on conditions.

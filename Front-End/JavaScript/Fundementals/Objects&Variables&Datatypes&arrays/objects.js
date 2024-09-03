@@ -74,6 +74,8 @@ console.log(employee.contact.email); // Output: "alice@example.com"
 // 7. Object Methods and `this` Keyword
 // - Methods are functions that belong to an object.
 // - The `this` keyword refers to the current object within its method.
+// - To use `this` correctly, you must invoke the method on the object itself:
+
 
 person.greet(); // Output: "Hello, my name is John Doe"
 
@@ -116,3 +118,5 @@ const person = {
   age: 30, // 'age' is a property (key), 30 is the value
   occupation: "Developer", // 'occupation' is a property (key), "Developer" is the value
 };
+
+

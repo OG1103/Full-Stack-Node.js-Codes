@@ -64,14 +64,14 @@ if (score >= 90) {
  *
  * Basic Syntax:
  * switch (expression) {
- *   case value1:
+ *   case value1 :
  *     // Code to execute if expression === value1
  *     break;
- *   case value2:
+ *   case value2 :
  *     // Code to execute if expression === value2
  *     break;
  *   ...
- *   default:
+ *   default :
  *     // Code to execute if none of the above cases match
  * }
  *

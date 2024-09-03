@@ -17,7 +17,7 @@ console.log(5 * false);
 // // 1. var
 // // - Function-scoped: Accessible anywhere within the function.
 // // - Hoisted: The declaration is moved to the top of its scope, but not the initialization.
-// // - Can be re-declared and re-assigned within the same scope.
+// // - Can be re-declared and re-assigned within the SAME SCOPE.
 
 // var x = 3;
 // console.log(x);
@@ -25,7 +25,7 @@ console.log(5 * false);
 // // 2. let
 // // - Block-scoped: Accessible only within the block it is defined in (e.g., within { }).
 // // - Hoisted but not initialized: You can't use it before declaration.
-// // - Cannot be re-declared in the same scope, but can be reassigned.
+// // - Cannot be re-declared in the SAME SCOPE, but can be reassigned.
 
 // let a = 5; // Declared using let
 // console.log(a); // Output: 5
@@ -33,13 +33,17 @@ console.log(5 * false);
 // // 3. const
 // // - Block-scoped: Like let, only accessible within the block it is defined in.
 // // - Hoisted but not initialized: You can't use it before declaration.
-// // - Cannot be re-declared or reassigned in the same scope. Must be initialized at the time of declaration.
+// // - Cannot be re-declared or reassigned in the SAME SCOPE. Must be initialized at the time of declaration.
 // // - If the const is an object or array, the contents can be modified, but the variable cannot be reassigned.
 
 // const pi = 3.14; // Declared using const
 // console.log(pi); // Output: 3.14
 
-// //What Does Hoisting Mean?
+// //What Does Hoisting Mean() VAR VS LET & CONST?
+
+//Hoisting in JavaScript is the behavior where variable and function declarations (but not their assignments) are moved to the top of their containing scope (global or function) during the compile phase.
+
+//HOISTING WITH VAR
 
 // //For variables declared using var, JavaScript hoists the declaration to the top of its scope but not the initialization.
 // //This means that the variable is treated as if it was declared at the top of its scope, but its value remains undefined until the assignment line is executed.
@@ -47,12 +51,16 @@ console.log(5 * false);
 // var y = 5; // Declaration is hoisted, initialization is not
 // console.log(y); // Output: 5
 
-// //Variables declared with let and const are also hoisted, but they are not initialized. Accessing them before their declaration will result in a ReferenceError
+//HOISTING WITH LET&CONST
+
+// Variables declared with let and const are hoisted to the top of their block scope, but they are not initialized until their declaration is evaluated in the code.
+// Accessing them before this point results in a ReferenceError due to the "temporal dead zone" (the period between the start of the block and the declaration line).
 // console.log(y); // Error: Cannot access 'y' before initialization
 // let y = 10;
-
 // console.log(z); // Error: Cannot access 'z' before initialization
 // const z = 20;
+
+//FUNCTION HOISTING
 
 // //Function declarations are fully hoisted, which means both the function definition and body are moved to the top of their scope.
 // //This allows you to call a function before it is defined in the code.
@@ -157,3 +165,19 @@ Summary:
 - Block Scope: Accessible only within the block in which they are defined (`let` and `const`).
 - Function Scope: Accessible only within the function in which they are defined (`var`, `let`, and `const`).
 */
+
+// IN LET AND CONST : When calling a variable, it will call the variable declared in the same scope you are calling it since they are block scoped,
+// if it doesnt find it in that scope then it will go to the global one if it exists. However for const and let, if its only declared in a function and doesn't have a global declaration,
+// then it will only be accesible in that function aka scope, not outside it
+//EXAMPLE:
+const myConst = 10; // Global scope
+
+function myFunction() {
+  const myConst = 20; // Function (block) scope - This is allowed SINCE IM DECLARING IT AND ASSIGNING IT IN A DIFFERENT SCOPE
+  const myConst2 = 30;
+  console.log(myConst); // Output: 20
+}
+
+myFunction();
+console.log(myConst); // Output: 10
+console.log(myconst2); // error doesnt have a any global declarion only declared inside myfunction scope therefore only accessible in there. will not be able to read it outside that scope of where it was declared
