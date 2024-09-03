@@ -9,9 +9,10 @@
   border-radius: 5px;
   margin: 10px 20px;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; /*Sets the top edge of the .header element to 0 pixels from the top of the viewport. This means the top of the header is flush with the top of the window.*/
+  left: 0; /*Sets the left edge of the .header element to 0 pixels from the left edge of the viewport. This positions the header to start from the leftmost side of the window.*/
+  right: 0; /*Sets the right edge of the .header element to 0 pixels from the right edge of the viewport. This ensures that the header spans all the way to the rightmost side of the window. aka full width*/
+  /* ensure that the .header element is fixed & positioned at the top of the viewport and stretches across the entire width of the screen. */
   z-index: 1000;
 }
 
@@ -24,7 +25,8 @@
   color: white;
   text-decoration: none;
   margin: 0 15px;
-  padding: 10px;
+  padding: 10px; /* Add internal space inside the box*/
+  font-weight: bold;
 }
 
 .navbar a:hover,

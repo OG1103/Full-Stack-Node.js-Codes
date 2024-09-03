@@ -102,3 +102,17 @@ console.table(person);
   - Methods are functions inside objects, and `this` refers to the object itself.
   - Destructuring is a shorthand way to extract properties from objects.
   */
+
+/*
+  What Are Properties?
+
+In JavaScript, an object is a collection of key-value pairs. 
+Each key (also known as a property name or attribute) is a string (or Symbol), 
+and each key is associated with a value. 
+This value can be of any data type: a number, a string, an array, another object, a function, etc.
+   */
+const person = {
+  name: "John", // 'name' is a property (key), "John" is the value
+  age: 30, // 'age' is a property (key), 30 is the value
+  occupation: "Developer", // 'occupation' is a property (key), "Developer" is the value
+};

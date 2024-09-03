@@ -33,7 +33,7 @@ console.log(5 * false);
 // // 3. const
 // // - Block-scoped: Like let, only accessible within the block it is defined in.
 // // - Hoisted but not initialized: You can't use it before declaration.
-// // - Cannot be re-declared or reassigned. Must be initialized at the time of declaration.
+// // - Cannot be re-declared or reassigned in the same scope. Must be initialized at the time of declaration.
 // // - If the const is an object or array, the contents can be modified, but the variable cannot be reassigned.
 
 // const pi = 3.14; // Declared using const
