@@ -195,6 +195,28 @@ let matrix = [
 console.log(matrix[0][0]); // Output: 1
 console.log(matrix[1][2]); // Output: 6
 
+//--------------------------------------------------------------------
+
+// 11. Sorting Arrays
+// - The `sort()` method sorts the elements of an array in place and returns the sorted array.
+// - By default, the sort is done lexicographically (i.e., based on string Unicode values), so numbers may not sort as expected.
+// - You can pass a comparison function to `sort()` to specify how to compare elements for proper sorting.
+
+let unsortedNumbers = [40, 100, 1, 5, 25, 10];
+let unsortedFruits = ["banana", "apple", "cherry", "date"];
+
+// Example 1: Default sorting (lexicographical sorting for numbers and strings)
+unsortedNumbers.sort();
+unsortedFruits.sort();
+
+console.log("Sorted numbers (default):", unsortedNumbers); // Output: [1, 10, 100, 25, 40, 5]
+console.log("Sorted fruits (default):", unsortedFruits); // Output: ['apple', 'banana', 'cherry', 'date']
+
+/* 
+Explanation:
+- By default, `sort()` converts the elements to strings and sorts them lexicographically, which can lead to unexpected behavior for numbers (e.g., 25 comes before 5).
+*/
+
 /*
 Summary:
 --------

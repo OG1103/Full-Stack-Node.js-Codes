@@ -14,10 +14,17 @@ let book = {
   getSummary: function () {
     return `${this.title} by ${this.author}`;
   },
+  // You can also write the method with shorthand syntax (ES6+)
+  introduce() {
+    console.log("title " + this.title);
+  },
 };
 
 // Invoking the method
 console.log(book.getSummary()); // Output: "JavaScript Essentials by Jane Smith"
+// Directly calling the introduce() method, which logs the title since its a void method
+book.introduce(); // Output: "Title: JavaScript Essentials"
+// If it wasn't a void method then we would print it in a console.log.
 
 /*
     Objects Representing Classes:
@@ -66,6 +73,7 @@ console.log(student.fullName()); // Output: "Emily Johnson"
     ----------------------------------
     - Arrow functions do not have their own 'this' context; they inherit 'this' from the enclosing function scope.
     - This makes arrow functions unsuitable as methods when you need to refer to the object's properties.
+    - However, this refers to the object when the arrow function is used as a call back function inside the method itself not to define the method itself
   
     Example:
   */

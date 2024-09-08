@@ -17,6 +17,10 @@ let person = {
     console.log("Hello, my name is " + this.name);
   },
   //key:value;
+  // You can also write the method with shorthand syntax (ES6+)
+  introduce() {
+    console.log("I am " + this.age + " years old.");
+  },
 };
 // the variable person is storing an object
 
@@ -76,7 +80,6 @@ console.log(employee.contact.email); // Output: "alice@example.com"
 // - The `this` keyword refers to the current object within its method.
 // - To use `this` correctly, you must invoke the method on the object itself:
 
-
 person.greet(); // Output: "Hello, my name is John Doe"
 
 // 8. Object Destructuring
@@ -118,5 +121,3 @@ const person = {
   age: 30, // 'age' is a property (key), 30 is the value
   occupation: "Developer", // 'occupation' is a property (key), "Developer" is the value
 };
-
-
