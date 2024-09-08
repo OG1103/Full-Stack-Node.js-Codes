@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <!-- desktop-nav -->
+    <nav id="desktop-nav">
+      <div class="logo">Omar Gaber</div>
+      <div>
+        <ul class="links">
+          <li><a href="#about"> About</a></li>
+          <li><a href="#experince">Experince</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- creating the mobile navigation -->
+    <nav id="mobile-nav">
+      <div class="logo">Omar Gaber</div>
+      <div class="mobile-menu">
+        <div class="mobile-icon" onclick="togglemenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="menu-links">
+          <li><a href="#about" onclick="togglemenu()"> About</a></li>
+          <li><a href="#experince" onclick="togglemenu()">Experince</a></li>
+          <li><a href="#projects" onclick="togglemenu()">Projects</a></li>
+          <li><a href="#contact" onclick="togglemenu()">Contact</a></li>
+          <!-- The onclick="togglemenu()" inside each <a> element makes sure that when you click on a menu link, the togglemenu() function is called again to close the menu (by removing the open class). -->
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>

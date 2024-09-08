@@ -96,12 +96,38 @@ console.log(fruits); // Output: ["apple", "blueberry", "cherry", "date"]
 numbers.unshift(0);
 console.log(numbers); // Output: [0, 1, 2, 3, 4, 5]
 
+/**
+ * Using `splice()` to Insert Elements:
+ * ------------------------------------
+ * - The `splice()` method can be used to add, remove, or replace elements in an array.
+ * - To insert new elements, provide the start index and specify 0 for the number of elements to remove.
+ * - Syntax: array.splice(startIndex, deleteCount, item1, item2, ..., itemN)
+ * - `startIndex`: The index at which to start changing the array.
+ * - `deleteCount`: An integer indicating the number of old array elements to remove (if 0, no elements are removed).
+ * - `item1, item2, ..., itemN`: The elements to add to the array at the `startIndex`.
+ */
+
+// Example: Using `splice()` to insert elements into an array
+
+let colors = ["red", "green", "blue"];
+
+// Insert "yellow" and "orange" at index 1 (after "red")
+colors.splice(1, 0, "yellow", "orange");
+
+console.log(colors); // Output: ["red", "yellow", "orange", "green", "blue"]
+
+// Explanation:
+// - `colors.splice(1, 0, "yellow", "orange")` starts at index 1.
+// - `0` indicates that no elements should be removed.
+// - `"yellow"` and `"orange"` are inserted starting at index 1.
+// - The array is modified to include the new elements in the specified positions.
+
 //--------------------------------------------------------------------
 
 // 5. Removing Elements from Arrays
 // - Use the `pop()` method to remove the last element from an array.
 // - Use the `shift()` method to remove the first element from an array.
-// - Use the `splice(startIndex, deleteCount)` method to remove a specific element from an array at a given index.
+// - Use the `splice(startIndex, deleteCount)` method to remove a specific element from an array at a given index and returns an array of the deleted elements.
 
 fruits.pop();
 console.log(fruits); // Output: ["apple", "blueberry", "cherry"]

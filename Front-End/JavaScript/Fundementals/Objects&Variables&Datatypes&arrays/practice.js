@@ -26,13 +26,12 @@ let collection = [
     job: "Graphic Designer",
   },
   {
-    // this is accessible since it is still considered an object
     model: "Toyota",
     year: 2018,
     type: "SUV",
   },
-  person,
 ];
-
+collection.push(person);
 console.log(collection);
-
+console.log(collection.length);
+console.log(collection.length === 4);

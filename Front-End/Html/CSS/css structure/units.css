@@ -1,0 +1,110 @@
+/* CSS with Units Explanation */
+
+/* 
+  Pixels (px):
+  A pixel is a relative unit of measurement based on the device's screen. 
+  It is commonly used for fixed-size elements like buttons or icons. 
+  1px = 1 pixel on the screen.
+*/
+.button {
+  width: 150px; /* Width of the button is 150 pixels */
+  height: 50px; /* Height of the button is 50 pixels */
+  font-size: 16px; /* Text size is 16 pixels */
+  padding: 10px 20px; /* Padding is 10px top/bottom, 20px left/right */
+}
+
+/*
+    Viewport Width (vw):
+    1vw is equal to 1% of the viewport's width (the width of the browser window). 
+    It scales based on the window size, which makes it useful for responsive design.
+  */
+.container {
+  width: 80vw; /* The container takes up 80% of the viewport's width */
+  margin: 0 auto; /* Centers the container */
+  padding: 20px;
+}
+
+/*
+    Viewport Height (vh):
+    1vh is equal to 1% of the viewport's height (the height of the browser window). 
+    Useful for full-page layouts or vertically scaling elements.
+  */
+.header {
+  height: 50vh; /* The header takes up 50% of the viewport's height */
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+/*
+    Relative units (em):
+    The 'em' unit is relative to the font-size of the element's parent.
+    1em = 100% of the parent element's font size.
+    This is useful when you want the size of an element to scale based on the parent size.
+  */
+.paragraph {
+  font-size: 1.5em; /* 1.5 times the size of the parent element's font size */
+  line-height: 1.4em; /* 1.4 times the font size */
+  margin-bottom: 2em; /* Margin below the paragraph is 2 times the font size */
+}
+
+/*
+    Root em (rem):
+    The 'rem' unit is relative to the font-size of the root element (usually the <html> element).
+    This ensures consistency across different components as it's always based on the root size.
+  */
+.title {
+  font-size: 2rem; /* 2 times the root element's font size */
+  margin-bottom: 1rem;
+}
+
+/*
+    Percent (%):
+    Percentages are relative to the parent element for most properties. 
+    For example, a width of 50% means it will take up half the width of its parent.
+  */
+.image {
+  width: 50%; /* Image takes up 50% of its parent's width */
+  height: auto; /* Height adjusts automatically to maintain aspect ratio */
+  margin-top: 5%;
+}
+
+/*
+    Min-width / Max-width:
+    These units ensure that the element does not go below or above a specific size, 
+    regardless of the parent's size.
+  */
+.card {
+  width: 100%;
+  max-width: 600px; /* The card won't grow beyond 600px */
+  min-width: 300px; /* The card won't shrink below 300px */
+  padding: 1rem;
+  background-color: #f9f9f9;
+}
+
+/*
+    Calc():
+    The calc() function allows you to mix units in calculations.
+    For example, you can subtract a fixed value from a percentage to create a more flexible layout.
+  */
+.sidebar {
+  width: calc(
+    100% - 200px
+  ); /* Sidebar takes the full width minus 200px for padding or margin */
+  background-color: #ddd;
+  height: 100vh; /* Sidebar takes up the full viewport height */
+}
+
+/*
+    Viewport Minimum (vmin) and Viewport Maximum (vmax):
+    vmin takes the smaller of either vw or vh, 
+    vmax takes the larger of either vw or vh.
+    These units are useful for creating fully scalable elements.
+  */
+.responsive-box {
+  width: 20vmin; /* Width is 20% of the smaller viewport dimension */
+  height: 20vmin; /* Height is also 20% of the smaller viewport dimension */
+  background-color: coral;
+}
