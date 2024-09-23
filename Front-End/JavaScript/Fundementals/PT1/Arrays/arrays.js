@@ -95,7 +95,7 @@ console.log(fruits); // Output: ["apple", "blueberry", "cherry", "date"]
 
 numbers.unshift(0);
 console.log(numbers); // Output: [0, 1, 2, 3, 4, 5]
-
+ 
 /**
  * Using `splice()` to Insert Elements:
  * ------------------------------------

@@ -27,6 +27,18 @@ function handleClick() {
 // Add the event listener to the button
 button.addEventListener("click", handleClick);
 // Now, when the button is clicked, the `handleClick` function runs
+// difference between onclick and adding event listeners is that i can add
+
+/** ONCLICK VS EVENT LISTENERS
+ * onclick: You can only assign one function to handle a click. If you assign a new one, it overwrites the previous function.
+ * addEventListener: Allows you to attach multiple event listeners to the same event (e.g., click), so multiple functions can handle the same event without overwriting each other.
+ */
+function handleOnClick() {
+  console.log("onclick method");
+}
+
+button.addEventListener("click", (event) => console.log("First handler"));
+button.addEventListener("click", () => console.log("Second handler"));
 
 //---------------------------------------------------------------------------------------
 

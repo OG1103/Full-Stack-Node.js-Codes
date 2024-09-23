@@ -257,3 +257,32 @@ try {
  * working with data, arrays, strings, objects, and other types easier. Understanding how to
  * use them effectively will help you write cleaner and more efficient code.
  */
+
+/**
+ * 1. Encoding and Decoding URI Components
+ * ---------------------------------------
+ * JavaScript provides functions to encode and decode URI components.
+ * - `encodeURIComponent()`: Encodes a string so that special characters
+ *   (e.g., spaces, &, =, etc.) can safely be included in a URI.
+ * - `decodeURIComponent()`: Decodes an encoded URI component back
+ *   to its original form.
+ */
+
+// a) Original string with special characters
+let originalString = "Hello World! & Special=Characters";
+
+// b) Encoding the string for use in a URI
+let encodedString = encodeURIComponent(originalString);
+console.log(encodedString);
+// Output: "Hello%20World%21%20%26%20Special%3DCharacters"
+
+// c) Decoding the URI component back to the original string
+let decodedString = decodeURIComponent(encodedString);
+console.log(decodedString);
+// Output: "Hello World! & Special=Characters"
+
+/**
+ * Summary:
+ * - `encodeURIComponent()` replaces special characters with percent-encoded values.
+ * - `decodeURIComponent()` converts encoded components back to their original form.
+ */

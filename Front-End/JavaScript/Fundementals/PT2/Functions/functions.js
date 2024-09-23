@@ -74,6 +74,8 @@ console.log(product); // Output: 20
  * ---------------------------------
  * Arrow functions provide a more concise syntax for writing function expressions.
  * They are particularly useful for inline functions and are often used in higher-order functions.
+ * Syntax : (parameters)=>{code}
+ * WE STORE OUR ARROW FUNCTION IN A CONST (CONST X = (PARMS)=>{CODE}) UNLESS IT IS A NESTED FUNCTION/CALLBACK FUNCTION THEN JUST (parameters)=>{code}
  */
 
 const subtract = (a, b) => {

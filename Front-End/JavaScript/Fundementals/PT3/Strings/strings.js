@@ -46,8 +46,11 @@ console.log("Contains 'JavaScript':", str.includes("JavaScript")); // Output: fa
 // slice(start, end) -> end is exclusive
 // If the `end` argument is not specified, the slice continues to the end of the string.
 
-console.log("Slice from index 7 to 12:", str.slice(7, 12)); // Output: world
-console.log("Substring from index 7 to 12:", str.substring(7, 12)); // Output: world
+//The endIndex in the substring() method is exclusive, meaning it is not included in the result.
+//So, if you want to extract a portion of the string up to and including a certain character, you typically set the endIndex to one position beyond the character's index.
+
+console.log("Slice from index 7 to 12:", str.slice(7, 12)); // Output: world, char at index 12 is not included, up to 11.
+console.log("Substring from index 7 to 12:", str.substring(7, 12)); // Output: world (get char at index 7 till 11 (11 is included))
 
 // What happens if no end is specified?
 console.log("Slice from index 7 to the end:", str.slice(7)); // Output: world!

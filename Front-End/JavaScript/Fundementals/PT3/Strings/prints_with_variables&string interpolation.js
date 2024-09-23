@@ -69,6 +69,14 @@ console.log(message); // Output: Hello, my name is Alice and I am 28 years old.
 // - `${}` is used to embed variables and expressions directly inside the string.
 // - This method automatically handles spaces and formatting, making the code more readable.
 
+// When wanting to write a string in a format where we have line under a line we use this format ex:
+const str = `abc,def,ghi
+jkl,mno,pqr
+stu,vwx,yza`;
+// this is equal to having a \n after each row as JavaScript's template literals (backticks `) preserve newlines and allow you to write multiline strings naturally.
+//So, the above string is interpreted like this:
+const str1 = "abc,def,ghi\njkl,mno,pqr\nstu,vwx,yza";
+
 /**
  * USING EXPRESSIONS IN TEMPLATE LITERALS
  * ---------------------------------

@@ -103,3 +103,4 @@ switch (fruit) {
 // - When a match is found, the corresponding block of code is executed.
 // - The 'break' statement prevents the execution from falling through to the next case.
 // - If no cases match, the 'default' block is executed.
+
