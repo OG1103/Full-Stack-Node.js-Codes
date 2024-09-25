@@ -1,0 +1,35 @@
+DESTRUCTION
+    - Destructuring in ES6 (ECMAScript 6) allows you to extract values from arrays or properties from objects and assign them to variables in a clean and concise way. 
+    - This reduces the need for verbose code and makes variable assignments more readable.
+
+1. Destructuring with Objects
+    - When destructuring an object, you can extract specific properties and assign them to variables with the same names as the object keys.
+      - Important Rule: The variable names must match the property keys in the object you're destructuring
+        - const person = {name: "John",age: 30,city: "New York"};
+        - ex: const { name, age} = person;
+        - The key name from the person object is destructured into the name variable.
+        - The key age from the person object is destructured into the age variable.
+
+    - Function with Destructured Parameters:
+        - I pass by the destructed object / const as a parameter 
+        - EX: function greet({ name, age }) {
+                console.log(`Hello, my name is ${name} and I am ${age} years old.`);
+            }
+
+    - If you want to assign the properties to variables with different names, you can do that by specifying the new names in the destructuring syntax.
+        - EX: const { name: fullName, age: years } = person;
+    
+    - Default Values in Object Destructuring
+        - You can also assign default values if the property doesn’t exist in the object.
+        - ex: const { name, city = "Unknown" } = person;
+    
+2. Destructuring with Arrays
+    - Array destructuring allows you to extract values from arrays based on their position.
+    - You can skip array elements by leaving the space between commas empty.
+    - You can use the rest operator (...) to capture the remaining elements of the array into a new array.
+
+
+
+
+
+    

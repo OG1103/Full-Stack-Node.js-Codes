@@ -1,0 +1,15 @@
+ASYNCHRONUS VS SYNCHRONOUS
+
+1. Synchronous Programming
+    - Tasks are executed one after another. Each task must complete before the next one begins.
+    - If a task takes time (like a network request), it blocks the execution of the next task until it finishes.
+
+    - The Problem with Synchronous Code:
+        - If you have tasks that take time, such as fetching data from a server or reading a file, 
+          it would block the whole program from executing the next tasks until the current task is done This makes the program unresponsive.
+
+ 2. Asynchronous Programming
+    - Tasks can start, but they do not block the execution of subsequent tasks.
+    - The program can continue running other code while waiting for an asynchronous task (like fetching data from a server) to complete.
+
+    

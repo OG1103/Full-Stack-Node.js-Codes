@@ -1,0 +1,95 @@
+XMLHttpRequest Object in JavaScript
+
+- The XMLHttpRequest (often abbreviated as XHR) object is used to interact with servers in an asynchronous manner. It allows you to send HTTP requests (GET, POST, etc.) from the browser to the server, retrieve data, and update the page without reloading it.
+- Although modern web development often uses the fetch() API, XMLHttpRequest is still commonly used and is a foundational technology behind AJAX.
+- Creating an XMLHttpRequest Object
+    - const xhr = new XMLHttpRequest();
+    - Once created, the xhr object can be used to configure and send HTTP requests.
+
+Key Properties of the XMLHttpRequest Object:
+    1. xhr.readyState:
+        - 0 (UNSENT): The request has been created but not opened.
+        - 1 (OPENED): The request has been opened with .open() but not sent yet.
+        - 2 (HEADERS_RECEIVED): The request has been sent and the server’s response headers are available.
+        - 3 (LOADING): The response body is being received.
+        - 4 (DONE): The request is complete, and the response is fully received.
+    2. xhr.status:
+        - The HTTP status code of the response.
+        - 200: OK (request was successful)
+        - 404: Not Found (resource not found)
+        - 500: Internal Server Error (server-side error)
+    3. xhr.responseType:
+        - You can set xhr.responseType to control the response format (e.g., 'json', 'text', 'blob', 'document', etc.).
+        - ex: xhr.responseType = 'json';
+              console.log(xhr.response);  // Output will be a JavaScript object
+    4. xhr.timeout:
+        - The time in milliseconds that a request can take before being automatically terminated. If the request takes longer than the timeout value, the request is aborted and the onTimeout event handler is triggered.
+
+Methods of the XMLHttpRequest Object:
+    1. xhr.open(method, url, async):
+        - This method initializes a new request.
+        - method: The HTTP request method (e.g., "GET", "POST").
+        - url: The URL to send the request to.
+        - async: A Boolean indicating whether the request should be asynchronous (true, which is the default) or synchronous (false).
+        - xhr.open("GET", "https://api.example.com/data", true); // Asynchronous GET request
+    2. xhr.send(body):
+        - Sends the request to the server. The body is optional and used only for methods like POST where you need to send data to the server.
+        - EX: xhr.send(); // For GET requests (no body)
+        -EX: xhr.open("POST", "/submit", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify({ name: "John", age: 30 }));
+    3. xhr.setRequestHeader(header, value):
+        - Sets the value of an HTTP request header (e.g., Content-Type, Authorization).
+        - xhr.setRequestHeader("Content-Type", "application/json");
+    4. xhr.abort():
+        - Cancels the current request.
+        - xhr.abort();  // Aborts the request
+
+Events of XMLHttpRequest:
+The XMLHttpRequest object also supports several events that allow you to handle different stages of the request:
+    1.xhr.onreadystatechange:
+        - A function that is called whenever the readyState property changes. This is the most commonly used event handler.
+    2. xhr.onload:
+        - A function Triggered when the request completes successfully.
+    3. xhr.onerror:
+        - function Triggered when the request fails.
+    4. xhr.ontimeout:
+        - Triggered when the request times out (if a timeout was set).
+
+Making Multiple Requests Simultaneously (Best Practice: Use Separate XMLHttpRequest Objects):
+- If you need to make multiple requests at the same time, it's better to create a new XMLHttpRequest object for each request. This way, each request has its own state, and they won't interfere with each other.
+
+example: 
+const makeRequest= (url) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            console.log("Post title:", response.title);
+        } else {
+            console.error("Error:", xhr.statusText);
+        }
+    };
+
+    xhr.onerror = function() {
+        console.error("Request failed");
+    };
+
+    xhr.send();
+}
+
+// Making multiple requests simultaneously with different objects
+makeRequest("https://jsonplaceholder.typicode.com/posts/1");
+makeRequest("https://jsonplaceholder.typicode.com/posts/2");
+
+
+
+    
+
+
+
+
+    
+

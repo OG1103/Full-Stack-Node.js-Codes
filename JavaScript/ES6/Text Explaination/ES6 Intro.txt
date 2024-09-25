@@ -1,0 +1,37 @@
+ES6 (ECMAScript 2015) is a major update to JavaScript, introducing new features that made the language more powerful and easier to use. 
+It brought modern syntax and several key features, which improved both readability and maintainability of code.
+
+Key Features Introduced in ES6:
+
+1.let and const
+    - let allows block-scoped variable declarations, unlike var, which is function-scoped.
+    - const is used for constant values that cannot be reassigned, but the object it points to may still be mutated.
+    - let allows you to reassign values after the initial declaration.
+    - const, on the other hand, does not allow reassignment of the variable.
+    - While const variables cannot be reassigned, objects and arrays assigned to const can still be mutated. 
+        - This means you can change the contents of an array or object, but you cannot reassign the entire array or object.
+
+2. Arrow Functions
+    - Arrow functions (=>) provide a concise syntax for writing functions and automatically bind the this context.
+        - const add = (a, b) => a + b;
+
+3. Template Literals
+    - Template literals make it easier to work with strings, allowing embedding expressions and multi-line strings.
+        - const greeting = `Hello, ${name}!`;
+
+4. Destructuring
+    - Destructuring allows you to unpack values from arrays or properties from objects into distinct variables.
+        - const [a, b] = [1, 2];
+        - const { name, age } = { name: 'Jane', age: 30 };
+
+5. Classes
+    - ES6 introduced a more readable class syntax for creating objects and handling inheritance
+
+6. Modules
+    - ES6 introduced a module system for importing and exporting functions, objects, or variables between different JavaScript files.
+        - export const add = (a, b) => a + b; // math.js
+        - import { add } from './math.js'; // main.js
+
+7. Promises
+    - Promises provide a cleaner way to handle asynchronous operations compared to callbacks.
+

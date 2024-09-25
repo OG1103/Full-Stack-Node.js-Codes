@@ -1,0 +1,81 @@
+Key Concepts of ES6 Modules:
+    - export: Used to export functions, objects, or variables from a module so they can be imported and used in other files.
+    - import: Used to import functions, objects, or variables from other modules.
+
+Types of Exports:
+    - Named exports
+    - Default exports
+
+Named Exports:
+    - Named exports allow you to export multiple values from a module. When using named exports, you have to use the same name when importing the values.
+        - // math.js
+            export const add = (a, b) => a + b;
+            export const subtract = (a, b) => a - b;
+        - // main.js
+            import { add, subtract } from './math';
+
+Default Exports:
+    - Default exports are used when you want to export a single value from a module. 
+    - Unlike named exports, the name used to import default exports can be different from the name of the exported value.
+    - When importing a default const/funcion i don't need to specify it in { } and i can give it any name. 
+        - // greet.js
+            export default function greet(name) {
+            return `Hello, ${name}!`;
+            }
+        - // main.js
+            import hey from './greet';
+    - There can only be one default export per module.
+
+    - Exporting a const Variable and Exporting it as Default at the End
+        - You can declare a function or variable with const (or let/var) and export it as the default export at the end of the file.
+            - // mathUtils.js
+                const add = (a, b) => a + b;
+
+                export default add;
+                export default {any other const/function};
+            - // main.js
+                import sum,{any other function} from './mathUtils';
+
+                console.log(sum(2, 3)); // Output: 5
+
+    - Exporting an Anonymous Arrow Function Directly
+        - When you export an anonymous arrow function directly as a default export, you do it without giving the function a name or declaration.
+        - SYNTAX: 
+            - export default (parameters) => {
+                //function body
+            };
+        - EXAMPLE:
+            - // arrayUtils.js
+            export const PI = 3.14159;
+            export const E = 2.718;
+            export const square = (x) => x * x;
+
+            export default (numbers) => {
+                return numbers.map((num) => num * 2);
+                };
+
+
+            - // main.js
+                import processNumbers, { PI, E, square } from './arrayUtils'; // i give the default function any name don't have to follow a naming convention
+
+                const nums = [1, 2, 3, 4, 5];
+                const doubled = processNumbers(nums);
+
+                console.log(doubled); // Output: [2, 4, 6, 8, 10]
+                console.log(PI);      // Output: 3.14159
+                console.log(E);       // Output: 2.718
+                console.log(square(4)); // Output: 16
+
+
+// NOTE:
+
+I can import all functions/consts that are exported (except default ones those you can define them seperatly) from an entire file under one name as if its an object and call the method from there:
+
+EX:
+import * as Test from "./filename.js";
+
+// call a function 
+Test.functionName(parameters);
+
+// if i wanna store something
+const omar = Test.functionName(Parameters);

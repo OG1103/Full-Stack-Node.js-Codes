@@ -1,0 +1,84 @@
+What is AJAX?
+AJAX stands for Asynchronous JavaScript and XML. It is a set of web development techniques used to create asynchronous web applications, 
+allowing web pages to update data dynamically without reloading the entire page. Despite its name, modern AJAX often uses formats like JSON instead of XML.
+
+Why Use AJAX?
+    - Asynchronous Communication: AJAX allows data to be sent(req) and retrieved(recieves response) from a server asynchronously without refreshing or reloading the web page. 
+    This improves user experience because only the necessary parts of the page are updated (e.g., fetching search results, submitting forms).
+    - BASICALLY allows front-end(client-side): 
+        - Send requests to the server.
+        - Receive responses from the server.
+        - Without the need to reload the page
+
+
+How AJAX Works:
+    1. Client-Side Request:
+        - JavaScript code on the client sends a request to a web server. This request is often sent via the XMLHttpRequest object or by using modern methods like fetch().
+    2. Server Processes Request: 
+        - The server receives the request, processes it (e.g., querying a database, performing some logic), and sends back a response (often in JSON or XML format).
+    3. Client Receives Response:
+        - The client-side JavaScript receives the server's response and updates the page dynamically (without a full reload), displaying the new data to the user.
+
+Basic Example of AJAX Flow:
+    1. User Interaction: User clicks a button or performs an action that triggers an AJAX request.
+    2. JavaScript Sends Request: JavaScript sends an asynchronous request to the server.
+    3. Server Processes Request: The server processes the request and sends back data (e.g., JSON).
+    4. JavaScript Handles Response: JavaScript receives the data and updates the page without reloading.
+
+Key Concepts of AJAX:
+    1. Asynchronous
+    2. XMLHttpRequest Object:
+        - The traditional way of performing AJAX requests. Though still in use, it's often replaced with fetch() in modern JavaScript development because fetch() is more flexible and simpler to use.
+    3. Response Formats:
+        - XML: Originally, AJAX was used to retrieve XML data, hence the "XML" in the acronym.
+        - JSON: Nowadays, JSON (JavaScript Object Notation) is the preferred format because it's more lightweight and easier to work with in JavaScript.
+        - HTML or Plain Text: Sometimes, the server responds with HTML or plain text, which can be directly inserted into the web page.
+
+
+WHEN IS IT USED? 
+    - AJAX is typically used in client-side web applications to make requests to a server and update parts of the page dynamically. 
+    - AJAX is not limited to HTML alone; it can be used in any front-end platform that utilizes JavaScript for making asynchronous requests.
+    -  AJAX is a technique, and as long as the front-end platform or framework supports JavaScript (or a language that compiles to JavaScript), you can use AJAX to perform asynchronous operations.
+
+
+Platforms and Frameworks Where AJAX is Used:
+    - Traditional HTML/CSS/JavaScript Websites
+    - Single Page Applications (SPA): React, Vue.js, Angular, and Svelte 
+    - Mobile/Hybrid Apps (React Native, Ionic, Cordova)
+
+AJAX vs. Node.js:
+    - AJAX (Client-Side):
+        - AJAX is used on the client-side (inside the browser) to send requests to the server asynchronously and receive responses without reloading the page.
+    - Node.js (Server-Side):
+        - Node.js is a server-side runtime that processes requests (including AJAX requests sent from the client) and returns responses. It can handle database queries, business logic, file handling, etc.
+    - How They Work Together:
+        - AJAX: Runs in the browser (client-side) to make HTTP requests to the server and handle dynamic data updates without reloading the page
+        - Node.js: Runs on the server to handle requests from AJAX, perform operations like database queries or file handling, and send a response back to the client
+    - Example Workflow:
+        - The user clicks a button in the browser (client-side).
+        - AJAX sends a request to the server (e.g., a Node.js API).
+        - Node.js processes the request (e.g., retrieving data from a database).
+        - AJAX receives the response and updates the webpage dynamically.
+
+
+Key Concepts of AJAX PT2:
+    - AJAX is the concept or technique for making asynchronous HTTP requests.
+
+    - Send Requests: The front end (typically via JavaScript) can send HTTP requests (GET, POST, PUT, DELETE, etc.) to the server. 
+      This can be done asynchronously, meaning the page does not need to refresh or reload when the request is made.
+    
+    - Receive Responses: Once the server processes the request (e.g., retrieves data, processes form inputs, etc.), it sends a response back to the front end. 
+      This response is typically in the form of JSON, XML, or HTML, which is then used to dynamically update parts of the webpage.
+
+Correlation Between XMLHttpRequest, fetch(), Axios, and AJAX:
+-------------------------------------------------------------
+All these methods and terms are part of how HTTP requests are handled in JavaScript, 
+and they serve the same core purpose: making asynchronous requests from the front end to the back end, allowing web pages to send or retrieve data from servers 
+without reloading the page. They all fall under the umbrella of AJAX (Asynchronous JavaScript and XML), but they differ in their approach and implementation.
+
+In Summary:
+---------------
+Yes, XMLHttpRequest, fetch(), and Axios are different ways to implement AJAX, enabling web pages to communicate with servers asynchronously. 
+The goal is the same: send HTTP requests in the background, update parts of a page, and provide a smooth user experience without full page reloads.
+
+So, AJAX is the technique, and XMLHttpRequest, fetch(), and Axios are tools to accomplish it. Choosing which one to use depends on the developer's needs and preferences
