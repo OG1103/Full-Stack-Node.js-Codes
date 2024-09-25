@@ -81,4 +81,4 @@ In Summary:
 Yes, XMLHttpRequest, fetch(), and Axios are different ways to implement AJAX, enabling web pages to communicate with servers asynchronously. 
 The goal is the same: send HTTP requests in the background, update parts of a page, and provide a smooth user experience without full page reloads.
 
-So, AJAX is the technique, and XMLHttpRequest, fetch(), and Axios are tools to accomplish it. Choosing which one to use depends on the developer's needs and preferences
+So, AJAX is the technique, and XMLHttpRequest, fetch(), and Axios are tools to accomplish it (enabling API calls). Choosing which one to use depends on the developer's needs and preferences

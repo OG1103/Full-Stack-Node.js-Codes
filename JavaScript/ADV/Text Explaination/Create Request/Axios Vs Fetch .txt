@@ -2,7 +2,7 @@ Difference Between fetch() and axios:
 -------------------------------------
 fetch() is a native JavaScript API that is built into modern browsers.
 axios is a third-party library that simplifies making HTTP requests 
-Both fetch() and axios are used for making HTTP requests from the front end to interact with the back end using promises to handle requests asynchronously. 
+Both fetch() and axios are used for making HTTP requests from the front end to interact with the back end by returning/using promises to handle requests asynchronously. 
 However, they differ in their implementation, functionality, and the way they handle requests and responses.
 
 When to Use fetch()

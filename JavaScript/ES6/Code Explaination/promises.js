@@ -107,6 +107,7 @@ Promise.race([fastPromise, slowPromise]).then((result) => {
 });
 //Promise.race(): waits for the first promise to resolve or reject.
 
+//--------------------------------------------------------------------------------------------------------
 //ADVANCED EXAMPLE
 function watchTutorialPromise() {
   let userLeft = false;
