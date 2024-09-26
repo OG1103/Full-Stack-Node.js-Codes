@@ -15,7 +15,6 @@
 │ │ ├── /utils # Store any helper files for frontend
 │ │ │ └── helpers.js # Example helper file
 │ │ ├── App.js # Main React file
-│ │ ├── index.css # Optional global css file to be applied to entire page
 │ │ └── index.js # Entry point for the React app
 │ ├── .env # Frontend environment variables
 │ ├── package.json # Frontend package manifest
@@ -54,6 +53,9 @@ npm install react react-dom react-router-dom axios react-scripts
       <div id="root"></div> <!-- React app mounts here -->
   </body>
   </html>
+
+    - You can an index.css file in the public folder as well its optional incase you want to add global styling
+    - Then in the index.js you can import it using: import "../Public/index.css";
 
 ## 2. index.js (in /src):
 
