@@ -97,7 +97,7 @@ add a script
 Run the following command to install required dependencies:
 
 ```bash
-npm install express mongoose
+npm install express mongoose cors
 npm install -g nodemon # Optional for automatic restart
 ```
 
@@ -127,9 +127,13 @@ dotenv.config(); // Load environment variables
 const app = express();
 const port = process.env.PORT || 8000;
 
+//CORS defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. 
+app.use(cors());
 app.use(express.json()); // Middleware to parse JSON
 
 initializeRoutes(app); // Initialize all routes
+
+// note call  Middleware to parse JSON before Initializing all routes
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -141,6 +145,8 @@ mongoose
   })
   .catch((err) => console.error("MongoDB connection error:", err));
 ```
+
+### Another way to do it is to create a class app with constructor that initializes attributes including this.app=express(); and methods that initialize db connection and middlewares  and routes in the app.js & export it as a default, EX: export default class App{}. Then in another file example server.js; import it and create an instance of app() and call its methods to initalize server.
 
 ## 5. Initialize Routes
 
@@ -235,3 +241,16 @@ export default mongoose.model("User", userSchema);
 ```bash
 npm run start
 ```
+
+## 10. For validations:
+
+  ### option 1: check library joi to create schemas and create a file validationmiddleware that has a function that utilizes joi schemas to validate requests. This function is then used in the routes where i pass to it a schema and a request property. Note: when you define a Joi validation schema, the body or parameters that are being validated must match the field names exactly as defined in the schema.
+
+  ### option 2: Use built in express-validator and create a middleware which utilizes the validationResult(req) method to validate/ check for errors from validations on the properties of request. 
+
+## 11. Adding manually exceptions and throwing them in Services and catching them in controller
+
+  ### Create a service folder and in there are the files that contain the functions that handle the logic of the controller functions
+  ### In those functions i preform checks and can throw exceptions
+  ### In controller functions i call the services functions, and there i catch any exception thrown by the services functions
+

@@ -1,0 +1,41 @@
+1. Import Express:
+    - This line imports the Express library using ES6 module syntax (import).
+    - Express is a Node.js framework used for building web applications and APIs.
+    - In this example, you are importing express to use its functionality to create a web server.
+
+2. Create an Express Application:
+    - const app = express();
+    - This line creates an instance of an Express application.
+    - app is an Express application object, which you can use to configure your server, define routes, middleware, and more.
+    - The app object provides methods for handling requests, adding middleware, and setting up the server.
+
+3. Define the Server Port:
+    - const port = 8000;
+    - This line defines the port number on which your server will listen for incoming HTTP requests.
+    - Here, the server will listen on port 8000.
+    - A port is simply an address on your computer (or server) that the application listens to for requests. Different applications use different ports.
+
+4. Set Up Middleware to Parse JSON:
+    - app.use(express.json());
+    - This line sets up middleware that enables your Express app to automatically parse incoming requests with JSON payloads.
+    - This line should be declared before defining / initializing any routes 
+    - Middleware functions in Express are functions that execute before the final route handler and allow you to modify the request or response objects.
+    - Without this middleware, your app wouldn't be able to handle application/json request bodies.
+    - app.use(cors());
+    - By using app.use(cors()), the backend server sends the appropriate CORS headers, allowing the frontend app to successfully make the request.
+    
+5. If routes are declared in a Separate file then Initialize them:
+    - Example:
+        - import initalizeroutes from "./routes.js";
+        - initalizeroutes(app);
+
+6. Start the Server and Listen for Requests:
+    - app.listen(port, () => {
+        console.log("server up and running on", port);
+    });
+    - This line starts the server and tells it to listen for incoming requests on the specified port (in this case, 8000).
+    - The app.listen() method takes two arguments:
+        - port: The port number to listen on.
+        - callback: A function that runs once the server starts successfully. In this case, it logs "server up and running on 8000" to the console.
+    - When the server is running, it waits for incoming HTTP requests and responds based on the routes or endpoints you define later.
+

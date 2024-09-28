@@ -6,6 +6,8 @@
  * inheritance, encapsulation, and polymorphism.
  * When we create an instance of a class in JavaScript, we are generating a new object of that class type with its own unique properties
  * This approach is more efficient and organized than manually creating multiple objects with the same properties
+ *  In classes, the this keyword refers to the specific instance (object) that is created when the class is instantiated.
+ *  Every time you create a new object using the new keyword, this inside the class methods or constructor refers to that new object.
  *
  * Basic concepts covered:
  * - Basic Class Syntax
@@ -43,7 +45,7 @@
 class Person {
   // Constructor initializes properties when an object is created
   constructor(name, age) {
-    this.name = name;
+    this.name = name; // the 'name' property of the instantiated object is set to the 'name' argument passed to the constructor
     this.age = age;
   }
 

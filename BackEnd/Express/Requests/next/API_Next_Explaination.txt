@@ -1,0 +1,48 @@
+next() Function:
+    - The next() function is used to pass control from one middleware function to the next middleware in the stack.
+    - Without calling next(), the request will be left hanging, and the server will not respond. This is because the request never proceeds to the next middleware or route handler.
+
+How next() Works:
+    - When next() is called, Express moves on to the next matching route or middleware function.
+    - If the current middleware or route sends a response and does not call next(), no further middleware or route handlers will be executed.
+
+Example of Middleware Stack:
+    function middlewareOne(req, res, next) {
+        console.log('Middleware One');
+        next(); // Passes control to the next middleware
+    }
+
+    function middlewareTwo(req, res, next) {
+        console.log('Middleware Two');
+        next(); // Passes control to the route handler
+    }
+
+    app.get('/about', middlewareOne, middlewareTwo, Function);
+                                (-->(next))    (-->(next)) 
+
+        - When a request to /about is made:
+            - middlewareOne logs "Middleware One" and calls next(). aka passing control to the next middleware function. In our endpoint in the example, its middlewareTwo
+            - middlewareTwo logs "Middleware Two" and calls next(). aka passing control to the next middleware function. In our endpoint in the example, its Function
+            - Then The controllor Function (Function) is called and executed. Typically, the controller function sends a response to the client (e.g., res.send() or res.json()).
+         
+Important Note:
+    -In Express routes, we do not explicitly pass parameters like req, res, or next when calling middleware functions or the controller function in the route definition. 
+    Express automatically passes these parameters behind the scenes.
+
+    -However, these functions (middleware or controller functions) must still define req, res, and next as parameters in their function definition. 
+    Even though you don’t manually pass these parameters in the route, they need to be present in the function's signature so that Express can provide the request, response, and next objects.
+
+    -Summary:
+        - Middleware : Automatically receives req, res, and next from express.
+        - Controller : Automatically receives req and res from Express, allowing you to handle the request without manually passing these parameters.
+EXAMPLE: 
+    function middlewareOne(req, res, next) {
+    console.log('Middleware One');
+    next(); // Passes control to the next middleware
+    }
+
+    function controllerFunction(req, res) {
+        res.send('Response from the controller');
+    }
+
+    app.get('/about', middlewareOne, controllerFunction);
