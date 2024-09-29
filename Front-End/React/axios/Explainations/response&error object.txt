@@ -10,7 +10,7 @@ NOTE:
     - If an error occurs it is passed by in the catch
     - here are what the 2 objects represent (resolved value and rejected value) from the axios.method() promise and what parts of the server response(success/failure) i can access:
 
-1- Response object in axios (from the await axios.method) (retrieving a response from backend endpoints):
+1- Response object in axios (from the await axios.method) (retrieving a response from backend endpoints in the case of a 200 response is received):
     1- response.data:
         - This contains the data sent by the server in response to your request.
         - Usually, this is the JSON object returned by your API.
@@ -26,7 +26,22 @@ NOTE:
     6. response.request:
         - This is the request object that was made, providing details about the request itself.
 
-2- Error Object in Axios (from the catch block when a request fails):
+2- Error Object in Axios (from the catch block when a request fails aka reponse not in 200 range):
+ if the API controller sends a 400 response, it will trigger the catch block in Axios.
+ Axios considers any HTTP status code outside the range of 2xx as an error. So, if the server responds with a 400 (or any other error status, such as 404, 500, etc.), 
+ Axios will throw an error, which will be caught by the catch block in the function thats awaiting the axiox promise.
+
+ EX:
+catch(error){
+    if (error.response) { //checks if the error occurred due to a response from the server that was outside the 2xx range (e.g., 400, 500).
+    return error.response; // Non-2xx response (e.g., 400, 500) is returned and handled somewhere else as checks for status and so on just like im returning a succesful res in the try.
+    } 
+    // If error.response is not defined, this means that the problem was not with the server's response
+    throw error; // Network or other error
+    // throw the error to be handled by higher-level error handling. This error might contain details about what went wrong (e.g., error.message).
+}
+
+The error object thrown:
     - error.response:
         - This contains the response object sent back by the server, but only if the server responded with an error status code (e.g., 4xx, 5xx)
         - The structure of error.response is similar to a successful Axios response object (response.data, response.status, etc.).

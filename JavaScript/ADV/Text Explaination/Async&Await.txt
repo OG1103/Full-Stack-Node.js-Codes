@@ -5,6 +5,10 @@ Overview of async and await:
 What is an async function?
 --------------------------
     - An async function is a function that always returns a Promise. Even if you explicitly return a non-promise value, it will automatically be wrapped in a resolved Promise.
+    - the return value in an async function = the resolve value in a promise
+    - if i want to add a reject value in an async function then i throw a new error. 
+    - Basicaaly async functions are a simpler way of creating promises.
+    - I can later then call/await that async function in another async function. 
 
 What is await?
 ---------------
@@ -25,7 +29,7 @@ Explanation of async/await and try-catch:
     - await is used to pause the execution of an async function until the promise either resolves (success) or rejects (failure).
     - The function must be marked as async in order to use await. The async keyword ensures that the function will always return a promis
     - Success Scenario:
-        - If the promise resolves successfully, the code after await continues to execute and the value returned by the promise is assigned to the variable
+        - If the promise resolves successfully, the code after await continues to execute and the value returned by the promise (in the try block) is assigned to the variable
     - Error Scenario:
         - when the promise is rejected or an error is thrown, the error is passed to the catch block and execution of the async function stops with a rejection reason of that await error.  
         - In the catch block,  The error is handled in the catch block, preventing your application from crashing. 

@@ -1,0 +1,52 @@
+WHAT IS MONGODB?
+---------------
+    - MongoDB is a document-oriented database solution, which we use for high volume data storage.
+    - It is fast and efficient
+    - MongoDB uses collections and documents to store data in comparision traditional tables and rows
+    - It is a non-relational,NoSQL database solution.
+
+Relational vs Non-Relational Database:
+--------------------------------------
+    Relational Database:
+        - Relational Datbase is a collection of tables and one table might be related to another table in some way 
+        - These tables store data in the format of ROWS and COLUMNS
+        - Each row is a data in the table which can have one or more columns.
+        - The data in a relational database is normalized and each table has a predefined schema. (we refernce different tables using ids pks)
+        - ADV: Less or no redundant data
+        - DISADV: to fetch proper data, you might need to join multiple tables, which is performace intensive.
+    Non-Relational Database:
+        - we do not have tables and rows. Instead we have collections and documents.
+        - A collection is equivlant to a table, and a document is equivlant to a row.
+        - A collection is a collection of one or more documents and a database has multiple collections.
+        - A document can have fields. Those fields you can think of them as the columns.
+        - Non-relational databases are schema-less.
+
+What is a document in a collection?
+------------------------------------
+    - A document stores data in the format of a JSON objec. JSON is a data format which is short for javascript Object Notation.
+    - Basically a document is a JSON OBJECT. Where it contains key,value pairs, where the value can be any type including a nested JSON object and in our case nested document. 
+    - Value can be a string number,bool,array of documents/objects, array of strings/numbers .........
+    - So for example, if we store some Customer's data in MongoDB, it will be stored in the format of a json object. 
+    - document format:   
+        {   field1:value1,
+            field2:value2,
+            field3: value3
+        }
+    - Note a collection has one or more documents so essentially a collection is a collection of JSON objects (documents).
+    - Since MongoDB is schema-less it means it can have any type&number of fields. Note: not all documents in a collection have to have the same fields some fields might be missing.
+    - It doesn't have to follow a certain schema, so not all documents in the collections have to have the same fields declared. aka we can have documents with differen structures.
+    - A field is essnetially the key in the object or to make it clearer we can think of it as the column.
+    - EX OF A COLLECTION:
+        {   field1:value1,
+            field2:value2,
+            field3: value3
+        }
+        {   field1:value1,
+            field2:value2
+        }
+    - The above is a collection of documents, as we can see the second document does have fields 3. This is normal since MongoDB is schema-less: not all docs have to have the same structure.
+    - Since we can store documents with different structure in a small collection with MongoDB, ypur database can grow with your application accordign to your applications needs. 
+    - With MongoDB, you can get started and you can add data with more information in the same collection at a later time. 
+    - Since we can store nested documents in MongoDB, it allows us to create complex relations between data and store them in one of the same document(think of joining).
+      This makes working with such data and fetching it super-efficient since we don't need complex joins. 
+    - We use JSON to perform CRUD Operations with MongoDB. 

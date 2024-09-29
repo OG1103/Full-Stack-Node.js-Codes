@@ -27,3 +27,19 @@ and handles many common use cases (like error handling, JSON parsing, and timeou
 
 Use fetch() for lightweight projects and where browser support is not an issue.
 Use Axios for feature-rich applications that require better error handling, interceptors, and request cancellation, or when you need to support older browsers.
+
+try{await axios & fetch} catch(error):
+--------------------
+    - fetch():
+        - The fetch API behaves differently from Axios when it comes to handling non-2xx responses. 
+        - The fetch API does not throw an error for HTTP responses outside the 2xx range (like 400 or 500).
+        - Instead, it resolves the promise successfully, and it's up to you to check the response status code and handle it accordingly.
+        - aka is not passed in a catch block. 
+        - Only network errors (like DNS issues or the server being unreachable) will trigger the catch block.
+    - axios():
+        - In Axios, when a request results in a response with an HTTP status code outside the 2xx range (like 400, 404, 500, etc.), 
+        - Axios automatically throws an error, which is caught by the catch block.
+        - This behavior is different from the fetch API, where non-2xx responses are considered successful and do not throw an error automatically.
+        - In the catch block, I can check if the error occurred due to a server response. 
+          If that's the case, I'll return error.response, allowing the calling function to handle the response (including status and data) appropriately.
+        -  Network errors will also trigger the catch block, just like fetch. 

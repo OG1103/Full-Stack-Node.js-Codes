@@ -29,10 +29,12 @@ const callmakeRequest = async (location) => {
     //pause execution of current function while continuing to execute whatever else is running in the background
     // wait for the promise to resolve
     // store the resolved value in the variable response
-    //if the promise is rejected it immediatly goes to the catch block
+    //if the promise is rejected it immediatly goes to the catch block passing by the rejected value
     const response = await makeRequestPromise(location);
+    console.log("response recieved", response); //" "response recieved" connection established to google"
     return response;
   } catch (error) {
+    //error value in the catch block will be "can only connect to google" as thats the reject value of the promise
     throw error; // Propagate the error to the calling function (run)
   }
 };
@@ -44,7 +46,7 @@ const run = async () => {
     // wait for callmakeRequest to resolve
     // The error propagated from callmakeRequest will be caught here
     const result = await callmakeRequest("google");
-    console.log(result);
+    console.log(result); //"response recieved"
   } catch (error) {
     console.log("Error in run:", error); // Now it catches the error propagated from callmakeRequest and handles it
   }
@@ -95,3 +97,60 @@ runasync();
         3. Error propagates to run() as run awaits/calls callmakeRequest →
         4. Error is caught and handled in the catch block of run().
  */
+
+//---------------------------------------------------------------------------------------------------------------------------------------------
+
+// Another example instead of using return promise syntax just like the makeRequestPromise(),  async function by default returns the promise (aka can use it to create a promise):
+
+// Basic syntax of creating a promise with a basis resolve and reject value.
+// note i can use throw <whatever message or object> without the new Error keyword
+
+//method3 represents the inital promise
+const method3 = async (number) => {
+  if (number >= 0) {
+    // by default this is the resolve value which will be assigned to the variable calling this asynchronous function
+    return `In method 3: ${number} is positive `;
+  } else {
+    // manual reject value: by throwing an error/something that would represent my error, so it can be caught in a catch block in the function calling this asynchronous function
+    throw `In method 3: ${number} is negative`;
+  }
+};
+
+const method2 = async (number) => {
+  try {
+    const responseFromMethod3 = await method3(number);
+    // the responseFromMethod3 variable = "In method 3 number is positive ", in the case the method3 resolves
+    // otherwise if it rejects it catches the error thrown and goes in the catch
+    // we await it because any line after it depends on the return of the promise. so we have to wait for it to resolve/reject
+    return `In method2: ${responseFromMethod3}`;
+  } catch (err) {
+    // the err variable = "In method 3 number is negative"
+    //propigate the error to last function for it to be handled there
+    throw `In method2: ${err}`;
+  }
+};
+
+const method1 = async (number) => {
+  try {
+    const responseFromMethod2 = await method2(number);
+    // we await it because any line after it depends on the return of the promise. so we have to wait for it to resolve/reject
+    console.log(`Success: In method1: ${responseFromMethod2}`);
+  } catch (err) {
+    console.log(`Error: In method1: ${err}`);
+  }
+};
+
+// as long as any future line does not depend on an async function or a promise then i don't need to await it.
+//await basicaaly waits for a promise to resolev aka return a value or throw an error before continuing to execute the rest of my function.
+// if ill use an await keyword it had to be in an async function
+//async function it self returns a promise i don't need the newPromise keyword
+// any return value represents a resolved value/success and to have a reject value i can throw an error or the value for it to be caught on later in another function awaiting the promise using a try and catch
+
+console.log("test1");
+method1(-1);
+console.log("test2");
+// output test1,test2,Error: In method1: In method2: In method 3: -1 is negative
+
+// SINCE HERE I DIDN'T await the async function method1() due to nothing after it depends on it.
+// So it continues to execute the code normally and in the background it runs tyhe async function which will finish at a future time
+// if i awaited method 1 then test 2 will come after Error: In method1: In method2: In method 3: -1 is negative, as console.log(("test2")) wouldve been only executed after method1() resolves/rejects.
