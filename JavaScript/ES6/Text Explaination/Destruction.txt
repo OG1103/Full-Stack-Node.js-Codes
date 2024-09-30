@@ -15,6 +15,23 @@ DESTRUCTION
         - EX: function greet({ name, age }) {
                 console.log(`Hello, my name is ${name} and I am ${age} years old.`);
             }
+        -  when you do object destructuring in a function's parameter like { name, age }, it’s like you’re passing an object with name: value and age: value.
+        -  again, it's as if you're passing an object with key-value pairs, and the function automatically extracts the values based on the keys you specified.
+        - If you do const { name, age, details } = object and then pass { name, age, details } to a function, you are passing an object key-value pairs to the function.
+        - EX: const person = {
+                name: "John",
+                age: 30,
+                details: {
+                    occupation: "Engineer",
+                    city: "New York"
+                }
+              };
+              
+              const { name, age, details } = person;
+              greet({ name, age, details }); THIS EQUALS => greet({ name: "John", age: 30, details: { occupation: "Engineer", city: "New York" } });
+
+              
+
 
     - If you want to assign the properties to variables with different names, you can do that by specifying the new names in the destructuring syntax.
         - EX: const { name: fullName, age: years } = person;

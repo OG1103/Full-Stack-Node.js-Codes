@@ -1,0 +1,92 @@
+working with documents in MongoDB:
+-----------------------------------
+
+SHELL COMMANDS/METHODS; Insert Documents in a Collections insertOne()/insertMany():
+---------------------------------------------------------
+    - db.<collection_name>.insertOne(document in json format): inserts only one document.
+
+    - db.<collection_name>.insertMany(array of documents): inserts many documents. we pass an array of documents, aka array of JSON objects. 
+      EX: db.customer.insertMany([{},{},{}]) 
+    
+    -  db.<collection_name>.insert(): Here if we pass one document it acts as insertOne(). If i pass an array of documents it acts as insertMany().
+
+
+SHELL COMMANDS/METHODS; Fetch Documents from a Collections find()/findOne():
+----------------------------------------------------------
+  To Include all fields in the returned Object or Objects:
+
+    - db.<collection_name>.find(): returns an array of ALL THE DOCUMENTS inside collection_name in the selected database.
+    - db.<collection_name>.findOne(): returns THE FIRST DOCUMENT from the collection specified.
+
+    APPLYING FILTER:
+    - Filter: This is passed as an argument in JSON format (essentially an object). It specifies the criteria that documents must meet to be returned.
+    - If i pass by mutliple key-value pairs in the filter object they are anded.
+    - If no document matches the filter, find/findOne() returns null.
+
+      - db.<collection_name>.find(filter): returns an array of ALL THE DOCUMENTS it encountered that passed that filter from the collection specified.
+        -  - EX: db.customer.find({name:omar}): This query will search the customers collection and return all the documents where the name field is equal to "Omar".
+
+      - db.<collection_name>.findOne(filter): returns THE FIRST DOCUMENT it encountered that passed that filter from the collection specified.
+          - EX: db.customer.findOne({name:omar}): This query will search the customers collection and return the first document where the name field is equal to "Omar".
+          - EX: db.customer.findOne({name:omar, age:21}): MongoDB will search the customer collection for the first document that has both the name field equal to "omar"
+                and the age field equal to 21.
+        
+  
+  To include only specifc fields in the returned Object or Objects:
+
+    - db.<collection_name>.find/findOne(filter,fields) 
+    - fields is an Object therefore key value pairs. To exclude/include a field we do {name of field: bool}.
+
+    - Two Approaches to Field Projections:
+        1. Excluding Specific Fields:
+            - You can specify which fields to exclude by setting their value to false in the projection object.
+            - All other fields will be included by default.
+            - EX: db.customers.findOne({ name: "omar" }, { _id: false, email: false })
+              - This query will return the first document where the name is "omar", but will exclude the _id and email fields from the result.
+
+        2. Including Specific Fields:
+            - Alternatively, you can specify which fields to include by setting their value to true in the projection object.
+            - Only the fields you specify will be included in the result, and all other fields will be excluded by default (except _id, which needs to be explicitly excluded if you don’t want it).
+            - EX: db.customers.findOne({ name: "omar" }, { name: true, age: true, _id: false })
+              - This will return the first document where name is "omar", but only the name and age fields will be included, and _id will be excluded.
+
+    - Applying Field Projections Without Filters:
+      - If you want to include/exclude fields without applying any filters (i.e., you want to retrieve all documents), you can pass an empty filter {} as the first argument.
+      - EX: db.customers.find({}, { _id: false, email: false })
+        - This will return all documents from the customers collection, but the _id and email fields will be excluded from each document.
+
+  
+SHELL COMMANDS/METHODS; Updating Documents in a Collections updateMany({filtervalues},{$set{}})/updateOne({filter},{$set: {}}):
+-------------------------------------------------------------------------------------------------------------------------------
+    - updateOne({filtervalues},{$set{}}):
+        - db.<collection_name>.updateOne({},{$set{}}) : updates a single document which matches the given filter. If multiple documents match the filter it will update the first document it encounters.
+        - {$set:{}}: is what im updating it to. $set:{updated fields details}. if a field doesn't exist it as added to the document with the value specified. 
+        - EX: db.customer.updateOne({name:"omar"},{$set:{age:22,city:"abudhabi"}}) =>updates the first document in the customer collection where the name is "omar", 
+                                                                                    setting the age to 22 and the city to "abudhabi" (creating these fields if they don't exist).
+    
+    -updateMany({filtervalues},{$set{}}):
+        - db.<collection_name>.updateMany({},{$set{}}) : updates all the documents which matches the given filter.
+        - {$set:{}}: is what im updating it to. $set:{updated fields details}. if a field doesn't exist it as added to the document with the value specified. 
+         - EX: db.customer.updateMany({name:"omar"},{$set:{age:22,city:"abudhabi"}}) =>updates all the documents in the customer collection where the name is "omar", 
+                                                                                    setting the age to 22 and the city to "abudhabi" (creating these fields  in the matched documents if they don't exist).
+
+SHELL COMMANDS/METHODS; save():
+-------------------------------
+  - We use save method to update an existing documet or insert a new document depending on its document parameter
+  
+SHELL COMMANDS/METHODS;  Deleting documents from Collection deleteOne():
+-------------------------------------------------------------------------
+    - db.<collection_name>.deleteOne({}): deletes first document in the collection. 
+    - db.<collection_name>.deleteOne({filter}): im deleting the first document i encounter that matches the filter object. 
+    - db.<collection_name>.deleteMany({filter}): im deleting all the documents i encounter that matches the filter object.
+    - db.<collection_name>.deleteMany({}): im deleting all the documents in the collection.
+
+    
+
+
+
+
+
+NOTES:
+------
+- Whenever we insert a document in a collection. If we don't specify _id fields explicity; MongoDB adds a it automaitcally with a unique value (_id:ObjectID("....")).
