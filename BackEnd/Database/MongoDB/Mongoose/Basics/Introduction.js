@@ -14,8 +14,22 @@ mongoose.connct(
   (e) => console.error(e)
 );
 
-/**Concepts of mongoose:
- * A schema defines what the structure of my data looks like in a document/ collection
- * A model is a schema in an actual form i can use so a model basically represnts the collection in an object format so i can interact with it
- * A query is essentially a query im making against the MongoDB database
+/** 
+ * Key Concepts in Mongoose:
+ * 
+ * 1. Schema:
+ *    - A **schema** defines the structure and rules for a document in a MongoDB collection.
+ *    - It specifies the fields, data types, and any validation or restrictions that should be applied to the data.
+ *    - The schema acts as a blueprint for how the data should be stored.
+ * 
+ * 2. Model:
+ *    - A **model** is a compiled version of the schema, representing a collection in the database.
+ *    - It provides a concrete form of the schema that allows interaction with the data (CRUD operations).
+ *    - Using a model, you can create, read, update, and delete documents within a collection.
+ * 
+ * 3. Query:
+ *    - A **query** is an operation or request made to the MongoDB database to retrieve or manipulate data.
+ *    - Queries are performed using Mongoose methods (e.g., `find()`, `updateOne()`, `deleteMany()`), and allow you to interact with the database.
+ *    - Queries can be used to filter, sort, update, or delete documents in the collection.
  */
+
