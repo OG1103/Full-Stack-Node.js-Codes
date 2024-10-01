@@ -1,0 +1,72 @@
+Request (req):
+---------------
+The req (request) object contains data that the client sends to the server. The request may include the following:
+    1. URL Parameters (req.params): Variables extracted from the URL. Example:
+        - req.params.id would capture id if the URL is /api/items/:id
+        - i can add a bunch of parameters to my url example /api_name/:param1/:param2
+    
+    2. Query Parameters (req.query): Optional parameters sent via the query string in the URL. Example:
+        - /api/items?category=books → req.query.category would equal "books".
+    
+    3. Body Parameters (req.body): Data sent in the request body, often used in POST/PUT requests. Typically JSON or form data.
+        - Example: req.body = { "name": "John", "age": 30 }
+            - to access a certain object from the body  we can do ex: const Name = req.body.name.
+            - This works because req.body is an object, so you can access any value by using its corresponding key.
+
+            - Alternatively, you can use object destructuring to extract multiple values from req.body in one step. For instance, you can create variables for name and age like this:
+                    - const { name, age } = req.body;
+                - This approach allows you to directly create variables for specific attributes from the req.body object, simplifying the process of accessing multiple values at once.
+                - when using object destructuring, the variable names must match the key names in req.body exactly.
+                    - For example, if req.body looks like this:
+                        - {"name": "John","age": 30}
+                    - You need to destructure it with matching key names:
+                        - const { name, age } = req.body;
+                
+                - However, if you want to use different variable names, you can alias them using a colon : to rename the variables during destructuring. Here’s how:
+                    - const { name: userName, age: userAge } = req.body;
+                    - userName will contain the value of req.body.name
+                    - userAge will contain the value of req.body.age
+    
+    4. Headers (req.headers): Metadata sent with the request. Useful for authentication (e.g., API keys, tokens).
+        - Example: req.headers.authorization
+
+
+Structure of `req.body`, `req.params`, and `req.query`:
+-------------------------------------------------------
+    - req.body:
+        - Returns: An object where keys are the names of the fields sent by the client, and values are the corresponding data.
+    - req.params:
+        - Returns: An object where keys are the parameter names defined in the route, and values are the actual values passed in the URL.
+    - req.query:
+        - Returns: An object where keys are the query parameter names, and values are the corresponding values.
+    
+    - Since they all return an object, so if im searching for a specific value that corresponds to a specific fields , 
+      i do req.body/params/query.field/param_name
+When to use `req.body`, `req.params`, and `req.query`:
+------------------------------------------------------
+    When to use the body:
+    --------------------
+    - **POST**, **PUT**, and **PATCH** methods typically use the **body** to send data.
+    - Use `req.body` when you want to **create** or **update** a resource on the server.
+    - Example: Creating a new user, updating user profile data, or submitting a form.
+    - Data in `req.body` is sent as part of the request body, not visible in the URL.
+
+    When to use params:
+    --------------------
+    - **GET**, **DELETE**, and **PUT** requests often use **params** for identifying specific resources in the URL.
+    - Use `req.params` when you want to pass **dynamic segments** in the URL, such as user IDs or product IDs.
+    - Example: Fetching or deleting a specific user or product by its ID (e.g., `/users/:userId`).
+    - Params are part of the URL path and are always required.
+
+    When to use query:
+    --------------------
+    - **GET** requests commonly use **query** parameters to send additional filtering, sorting, or searching options.
+    - Use `req.query` when you need to pass **optional** data that doesn't modify the route but is used for refining the request.
+    - Example: Searching for users (`/search?q=keyword`), filtering products (`/products?category=electronics`), or sorting results (`/users?sortBy=name`).
+    - Query parameters are appended to the URL and are not required for the route to work.
+
+
+Summary of Method Usage:
+    - `req.body`: Used in POST, PUT, and PATCH methods to send data for resource creation or updates.
+    - `req.params`: Used in GET, DELETE, and PUT methods for dynamic segments in the URL to specify which resource is being accessed or modified.
+    - `req.query`: Used in GET methods to pass optional data for filtering, sorting, or searching results in a request.

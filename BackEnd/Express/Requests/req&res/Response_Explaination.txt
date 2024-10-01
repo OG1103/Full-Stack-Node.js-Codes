@@ -1,0 +1,38 @@
+Response (res)
+----------------
+The res (response) object is used to send data back to the client. You can set the status and body of the response.
+    1 - res.status(code):
+        - This sets the HTTP status code of the response. Common codes:
+            - 200 OK: Success.
+            - 201 Created: Resource was successfully created.
+            - 400 Bad Request: The client sent invalid data.
+            - 401 Unauthorized: Authentication is required.
+            - 404 Not Found: Resource not found.
+            - 500 Internal Server Error: General server error.
+        
+    2 - res.json({}):
+        - This method sends a JSON response to the client. You can pass a JSON object that will be serialized and returned.
+        - When calling res.json(), you pass a JavaScript object (or array) with key-value pairs that represent the response data. Here's an example of what to include:
+            - status: A status message indicating success or failure.
+                - Example: status: "success" or status: "error"
+            - message (optional): A string providing more details about the result.
+                - Example: message: "Data retrieved successfully" or message: "Invalid input"
+            - data: The actual data or payload being returned, which could be an object, an array, or null (if no data is returned).
+                - Example: data: { "id": 1, "name": "John Doe" } or data: []
+            - errors (optional): An array of error messages, usually when validation fails or something goes wrong.
+                - Example: errors: [{ "field": "name", "message": "Name is required" }]
+                
+    - Example Response Object in backend :
+        - res.status(200).json({
+            "status": "success",
+            "message": "Item retrieved successfully",
+            "data": {
+                "id": "123",
+                "name": "Book Title",
+                "category": "books"
+            }
+        })
+    
+Summary:
+    - Response (res): Use res.status(code) to set the HTTP status code and res.json({}) to return JSON data to the client.
+    - Inside res.json({}): Pass status, message, data, and errors as necessary to communicate the result of the API call.

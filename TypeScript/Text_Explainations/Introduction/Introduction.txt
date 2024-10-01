@@ -1,0 +1,47 @@
+Typescript is a strongly typed programming language that build on javascript
+Typescript is javascript with types
+Typescript add features to javascript without changing it
+TypeScript is essentially JavaScript with added restrictions and rules around types and structure, which helps you catch potential errors at compile time rather than at runtime.
+Then using tsc it compiles the ts files into an equivalant js files with same logic due typescript code can't be execuded directily by browsers/node.js
+
+/*
+Detect the errors without running the code 'static type checking', Eg:trying to access object property that doesn't exist
+let a = {
+  key1: 2,
+  key2: "",
+};
+console.log(a.key1);
+console.log(a.key5);
+
+
+Analyze the code as you type
+Every JS file is valid TS file
+
+TS compiler compile TS code into JS code "This is called Transpilation"
+*/
+
+
+Common Practice:
+---------------
+it’s common practice to use TypeScript in React and JavaScript in Node.js, but this isn't a strict rule—both React and Node.js can be written in either TypeScript or JavaScript.
+
+React with TypeScript:
+----------------------
+    - Type Safety: 
+            React applications often involve complex components, props, state management, and event handling. 
+            TypeScript's type system helps ensure that you're passing the correct data types between components, catching potential bugs at compile time.
+    - Scalability:
+            Large-scale React applications benefit from TypeScript because it makes the code easier to maintain and refactor as your app grows.
+    - Better Tooling: 
+            With TypeScript, you get improved IDE support (auto-completion, better navigation, refactoring tools), 
+            which is especially helpful when dealing with complex component hierarchies and state management libraries like Redux.
+
+Node.js with JavaScript:
+------------------------
+    - Simplicity:
+            JavaScript is the default language of Node.js, and many developers opt for it because it’s simpler to set up.
+            JavaScript doesn’t require a compilation step like TypeScript.
+    - Historical Usage:
+            JavaScript has been used in Node.js since its inception, so there’s a lot of code, libraries, and resources in JavaScript.
+    - Rapid Prototyping:
+            For smaller Node.js projects or quick prototyping, JavaScript allows for rapid development without the overhead of defining types.

@@ -1,0 +1,42 @@
+In TypeScript, "use strict"; is often automatically included when you compile your TypeScript code to JavaScript, especially if your tsconfig.json has strict options enabled (e.g., "strict": true).
+
+What does "use strict"; do?
+---------------------------
+
+1. Prevents the Use of Undeclared Variables:
+    - In non-strict mode, you can accidentally assign a value to an undeclared variable, which implicitly creates a global variable. Strict mode throws an error if you try to do this
+    - EX:"use strict";
+         myVar = 10;  // Error: myVar is not defined
+
+2. Disallows Duplicating Parameter Names in Functions:\
+    - In non-strict mode, you can declare function parameters with the same name, which can lead to unpredictable behavior. In strict mode, this results in an error.
+    -EX: "use strict";
+        function add(a, a) {  // Error: Duplicate parameter name not allowed
+        return a + a;
+        }
+3. Prevents this from Defaulting to the Global Object:
+    - In non-strict mode, when a function is called without an explicit object, this refers to the global object (e.g., window in browsers). In strict mode, this will be undefined in such cases, which helps avoid unintended side effects.
+    -EX: "use strict";
+        function logThis() {
+        console.log(this);  // In strict mode, this will be undefined
+        }
+        logThis();  // Outputs: undefined
+
+4. Disallows Deleting Non-deletable Properties:
+    - In non-strict mode, attempting to delete a non-deletable property fails silently. In strict mode, it throws an error.
+
+How to Use "use strict";
+------------------------
+1. Globally at the top of a script or file:
+    - "use strict";
+      // All code in this file will run in strict mode
+
+2. Inside a function:
+    -   function myFunction() {
+        "use strict";
+        // Code inside this function will run in strict mode
+        }
+
+
+
+

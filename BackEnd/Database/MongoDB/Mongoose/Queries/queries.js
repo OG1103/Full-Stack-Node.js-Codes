@@ -30,13 +30,14 @@ const findAllUsers = async () => {
 };
 
 /**
- * 1.2 Find Documents with a Filter
- * Finds users where age is greater than or equal to 18
+ * 1.2 Find Documents with a Filter and Select Specific Fields
+ * Finds users where age is greater than or equal to 18, but only returns their name and email.
+ * only certain fields are selected, you can use the .select() method in Mongoose
  */
-const findAdultUsers = async () => {
+const findAdultUsersWithFields = async () => {
   try {
-    const users = await User.find({ age: { $gte: 18 } });
-    console.log("Adult users:", users);
+    const users = await User.find({ age: { $gte: 18 } }).select("name email"); // Select only the name and email fields
+    console.log("Adult users (name and email only):", users);
   } catch (err) {
     console.error("Error finding users:", err);
   }
@@ -61,7 +62,7 @@ const findOneUser = async () => {
  */
 const findUserById = async (id) => {
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id); // Pass the ID nuymber directly, Mongoose queries the _id field
     console.log("Found user by ID:", user);
   } catch (err) {
     console.error("Error finding user by ID:", err);

@@ -1,0 +1,75 @@
+Basic Types in TypeScript:
+- In TypeScript, you can declare the data type of your variables, but it's not always required.
+- TypeScript allows you to declare the type explicitly for variables, which helps with static type checking. 
+- TypeScript also has type inference, where the type is automatically inferred based on the value assigned to the variable.
+- If you try to reassign a let variable with a different data type than the one it was originally assigned or inferred, TypeScript will throw a type error during compilation.
+- The reason i say let is because in const you can't reassing a variable
+- OverAll, In type script variables have to have a corresponding data type either inferred automatically or assigned explicitly.
+
+Types:
+------
+1. **string**: Used to represent text. 
+   Example: 
+   let name: string = "Alice";
+
+2. **number**: Used to represent numbers (both integers and floating-point numbers).
+   Example: 
+   let age: number = 25;
+
+3. **boolean**: Used to represent true or false values.
+   Example:
+   let isStudent: boolean = true;
+
+4. **array**: Used to represent a collection of values of a specific type.
+   Example:
+   let scores: number[] = [90, 85, 88]; // Array of numbers
+
+5. **tuple**: A fixed-length array where each element has a specific type.
+   Example:
+   let person: [string, number] = ["Alice", 25]; // Tuple with string and number
+
+6. **enum**: Used to define a set of named constants.
+   Example:
+   enum Direction { Up, Down, Left, Right };
+   let move: Direction = Direction.Up;
+
+7. **any**: A type that allows any type of value (used when the type is not known or dynamic).
+   Example:
+   let randomValue: any = "Hello";
+   randomValue = 10; // No error
+
+8. **void**: Used for functions that do not return a value.
+   Example:
+   function logMessage(): void {
+     console.log("This is a message");
+   }
+
+
+9. **null and undefined**: These types represent null and undefined values.
+   Example:
+   let emptyValue: null = null;
+   let uninitializedValue: undefined = undefined;
+
+Invoking Types on an Object:
+In TypeScript, you can declare an object's shape using interfaces or type aliases. Here’s how to define and invoke types on an object.
+
+Example using a type alias:
+type Person = {
+   name: string;
+   age: number;
+   isStudent: boolean;
+};
+
+let person: Person = {
+   name: "Alice",
+   age: 25,
+   isStudent: true
+};
+
+Here, the 'person' object must have all the properties (name, age, isStudent) with the correct types as specified in the Person type.
+
+
+Notes:
+I can set a variable to be more than one type. 
+EX: let var : string|number = 10;
+- var can either be a string or a number. 

@@ -1,0 +1,28 @@
+What is a Type Alias in TypeScript?
+----------------------------------
+- A type alias in TypeScript is a way to give a custom name (alias) to a specific type. 
+- It allows you to create a type with a more readable or meaningful name, making your code easier to understand
+
+Syntax:
+-------
+type AliasName = Type;
+
+Example: 
+type Name = string;
+let firstName: Name = "Alice";
+
+Name is an alias for the type string. Now, instead of writing string, you can refer to the type Name.
+
+Example: Object Type Alias
+--------------------------
+type Person = {
+  name: string;
+  age: number;
+  isStudent: boolean;
+};
+
+let student: Person = {
+  name: "John",
+  age: 21,
+  isStudent: true
+};
