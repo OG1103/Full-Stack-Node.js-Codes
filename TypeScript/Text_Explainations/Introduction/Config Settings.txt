@@ -1,4 +1,75 @@
-CONFIG SETTINGS IN TYPESCRIPT: 
-------------------------------
+{
+  "compilerOptions": {
+    // 1. noUnusedLocals: Set to true to show errors when local variables are declared but never used
+    "noUnusedLocals": true,
 
-    
+    // 2. noUnusedParameters: Set to true to show errors when function parameters are declared but never used
+    "noUnusedParameters": true,
+
+    // 3. strict: Enables all strict type-checking options, which include strictNullChecks and more
+    "strict": true,
+
+    // 4. strictNullChecks: Set to true to ensure null or undefined are not assigned to variables unless explicitly allowed
+    "strictNullChecks": true,
+
+    // 5. noImplicitAny: Set to true to raise an error when a variable is implicitly assigned to the 'any' type
+    "noImplicitAny": true,
+
+    // 6. noImplicitReturns: Set to true to raise an error when a function doesn't explicitly return a value in all code paths
+    "noImplicitReturns": true,
+
+    // 7. noImplicitThis: Set to true to raise an error when 'this' is used without an explicit type
+    "noImplicitThis": true,
+
+    // 8. alwaysStrict: Set to true to ensure the "use strict" directive is included in all emitted JavaScript files
+    "alwaysStrict": true,
+
+    // 9. strictFunctionTypes: Set to true to ensure function parameter types are strictly enforced in function types
+    "strictFunctionTypes": true,
+
+    // 10. strictPropertyInitialization: Ensures class properties are initialized either in the constructor or with a default value
+    "strictPropertyInitialization": true,
+
+    // 11. allowJs: Set to true if you want to include JavaScript files in the compilation
+    "allowJs": true,
+
+    // 12. checkJs: Set to true to enable type checking for JavaScript files as well
+    "checkJs": true,
+
+    // 13. target: Specifies the ECMAScript target version, for example, 'es5', 'es6', etc.
+    "target": "es6",
+
+    // 14. module: Specifies the module system used in the generated JavaScript, e.g., 'commonjs', 'esnext', etc.
+    "module": "commonjs",
+
+    // 15. removeComments: Set to true to remove comments from the emitted JavaScript files
+    "removeComments": true,
+
+    // 16. sourceMap: Set to true to generate corresponding '.map' files alongside the JavaScript files for debugging
+    "sourceMap": true,
+
+    // 17. outDir: Specify the directory to output the compiled JavaScript files
+    "outDir": "./dist",
+
+    // 18. rootDir: Specify the root directory of your TypeScript files for organizing your project structure
+    "rootDir": "./src",
+
+    // 19. esModuleInterop: Enables interop for CommonJS modules and allows default imports from those modules
+    "esModuleInterop": true,
+
+    // 20. forceConsistentCasingInFileNames: Enforces consistent casing for file and folder names in imports
+    "forceConsistentCasingInFileNames": true,
+
+    // 21. noFallthroughCasesInSwitch: Set to true to prevent fallthrough in switch-case statements without a break or return
+    "noFallthroughCasesInSwitch": true,
+
+    // 22. isolatedModules: Ensures that each file can be transpiled individually without type information from other files
+    "isolatedModules": true,
+
+    // 23. resolveJsonModule: Allows you to import `.json` files into TypeScript modules
+    "resolveJsonModule": true,
+
+    // 24. skipLibCheck: Set to true to skip type checking of declaration files (useful for faster compilation)
+    "skipLibCheck": true
+  }
+}

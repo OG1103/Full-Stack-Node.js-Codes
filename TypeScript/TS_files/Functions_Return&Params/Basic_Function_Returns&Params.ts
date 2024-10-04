@@ -35,3 +35,25 @@ const multiplyNumbers = (a: number, b: number): number => {
 const printMessageArrow = (message: string): void => {
   console.log(message);
 };
+
+//--------------------------------------------------------------------------------------
+
+// Function with optional parameters (? notation)
+// The 'lastName' parameter is optional. If it is not provided, it will be 'undefined' by default.
+//Optional parameters can have required parameters afdter it, therefore declared at the end when passing my parameters
+function greetings(firstName: string, lastName?: string): string {
+  // Check if 'lastName' is provided
+  if (lastName) {
+    return `Hello, ${firstName} ${lastName}!`; // If lastName is provided, use both names
+  } else {
+    return `Hello, ${firstName}!`; // If lastName is not provided, only use firstName
+  }
+}
+
+// Calling the function with both parameters
+let fullNameGreeting = greetings("John", "Doe");
+console.log(fullNameGreeting); // Output: "Hello, John Doe!"
+
+// Calling the function with only the first parameter
+let firstNameGreeting = greetings("Alice");
+console.log(firstNameGreeting); // Output: "Hello, Alice!"
