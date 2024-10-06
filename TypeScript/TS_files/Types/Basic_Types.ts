@@ -15,6 +15,16 @@ let arr1: (string | number)[] = [1, 2, 3, "A"]; // arr can elements of type stri
 let arr2: (string | number | string[] | boolean[])[] = [1, 2, 3, 4, "a", ["ss", "ss1"], [true, false]]; // arr can elements of type string/number/array of strings/array of booleans
 // 5. Tuple
 let person: [string, number] = ["Alice", 25]; // This is a tuple with a string and a number
+// Array of tuples where each tuple contains a string and a number
+let employees: [string, number][] = [
+  ["Alice", 101],
+  ["Bob", 102],
+  ["Charlie", 103],
+];
+
+// Accessing the array of tuples
+console.log(employees[0]); // Output: ["Alice", 101]
+console.log(employees[1][0]); // Output: "Bob" (Accessing the string from the second tuple)
 
 //MIX USING OR
 let varMix: string | number = 2;

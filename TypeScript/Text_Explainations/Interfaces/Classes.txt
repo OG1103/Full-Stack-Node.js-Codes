@@ -1,0 +1,51 @@
+Key Features of Classes in TypeScript
+------------------------------------
+- Properties: Variables that store data for an object. You declare their types when you define them.
+- Constructor: A special method called when an instance of the class is created. It initializes the object’s properties.
+- Methods: Functions that define the behavior of the class. You can declare their parameter types and return types.
+
+Access Modifiers
+-----------------
+- public: Accessible from anywhere (default if not specified).
+- private: Accessible only within the class.
+- protected: Accessible within the class and its subclasses.
+
+Example of Access Modifiers:
+----------------------------
+class Car {
+  public make: string;  // Public property
+  private model: string;  // Private property
+  protected year: number;  // Protected property
+
+  constructor(make: string, model: string, year: number) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+
+  // Public method
+  public getDetails(): string {
+    return `${this.make} ${this.model} (${this.year})`;
+  }
+
+  // Private method
+  private getModel(): string {
+    return this.model;
+  }
+}
+
+let car1 = new Car("Toyota", "Camry", 2020);
+console.log(car1.getDetails());  // Output: Toyota Camry (2020)
+console.log(car1.make);  // Output: Toyota
+// console.log(car1.model);  // Error: Property 'model' is private
+
+
+Abstract Classes
+----------------
+- Abstract classes are classes that cannot be instantiated directly. 
+- They are meant to be subclassed. You can define abstract methods within abstract classes, which must be implemented by any subclass.
+
+Interfaces with Classes
+-----------------------
+- A class can implement an interface to ensure that it follows a specific structure. This enforces that the class contains the properties and methods defined in the interface.
+

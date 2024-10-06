@@ -1,0 +1,110 @@
+What are Interfaces in TypeScript?
+----------------------------------
+- An interface in TypeScript is a way to define the structure of an object. It allows you to describe the shape of an object, 
+  including the properties and methods that an object or class should have. Interfaces help ensure type safety by enforcing that objects and classes conform to a particular structure.
+
+Key Features of Interfaces:
+---------------------------
+- Object Structure: Interfaces define the properties and methods that an object should have.
+- Type Safety: They ensure that objects and classes follow the required structure, helping catch errors at compile time.
+- Optional Properties: You can define properties that may or may not be present.
+- Read-Only Properties: Properties can be marked as read-only, meaning they cannot be modified after initialization
+- Method Signatures: You can define methods with their parameters and return types, ensuring consistent implementation across classes.
+- Classes Implementing Interfaces: Classes that implement an interface must implement all the properties and methods defined in the interface.
+
+Syntax for Interfaces:
+----------------------
+interface InterfaceName {
+  property1: type;
+  property2: type;
+  methodName(param: type): returnType;
+}
+
+Example of a Basic Interface:
+-----------------------------
+interface Person {
+  name: string;
+  age: number;
+  isStudent: boolean;
+}
+
+let student: Person = {
+  name: "Alice",
+  age: 22,
+  isStudent: true
+};
+    - Interface Person: Defines the structure of a person object with properties name, age, and isStudent.
+    - Conformance: The object student must conform to the Person interface, meaning it must have all the properties with the correct types.
+
+Optional Properties:
+---------------------
+- You can make properties optional by using a question mark ?.
+
+Read-Only Properties:
+---------------------
+- You can define properties as read-only to prevent modification after initialization.
+
+interface User {
+  readonly id: number;
+  name: string;
+}
+
+let user: User = { id: 1, name: "John" };
+// user.id = 2; // Error: Cannot assign to 'id' because it is a read-only property
+
+Methods in Interfaces:
+----------------------
+- Interfaces can define method signatures, specifying the parameters and return types that must be implemented.
+interface Person {
+  name: string;
+  greet(): string; // Method signature: greet() must return a string
+}
+
+let person: Person = {
+  name: "Alice",
+  greet() {
+    return `Hello, my name is ${this.name}`;
+  }
+};
+
+console.log(person.greet()); // Output: Hello, my name is Alice
+
+Do Classes Have to Implement All Methods in an Interface?
+----------------------------------------------------------
+- Yes, any class that implements an interface must implement all the methods (and properties) defined by that interface.
+- If a class doesn't implement all the methods or properties defined by the interface, TypeScript will throw an error during compilation.
+
+Extending Interfaces:
+---------------------
+- You can extend an existing interface to create a new one with additional properties or methods.
+
+interface Animal {
+  species: string;
+}
+
+interface Dog extends Animal {
+  breed: string;
+}
+
+let myDog: Dog = {
+  species: "Canine",
+  breed: "Labrador"
+};
+
+-  this example, Dog extends the Animal interface, so any object of type Dog must include both species and breed.
+
+Interfaces with Classes:
+------------------------
+- Interfaces can also be used with classes to enforce that a class implements specific properties and methods.
+
+Interface vs Type Alias:
+------------------------
+- Interfaces and type aliases both allow you to define the structure of objects, but interfaces can be extended and implemented by classes, whereas type aliases cannot.
+- Type Aliases are more flexible as they can define not just object shapes but also union types and other types.
+
+Conclusion:
+-----------
+- Interfaces in TypeScript are used to define the structure of objects and classes, ensuring that they have specific properties and methods with the correct types.
+- They provide type safety and help ensure that objects and classes conform to a predefined shape.
+- Any class that implements an interface must provide implementations for all the properties and methods defined in the interface, or TypeScript will throw an error.
+- Interfaces can define method signatures, optional and read-only properties, and can be extended to create more complex interfaces

@@ -12,20 +12,23 @@ import mongoose from "mongoose";
  * The value can later then be an object which represent restrictions on the field,This object can define validation rules, default values, and other constraints.
  * Check Schema types
  */
-const userSchema = new mongoose.userSchema({
+const userSchema = new mongoose.Schema({
   name: String,
   age: Number,
   //we define all my fields and corresponding data type
 });
 
 //Example of setting advanced declaration of schema with restrictions and validations
-const userSchema1 = new mongoose.userSchema({
-    name: {/*Details regarding that field. Ex type and any restrictions/validations */},
-    age: {/*Details regarding that field. Ex type and any restrictions/validations */},
-    
-    //we define all my fields and corresponding data type
-  });
+const userSchema1 = new mongoose.Schema({
+  name: {
+    /*Details regarding that field. Ex type and any restrictions/validations */
+  },
+  age: {
+    /*Details regarding that field. Ex type and any restrictions/validations */
+  },
 
+  //we define all my fields and corresponding data type
+});
 
 // Create a model for that schema
 //mongoose.model(): Takes 2 parameters:
