@@ -1,0 +1,36 @@
+Basic Components of Regular Expressions
+---------------------------------------
+1.Delimiters:
+    - In JavaScript, a regex is defined between two slashes (/). For example, /pattern/.
+
+2. Characters:
+    - Literal Characters: Characters that match themselves. For example, the regex /abc/ matches the string "abc".
+    - Metacharacters: Special characters that have specific meanings. For example:
+        - .: Matches any single character except newline.
+        - ^: Matches the start of a string
+        - $: Matches the end of a string.
+        - *: Matches zero or more occurrences of the preceding element.
+        - +: Matches one or more occurrences of the preceding element.
+        - ?: Matches zero or one occurrence of the preceding element.
+        - {n}: Matches exactly n occurrences of the preceding element.
+        - {n,}: Matches n or more occurrences of the preceding element.
+        - {n,m}: Matches between n and m occurrences of the preceding element.
+    
+3. Character Classes:
+    - Defined using square brackets []. They match any one of the enclosed characters.
+        - For example, /[abc]/ matches any single "a", "b", or "c".
+        - Ranges can be specified, e.g., /[a-z]/ matches any lowercase letter.
+
+4. Negated Character Classes:
+    - Defined using [^...]. They match any character not listed inside the brackets.
+        - For example, /[^abc]/ matches any character that is not "a", "b", or "c".
+
+5. Groups and Ranges:
+    - Grouping: Parentheses () can group patterns together. For example, /(abc)+/ matches one or more occurrences of "abc".
+    - Alternation: The pipe symbol | allows you to specify alternatives. For example, /cat|dog/ matches either "cat" or "dog".
+
+6. Modifiers (Flags):
+    - Modifiers change the way the regex is interpreted:
+        - i: Case-insensitive matching.
+        - g: Global search (find all matches rather than stopping after the first).
+        - m: Multiline matching.
