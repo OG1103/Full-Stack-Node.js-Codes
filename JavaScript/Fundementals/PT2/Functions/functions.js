@@ -157,12 +157,12 @@ console.log(doubles); // Output: [2, 4, 6, 8, 10]
  * Closures allow a function to access variables from an enclosing scope, even after the outer function has finished executing.
  */
 
-function outerFunction(outerVariable) {
-  return function innerFunction(innerVariable) {
+const outerFunction = (outerVariable) => {
+  return (innerVariable) => {
     console.log(`Outer variable: ${outerVariable}`);
     console.log(`Inner variable: ${innerVariable}`);
   };
-}
+};
 
 const closureExample = outerFunction("outside");
 closureExample("inside");
