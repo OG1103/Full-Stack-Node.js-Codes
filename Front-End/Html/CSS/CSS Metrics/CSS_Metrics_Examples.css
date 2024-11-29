@@ -1,0 +1,44 @@
+
+/* CSS Metrics Examples with Comments */
+
+/* Absolute Units */
+.box-px {
+    width: 200px; /* Set width to 200 pixels */
+    height: 100px; /* Set height to 100 pixels */
+}
+
+.box-cm {
+    width: 5cm; /* Set width to 5 centimeters, ideal for print */
+    height: 3cm; /* Set height to 3 centimeters */
+}
+
+/* Relative Units */
+.box-em {
+    font-size: 1.5em; /* 1.5 times the parent font size */
+    padding: 2em; /* Padding 2 times the font size */
+}
+
+.box-rem {
+    font-size: 1.5rem; /* 1.5 times the root font size */
+    margin: 3rem; /* Margin based on root font size */
+}
+
+.box-percent {
+    width: 50%; /* 50% of the parent element's width */
+}
+
+/* Viewport Units */
+.box-vw {
+    width: 50vw; /* 50% of the viewport's width */
+    height: 30vh; /* 30% of the viewport's height */
+}
+
+.box-vmin {
+    width: 10vmin; /* 10% of the smallest viewport dimension */
+    height: 10vmin; /* Matches width to ensure a square */
+}
+
+/* Newer Viewport Units */
+.box-lvw {
+    width: 30lvw; /* 30% of layout viewport width, great for multi-screen */
+}

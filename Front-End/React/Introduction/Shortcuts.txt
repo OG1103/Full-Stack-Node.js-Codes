@@ -1,0 +1,28 @@
+| Shortcut              | Description                                                |
+|-----------------------|------------------------------------------------------------|
+| rafce                 | Create a React Arrow Function Component with export         |
+| rafc                  | Create a React Arrow Function Component                     |
+| rfc                   | Create a React Functional Component                        |
+| rfce                  | Create a React Functional Component with export             |
+| rcc                   | Create a React Class Component                             |
+| rce                   | Create a React Class Component with export                 |
+| rconst                | Add a constructor method in a class component              |
+| cwm                   | Add `componentWillMount` lifecycle method                  |
+| cdm                   | Add `componentDidMount` lifecycle method                   |
+| cwrp                  | Add `componentWillReceiveProps` lifecycle method           |
+| scu                   | Add `shouldComponentUpdate` lifecycle method               |
+|-----------------------|------------------------------------------------------------|
+| useState              | Create a `useState` hook with initialization               |
+| useEffect             | Create a `useEffect` hook                                  |
+| useContext            | Create a `useContext` hook                                 |
+| useRef                | Create a `useRef` hook                                     |
+| useReducer            | Create a `useReducer` hook                                 |
+|-----------------------|------------------------------------------------------------|
+| rxaction              | Create a Redux action                                      |
+| rxconst               | Create Redux action constant                               |
+| rxreducer             | Create a Redux reducer                                     |
+| rxmapstatetoprops     | Create `mapStateToProps` function                          |
+| rxmapdispatchtoprops  | Create `mapDispatchToProps` function                       |
+| rxconnect             | Create a Redux connected component                         |
+|-----------------------|------------------------------------------------------------|
+| clg                   | Console log statement                                      |

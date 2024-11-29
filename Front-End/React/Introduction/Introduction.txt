@@ -83,3 +83,6 @@ Folders:
     
     - Usually we use libraries to handle css. However an index.css file is usually used to apply a wide used style on the body of the page.
 
+//Install ES7+ React/Redux/React-Native snippets Extension
+//Type rafce and press Tab to generate a React functional component with an export.
+//This extension provides a wide range of useful snippets for quickly generating boilerplate React code, including components, hooks, prop types, and more.

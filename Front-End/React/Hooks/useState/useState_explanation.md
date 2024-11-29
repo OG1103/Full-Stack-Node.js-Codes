@@ -17,7 +17,7 @@ const [state, setState] = useState(initialState);
 ```
 
 - **state**: The current state value.
-- **setState**: A function that updates the state value.
+- **setState**: An ASYNCHRONOUS function that updates the state value.When you call setState, React doesn't immediately update the state. Instead, it schedules an update and re-renders the component later.
 - **initialState**: The initial value of the state when the component renders for the first time.
 
 - **setState** can either take a direct new value/variable which assings it ot the stateor a function that uses the previous state to compute the new one
@@ -25,7 +25,10 @@ const [state, setState] = useState(initialState);
 - The basic syntax for using the setState function with a callback to access the previous state is as follows:
 
 ```js
-// The element passed into the function (in this case previousState) represents the current state that will be used to compute the new state value.
+//The element passed into the callback function (in this case previousState) represents the current state that will be used to compute the new state value.
+//Functional form of setState
+//It can also take another call back function as a second argument which executes after the state has been updated.
+
 setState((previousState) => {
   // logic to calculate new state based on previous state
   return newState;
@@ -97,7 +100,7 @@ export default UserProfile;
 
 - **Initial Value**: `useState` accepts one argument as the initial state value.
 - **State Updater**: The state updater function (`setState`) allows you to modify the state.
-- **Re-renders**: Calling the state updater causes React to re-render the component with the updated state.
+- **Re-renders**: Calling the state updater causes React to re-render the component with the updated state, and the changes are reflected in the parent’s UI automatically without any re-render of the parent.
 - **Multiple States**: You can have multiple `useState` hooks to handle different state variables.
 
 ## Conclusion

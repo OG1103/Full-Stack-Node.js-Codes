@@ -1,0 +1,2 @@
+Go to tailwind website to access classes and certain templates 
+you can them apply them in the code. 
