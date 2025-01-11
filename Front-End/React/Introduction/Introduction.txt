@@ -16,7 +16,7 @@ Why React?
 To start a React Project:
 -------------------------
     - Go to directory where I wanna create the project
-    - Create rext Project
+    - Create react Project
     - npx create-react-app <nameofyourapp>
     - install react router
     - Edit the src/.app.js file to create your own UI

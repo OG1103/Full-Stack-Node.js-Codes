@@ -1,0 +1,13 @@
+Browser
+--------
+    - Browser side apps (Dom / Window)
+    - Interactive apps
+    - No filesystem
+    - Depend on Fragmentation(user's browser)
+
+Node
+-----
+    - No browser API's / access (No DOM / No Window)
+    - Server Side Apps
+    - Access to File Systems 
+    - Based Versions

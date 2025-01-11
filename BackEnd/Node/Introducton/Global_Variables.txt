@@ -1,0 +1,7 @@
+ 1. GLOBALS - NO WINDOW !!!
+ 2. _dirname - returns path to current directory
+ 3. _filename - returns filename
+ 4. process - returns info about env where the program is being executed.
+ 5. module - returns info about current module (file)
+ 6. performance - provides access to the Performance API, which is useful for measuring the timing of code execution.
+ 7. There are way more but these are the main useful ones there is also setInterval & console & .... 

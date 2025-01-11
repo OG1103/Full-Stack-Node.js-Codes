@@ -14,6 +14,7 @@ const userSchema = Joi.object({
 // Middleware function for validating user data
 const validateUser = (req, res, next) => {
   // Validate the request body against the userSchema
+  // import the schema if implementing it in a seperate file
   const { error, value } = userSchema.validate(req.body);
 
   if (error) {
