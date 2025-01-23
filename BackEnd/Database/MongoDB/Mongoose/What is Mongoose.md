@@ -25,6 +25,7 @@ While MongoDB offers flexibility, Mongoose provides more control and a structure
 ### 1. Schema Definition
 
 - While MongoDB allows you to insert documents with varying structures, Mongoose enables you to define a schema for your collections. This ensures that all documents in a collection follow the same structure.
+- By default, Mongoose ignores fields that are not defined in the schema upon insertions and updates. However, if we set strict: false, then those undefined fields can be inserted but by default strict is set to true so Mongoose ignores fields that are not defined in the schema.
 
 ### 2. Validation
 

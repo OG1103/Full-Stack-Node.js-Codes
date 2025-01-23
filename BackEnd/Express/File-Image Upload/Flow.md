@@ -41,6 +41,7 @@ const FileUpload = () => {
     // Create FormData and append the file
     const formData = new FormData();
     formData.append("file", file); // 'file' should match the backend field name
+    // in multer config upload...("file") as that was the key sent in the form data
 
     try {
       // Send POST request to the backend
@@ -120,6 +121,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // File upload route
+
 app.post("/upload", upload.single("file"), (req, res) => {
   res.json({
     message: "File uploaded successfully!",
@@ -160,6 +162,14 @@ app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`)
    - Returns a success response with the file path.
 3. **Frontend**:
    - Displays the response message from the backend.
+
+### Note:
+
+- In your backend, the behavior of upload.single("key") or upload.array("key") depends on the KEY specified in your form-data (e.g., image or file), where the key in the request must match the argument passed to the Multer middleware for it to correctly process and retrieve the uploaded file(s).
+- EXAMPLE: app.post("/upload", upload.single("image"), (req, res) => res.send(req.file));
+- In this example, the backend will look for a file uploaded with the key 'image' in the form-data and then take the value which is the file(s) to process it and save it
+
+
 
 ---
 

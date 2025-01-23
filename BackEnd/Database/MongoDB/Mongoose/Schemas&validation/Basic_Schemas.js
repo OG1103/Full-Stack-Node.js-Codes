@@ -37,4 +37,4 @@ const userSchema1 = new mongoose.Schema({
 export default mongoose.model("user", userSchema);
 // I export that so then i can use it in other places to query that model/collection.
 
-// Having a schema ensure only the field specified are the one's who can be inserted, otherwise, any other field not specified by the schema will be ignored
+// Having a schema ensure only the field specified are the one's who can be inserted, otherwise, any other field not specified by the schema will be ignored. Unless we specifiy strict to false. 

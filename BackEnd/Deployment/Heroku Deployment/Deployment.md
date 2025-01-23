@@ -12,7 +12,7 @@ Ensure that your backend application is ready for production:
 
 - Copy folder into a separate folder aka make a copy of your project
 - Open the copied project
-- Clear any GitHub repo associated with the copied folder
+- Clear any GitHub repo associated with the copied folder:`rm -rf .git `
 - In `package.json`, add:
   ```json
   "engines": { "node": "version" }
@@ -103,6 +103,17 @@ Since Heroku does not provide a built-in MongoDB service, you’ll need to use *
 
 4. **Set the Connection String as an Environment Variable**
    - In your backend code, use `process.env.MONGO_URI` to refer to the connection string.
+
+### **2. If Using mySql**
+
+- Host your Database on clever, and update the connection configuration in your application to the corresponding info given to your remote database.
+- ```javascript
+  export const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: "mysql",
+  });
+  // Use Clever Database Credentials 
+  ```
 
 ---
 
