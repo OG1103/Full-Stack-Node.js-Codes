@@ -53,7 +53,7 @@ const peoples = {
 };
 
 // Using 'for...in' to iterate over the keys of the 'people' object
-for (let key in people) {
+for (let key in peoples) {
   console.log(`${key}:`, peoples[key]);
 }
 
