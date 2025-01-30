@@ -9,19 +9,16 @@ TypeScript has a type hierarchy where all types can be broadly categorized into 
 3. **Primitive Types**: Includes `number`, `string`, `boolean`, `symbol`, `bigint`, `null`, and `undefined`.
 4. **Object Types**: Includes arrays, functions, and objects.
 
-### **Hierarchy Visualization**
-```plaintext
-            any
-             |
-        -------------
-       |             |
-    unknown       primitive
-                      |
-             ----------------
-            |        |       |
-         number   string   boolean
-```
+## **Notes**
+1. As we move down in types, we are getting stricter with types. 
+2. A stricter type is a subtype of it's parent type. Ex: String extends any & any extends unknown
+3. This means that a parent type can always be used instead of a subtype. Ex: any can be used instead of string and so on..
+4. null, void, undefined are subtypes of any
+5. undefined is a subtype of void 
 
+### **Hierarchy Visualization**
+
+![alt text](<Screenshot 2025-01-24 213342.png>)
 ---
 
 ## **Scenarios**

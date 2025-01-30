@@ -2,6 +2,7 @@
 # Union Types in TypeScript
 
 Union types allow a variable to hold one of several types. This is useful for cases where a value can logically belong to multiple types.
+Usually used along side type alias to define a custom type. 
 
 ## **Syntax**
 ```typescript
