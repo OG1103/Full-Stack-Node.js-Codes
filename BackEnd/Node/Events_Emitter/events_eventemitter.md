@@ -29,7 +29,7 @@ Hello, Omar!
 
 ## Methods in EventEmitter
 1. **`on(event, listener)`**: Registers a listener for the specified event.
-2. **`emit(event, [args])`**: Emits an event, invoking all registered listeners for that event.
+2. **`emit(event, [args])`**: Emits an event, invoking all registered listeners for that event. Args can be an array an object, i can also pass multiple args aka arg1,arg2,...
 3. **`once(event, listener)`**: Registers a listener that is invoked only the first time the event is emitted.
 4. **`removeListener(event, listener)`**: Removes a specific listener from an event.
 5. **`removeAllListeners([event])`**: Removes all listeners for an event.
@@ -74,7 +74,8 @@ An error occurred: Something went wrong
 
 ## Conclusion
 The `EventEmitter` class provides a powerful mechanism for managing events in Node.js applications. By understanding how to emit and listen for events, you can create modular and efficient code.
-The order matters, I have to create the listener first and then i emit it. I can also export my emitter and emit the events in another file.  
+The order matters, I have to create the listener first and then i emit it. I can also export my emitter and emit the events in another file however, before emitting ensure that you have the file that contains the listeners imported, or if they are all in one file declares the listener first then you can emit the events thyat correspond to that listener. 
+So Lets say everything is seperated, I import my emitter first then i import my listeners (the file only) then i can emit events. 
 
 ## References
 - [Node.js Events Documentation](https://nodejs.org/api/events.html)

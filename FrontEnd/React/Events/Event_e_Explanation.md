@@ -45,6 +45,8 @@ In React, when you handle events such as clicks, form submissions, or key presse
 ### 3. `e.target`
 
 - **Description**: Refers to the element that triggered the event. Commonly used to access the value of form elements like inputs or buttons.
+- The exact element that triggered the event. (Could be a child element inside the listener element)
+- When you need to know which specific element was clicked inside a parent container.
 - **Example**:
   ```jsx
   <input type="text" onChange={(e) => console.log(e.target.value)} placeholder="Type something" />
@@ -53,6 +55,8 @@ In React, when you handle events such as clicks, form submissions, or key presse
 ### 4. `e.currentTarget`
 
 - **Description**: Refers to the element on which the event handler is attached, which may be different from `e.target` if the event is bubbling up from a child element.
+- 
+- When you need to reference the parent element handling the event so in the following example e.target will reference the button element (as it's the one that triggered the event) and e.currentTarget will reference the div element as it has the event listener.
 - **Example**:
   ```jsx
   <div onClick={(e) => console.log(e.currentTarget)}>

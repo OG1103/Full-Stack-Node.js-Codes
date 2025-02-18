@@ -1,0 +1,55 @@
+/* borders.css */
+
+/* Basic Border Example */
+.box {
+    width: 300px;
+    height: 150px;
+    border: 3px solid #3498db;
+    border-radius: 15px;
+    margin: 20px;
+    padding: 10px;
+    background-color: lightgray;
+}
+
+/* Border Shorthand for All Sides */
+.box-shorthand {
+    border: 5px solid red;
+}
+
+/* Different Border Styles */
+.dotted-box {
+    border: 3px dotted black;
+}
+
+.dashed-box {
+    border: 3px dashed blue;
+}
+
+.double-box {
+    border: 5px double green;
+}
+
+/* Border-radius Example */
+.rounded-box {
+    width: 200px;
+    height: 100px;
+    border: 5px solid black;
+    border-radius: 15px;
+}
+
+/* Border Specific Sides */
+.border-top-left {
+    border-top: 2px solid red;
+}
+
+.border-right {
+    border-right: 2px dashed green;
+}
+
+.border-bottom {
+    border-bottom: 2px solid blue;
+}
+
+.border-left {
+    border-left: 2px dotted yellow;
+}

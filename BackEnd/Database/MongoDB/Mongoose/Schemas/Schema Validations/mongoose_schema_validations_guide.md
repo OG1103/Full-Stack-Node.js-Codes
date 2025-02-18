@@ -2,15 +2,17 @@
 
 Mongoose provides built-in **validations** to ensure data integrity and consistency in MongoDB.
 
+---
+
 ## 1. Required Fields
 ### ✅ Description
 - Ensures that a field **must have a value** (cannot be `null` or `undefined`).
 
 ### 📌 Example:
 ```js
-email: {
+documentField: {
   type: String,
-  required: [true, "Email is required"] // Custom error message if validation fails
+  required: [true, "Field is required"] // Custom error message if validation fails
 }
 ```
 
@@ -101,6 +103,8 @@ email: {
 }
 ```
 
+> ⚠️ **Note:** `unique` is an **index**, not a validation. Use `mongoose-unique-validator` for enforcing uniqueness.
+
 ---
 
 ## 8. Custom Validator Function
@@ -153,7 +157,60 @@ posts: [
 
 ---
 
-## Summary
+## 11. String Transformations (Lowercase, Uppercase, Trim)
+### ✅ Description
+- **`lowercase: true`** → Converts the value to lowercase before saving.
+- **`uppercase: true`** → Converts the value to uppercase before saving.
+- **`trim: true`** → Removes leading and trailing spaces.
+
+### 📌 Example:
+```js
+name: {
+  type: String,
+  required: true,
+  trim: true,
+  lowercase: true
+}
+```
+
+```js
+category: {
+  type: String,
+  uppercase: true
+}
+```
+
+---
+
+## 12. `select: false` (Hiding Fields from Queries)
+### ✅ Description
+- The `select: false` option prevents a field from being returned in queries by default.
+- Useful for **hiding sensitive data** like passwords.
+
+### 📌 Example:
+```js
+password: {
+  type: String,
+  required: true,
+  select: false
+}
+```
+
+✅ **Example Usage:**
+```js
+const user = await User.findOne({ email: "test@example.com" });
+console.log(user.password);  // Undefined, since select: false hides it
+```
+
+🔹 **To include a `select: false` field in queries**, use `.select('+field')`:
+```js
+const user = await User.findOne({ email: "test@example.com" }).select("+password");
+console.log(user.password);  // Now the password is visible
+```
+
+---
+
+## Summary Table
 
 | Validation | Description | Example |
 |------------|------------|---------|
@@ -167,3 +224,8 @@ posts: [
 | **Custom Validator** | Defines custom rules | `{ validate: fn }` |
 | **Mixed Type** | Stores flexible data | `{ type: mongoose.Schema.Types.Mixed }` |
 | **Reference** | Relates to another document | `{ ref: "Post" }` |
+| **Lowercase** | Converts string to lowercase | `{ lowercase: true }` |
+| **Uppercase** | Converts string to uppercase | `{ uppercase: true }` |
+| **Trim** | Removes spaces before and after | `{ trim: true }` |
+| **Select** | Hides field from queries | `{ select: false }` |
+

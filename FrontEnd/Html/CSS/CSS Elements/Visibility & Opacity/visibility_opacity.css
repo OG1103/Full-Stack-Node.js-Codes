@@ -1,0 +1,37 @@
+/* visibility_opacity.css */
+
+/* 1. Visibility Example */
+.hidden-box {
+    width: 200px;
+    height: 100px;
+    background-color: red;
+    visibility: hidden; /* Hidden but still takes space */
+}
+
+/* 2. Opacity Example */
+.faded-box {
+    width: 200px;
+    height: 100px;
+    background-color: blue;
+    opacity: 0.5; /* 50% transparent */
+}
+
+/* 3. Completely Transparent but Clickable */
+.invisible {
+    opacity: 0; /* Fully transparent but still interactive */
+}
+
+/* 4. Remove an Element from Layout */
+.display-none {
+    display: none; /* Completely removes the element */
+}
+
+/* 5. Fade-in Effect on Hover */
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in:hover {
+    opacity: 1; /* Becomes fully visible when hovered */
+}

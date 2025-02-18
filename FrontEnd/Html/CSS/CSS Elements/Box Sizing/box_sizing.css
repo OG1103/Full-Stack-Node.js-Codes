@@ -1,0 +1,24 @@
+/* box-sizing.css */
+
+/* 1. Default content-box model */
+.box-content {
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+    border: 5px solid black;
+    box-sizing: content-box;
+}
+
+/* 2. Border-box model */
+.box-border {
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+    border: 5px solid black;
+    box-sizing: border-box;
+}
+
+/* 3. Global border-box */
+* {
+    box-sizing: border-box;
+}

@@ -1,6 +1,0 @@
-In here we discuss the css structure: 
-    1- link css to html
-    2- create classes
-    3- css to an element id
-    4- css to a global element
-    5- css (Decendant Selector)

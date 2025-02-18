@@ -1,0 +1,65 @@
+/* media_queries.css */
+
+/* Mobile Devices (max-width: 600px) */
+@media (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* Tablets (601px - 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+    body {
+        background-color: lightgreen;
+    }
+
+    .container {
+        width: 80%;
+        padding: 20px;
+    }
+}
+
+/* Desktops (min-width: 769px) */
+@media (min-width: 769px) {
+    body {
+        background-color: lightgray;
+    }
+
+    .container {
+        width: 60%;
+        padding: 30px;
+    }
+}
+
+/* Landscape Mode */
+@media (orientation: landscape) {
+    .image {
+        width: 50%;
+    }
+}
+
+/* Portrait Mode */
+@media (orientation: portrait) {
+    .image {
+        width: 100%;
+    }
+}
+
+/* Hide Sidebar on Medium Screens */
+@media (min-width: 600px) and (max-width: 1200px) {
+    .sidebar {
+        display: none;
+    }
+}
+
+/* High-Resolution Screens */
+@media only screen and (min-resolution: 2dppx) {
+    .logo {
+        background-image: url('logo-retina.png');
+    }
+}

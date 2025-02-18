@@ -1,0 +1,57 @@
+/* backgrounds.css */
+
+/* 1. Background Color */
+.bg-color {
+    background-color: lightgray;
+}
+
+/* 2. Background Image */
+.bg-image {
+    background-image: url('background.jpg');
+}
+
+/* 3. Background Size */
+.bg-cover {
+    background-size: cover;
+}
+
+.bg-contain {
+    background-size: contain;
+}
+
+/* 4. Background Position */
+.bg-center {
+    background-position: center center;
+}
+
+/* 5. Background Repeat */
+.bg-no-repeat {
+    background-repeat: no-repeat;
+}
+
+.bg-repeat-x {
+    background-repeat: repeat-x;
+}
+
+.bg-repeat-y {
+    background-repeat: repeat-y;
+}
+
+/* 6. Background Attachment */
+.bg-fixed {
+    background-attachment: fixed;
+}
+
+/* 7. Background Gradient */
+.bg-gradient {
+    background: linear-gradient(to right, blue, purple);
+}
+
+.bg-radial-gradient {
+    background: radial-gradient(circle, red, yellow);
+}
+
+/* 8. Background Shorthand */
+.bg-shorthand {
+    background: url('background.jpg') no-repeat center center / cover;
+}

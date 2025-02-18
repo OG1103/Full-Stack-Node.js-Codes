@@ -1,0 +1,30 @@
+/* styles.css */
+
+/* 1. Global Element Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Class Selector */
+.text-blue {
+    color: blue;
+    font-size: 18px;
+}
+
+/* 3. ID Selector */
+#highlight {
+    background-color: yellow;
+    padding: 10px;
+}
+
+/* 4. Descendant Selector */
+.container p {
+    color: green;
+    font-weight: bold;
+}
+
+/* 5. Linking Example */
+/* Ensure this file is linked in your HTML for styles to take effect */

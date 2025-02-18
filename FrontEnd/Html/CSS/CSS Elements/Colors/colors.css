@@ -1,0 +1,31 @@
+/* colors.css */
+
+/* 1. Named Colors */
+.text-red {
+    color: red;
+}
+
+/* 2. Hexadecimal Colors */
+.text-blue {
+    color: #3498db;
+}
+
+/* 3. RGB Colors */
+.text-green {
+    color: rgb(0, 255, 0);
+}
+
+/* 4. RGBA Colors (With Transparency) */
+.text-semitransparent {
+    color: rgba(255, 165, 0, 0.5); /* Semi-transparent orange */
+}
+
+/* 5. HSL Colors */
+.text-hsl {
+    color: hsl(300, 100%, 50%); /* Bright pink */
+}
+
+/* 6. HSLA Colors (With Transparency) */
+.text-hsla {
+    color: hsla(180, 100%, 50%, 0.6); /* Semi-transparent cyan */
+}

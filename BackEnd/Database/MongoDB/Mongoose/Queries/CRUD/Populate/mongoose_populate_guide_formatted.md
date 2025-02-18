@@ -5,6 +5,7 @@
 - Mongoose's `populate()` **replaces references (ObjectIDs) with actual documents**.
 - Works on **single documents** and **arrays of documents**.
 - Requires a **reference field** in the schema.
+- you populate the field name, not the model.
 
 ### 📌 Example (Basic Population):
 ```js

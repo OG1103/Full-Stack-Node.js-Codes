@@ -1,0 +1,11 @@
+/* display_inline_block.css */
+
+.inline-block-example {
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    background-color: lightcoral;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+}

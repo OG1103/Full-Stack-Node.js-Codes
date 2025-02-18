@@ -1,0 +1,54 @@
+/* pseudo_classes.css */
+
+/* 1. Hover Effect */
+button:hover {
+    background-color: yellow;
+    color: black;
+}
+
+/* 2. Active State */
+button:active {
+    background-color: red;
+}
+
+/* 3. Focused Input */
+input:focus {
+    border: 2px solid green;
+    outline: none;
+}
+
+/* 4. First Child */
+.container p:first-child {
+    font-weight: bold;
+}
+
+/* 5. Last Child */
+ul li:last-child {
+    color: red;
+}
+
+/* 6. Every Even Row in a Table */
+table tr:nth-child(even) {
+    background-color: lightgray;
+}
+
+/* 7. Third Paragraph in a Container */
+.container p:nth-of-type(3) {
+    font-style: italic;
+}
+
+/* 8. Exclude Special Buttons */
+button:not(.special) {
+    background-color: gray;
+}
+
+/* 9. Checked Checkboxes */
+input[type="checkbox"]:checked {
+    background-color: green;
+}
+
+/* 10. Disabled Inputs */
+input:disabled {
+    background-color: lightgray;
+    color: gray;
+}

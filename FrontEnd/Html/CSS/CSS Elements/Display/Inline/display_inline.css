@@ -1,0 +1,7 @@
+/* display_inline.css */
+
+.inline-example {
+    display: inline;
+    color: blue;
+    font-weight: bold;
+}

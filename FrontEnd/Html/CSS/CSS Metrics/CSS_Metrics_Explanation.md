@@ -16,11 +16,11 @@ Absolute units are fixed, meaning they remain the same regardless of the screen 
 ## Relative Units
 Relative units adjust based on the size of other elements or the viewport, making them suitable for responsive design as they scale with the screen or parent element.
 
-- `em`: **Relative to Font Size** - Based on the font size of the parent element. Ideal for scalable font sizes, padding, and margin in responsive layouts.
-- `rem`: **Root EM** - Relative to the root font size (usually `<html>`). Useful for consistent typography across a site, independent of nesting.
+- `em`: **Relative to Font Size** - Based on the font size of the parent element. Ideal for scalable font sizes, padding, and margin in responsive layouts.(1 em = 100% of it's parent's font-size. ex: if parent has font-size 30 px , then 1 em = 30px, 2em = 60px.. wherever it's declared, therefore, dependant on nesting). If parent is root then 1em = 1rem. 
+- `rem`: **Root EM** - Relative to the root font size (usually `<html> aka 16px`). Useful for consistent typography across a site, independent of nesting.
 - `%`: **Percentage** - Relative to the parent element’s size, making it essential for flexible layouts.
-- `vw`: **Viewport Width** - 1% of the viewport’s width, excellent for creating responsive widths.
-- `vh`: **Viewport Height** - 1% of the viewport’s height, useful for full-height sections that adapt to screen size.
+- `vw`: **Viewport Width** - 1% of the viewport’s width (1 vw = 1% of the entire rendered screen width (different that % as % relative to parent container size)), excellent for creating responsive widths (1-100).
+- `vh`: **Viewport Height** - 1% of the viewport’s height(1 vh = 1% of the entire rendered screen height (different that % as % relative to parent container size)), useful for full-height sections that adapt to screen size(1-100).
 - `vmin`: **Viewport Minimum** - 1% of the smallest viewport dimension (width or height). Often used for responsive scaling that considers both dimensions.
 - `vmax`: **Viewport Maximum** - 1% of the largest viewport dimension. Useful for elements that need to adapt based on the larger screen dimension.
 

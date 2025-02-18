@@ -1,5 +1,0 @@
-In this folder we are looking at the css elements:
-    1- colors
-    2- text elements
-    3- Box sizing
-    4- Background

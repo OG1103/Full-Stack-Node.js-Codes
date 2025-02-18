@@ -1,0 +1,55 @@
+/* positions.css */
+
+/* 1. Static Position (Default) */
+.static-box {
+    position: static;
+    top: 50px; /* No effect */
+}
+
+/* 2. Relative Position */
+.relative-box {
+    position: relative;
+    top: 20px;
+    left: 30px;
+    background-color: lightblue;
+}
+
+/* 3. Absolute Position */
+.absolute-box {
+    position: absolute;
+    top: 50px;
+    right: 30px;
+    background-color: orange;
+}
+
+/* 4. Fixed Position */
+.fixed-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* 5. Sticky Position */
+.sticky-box {
+    position: sticky;
+    top: 10px;
+    background-color: yellow;
+}
+
+/* 6. Z-Index Example */
+.box1 {
+    position: absolute;
+    z-index: 10;
+    background-color: red;
+}
+
+.box2 {
+    position: absolute;
+    z-index: 5;
+    background-color: green;
+}

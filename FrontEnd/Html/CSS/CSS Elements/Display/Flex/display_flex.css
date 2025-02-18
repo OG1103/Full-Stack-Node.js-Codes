@@ -1,0 +1,24 @@
+/* display_flex.css */
+
+/* Flex Container */
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Flex Items */
+.flex-item {
+    flex: 1;
+    background-color: lightblue;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.flex-item:first-child {
+    flex-grow: 2;
+}

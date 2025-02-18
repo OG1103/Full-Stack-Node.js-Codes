@@ -2,6 +2,8 @@
 
 Nodemailer is a Node.js library for sending emails. It simplifies the process of email delivery by integrating with popular email services or custom SMTP servers. This guide includes detailed explanations, field descriptions, and examples.
 
+Best practice for emails like resetpassword and verficationemail is to include tokens and include them in the redirection. Ex, in verfication email, tokenize the email before sending and upon recieving decode the token and find the corresponding email. 
+
 ## Installation
 
 To use Nodemailer, install it using npm:
@@ -26,15 +28,24 @@ This file configures the email transporter and the Handlebars template engine.
 import nodemailer from 'nodemailer';
 import hbs from 'nodemailer-express-handlebars';
 import path from 'path';
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Initialize my transporter 
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
+        // This is the sender email authentication / details 
         user: 'your-email@gmail.com',
-        pass: 'your-email-password',
+        // Use password alias instead of actual password of the gmail however, this alias can not be used to login your actual gmail account
+        // To create the alias : 1.go to manage account in your gmail, 2. go to security & enable 2 step verfication 3. In search type app-password 4. Create an app and it will generate your password alias and remove spacing
+        pass: 'your-email-password-alias',
     },
 });
 
+//  The viewEngine is typically required when you need advanced rendering features, like layouts or partials.
 transporter.use(
     'compile',
     hbs({
@@ -43,13 +54,13 @@ transporter.use(
             layoutsDir: path.join(__dirname, 'views/layouts'),
             defaultLayout: null,
         },
-        viewPath: path.join(__dirname, 'views'),
-        extName: '.hbs',
+        viewPath: path.join(__dirname, 'views'), // Points to the folder where your .hbs files are stored.
+        extName: '.hbs', // Tells Nodemailer to process .hbs files.
     })
 );
 
 const defaultMailOptions = {
-    from: 'your-email@gmail.com',
+    from: '"name" "<your-email@gmail.com>"',
 };
 
 export { transporter, defaultMailOptions };

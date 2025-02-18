@@ -126,13 +126,15 @@ metadata: {
 ### ✅ Description
 - Stores references to documents in another collection.
 - Useful for relationships between models.
+- For ref, you include the refrence Model. You have to copy the exact model name that you created.
+
 
 ### 📌 Example:
 ```js
 posts: [
   {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Post"
+    ref: "Post" // Post model 
   }
 ]
 ```

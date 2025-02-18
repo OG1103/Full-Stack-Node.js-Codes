@@ -1,0 +1,92 @@
+/* text.css */
+
+/* 1. Font Family */
+.text-serif {
+    font-family: Georgia, serif;
+}
+
+.text-sans-serif {
+    font-family: Arial, sans-serif;
+}
+
+/* 2. Font Size */
+.text-small {
+    font-size: 12px;
+}
+
+.text-large {
+    font-size: 24px;
+}
+
+/* 3. Font Weight */
+.text-bold {
+    font-weight: bold;
+}
+
+.text-light {
+    font-weight: 300;
+}
+
+/* 4. Text Color */
+.text-red {
+    color: red;
+}
+
+.text-blue {
+    color: blue;
+}
+
+/* 5. Text Alignment */
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* 6. Text Decoration */
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-strike {
+    text-decoration: line-through;
+}
+
+/* 7. Text Transform */
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+/* 8. Letter Spacing */
+.text-spaced {
+    letter-spacing: 3px;
+}
+
+/* 9. Word Spacing */
+.text-word-spaced {
+    word-spacing: 5px;
+}
+
+/* 10. Line Height */
+.text-line-height {
+    line-height: 1.8;
+}
+
+/* 11. White Space Handling */
+.text-nowrap {
+    white-space: nowrap;
+}

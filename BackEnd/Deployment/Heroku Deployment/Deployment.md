@@ -90,7 +90,7 @@ Since Heroku does not provide a built-in MongoDB service, you’ll need to use *
 2. **Create a New Cluster**
 
    - Follow the instructions to create a new free-tier cluster.
-   - Ensure in Network access: change local IP such that we choose the option accessible from anywhere.
+   - Ensure in Network access: change local IP such that we choose the option accessible from anywhere or your server ip. 
 
 3. **Connect to Your Cluster**
 
