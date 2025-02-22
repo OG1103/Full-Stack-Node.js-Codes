@@ -1,0 +1,1 @@
+1- ToggleButtonGroup is the same as a button group however, toggle button group is letting you select options (toggle buttons) and button group is for performing actions
