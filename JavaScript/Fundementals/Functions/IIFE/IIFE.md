@@ -12,10 +12,11 @@ An IIFE (pronounced "iffy") is a JavaScript function that runs as soon as it is 
 
 ## Example: IIFE with Parameters
 ```javascript
+// Immediatly invokes a function and passes alice as the parameter. 
 (function (name) {
   console.log(`Hello, ${name}!`);
 })("Alice");
-// Output: Hello, Alice!
+// Output: Hello, Alice! 
 ```
 
 ## Use Case: Preventing Global Scope Pollution

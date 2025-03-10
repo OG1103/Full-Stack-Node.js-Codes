@@ -45,7 +45,7 @@ In `pre` middleware, we often use the `function` keyword instead of arrow functi
 ### Example:
 
 ```javascript
-schema.pre("save", function (next) {
+schema.pre("save", function (next) { // in pre-hooks (pre), you need to call next() to continue execution, including moving forward in your controller. You do NOT need next() in post-hooks (post).
   console.log("Saving document:", this);
   next();
 });

@@ -97,7 +97,7 @@ userSchema.pre('save', function(next) {
 Retrieves the update object in `pre('findOneAndUpdate')`, `pre('updateOne')`, and `pre('updateMany')` hooks.
 
 ### **How it works:**
-- It retrieves the update object passed to an update query.
+- It retrieves the update object passed to an update query. Only retrieves the fields that are being updated in the query.
 
 ### **Example:**
 ```javascript

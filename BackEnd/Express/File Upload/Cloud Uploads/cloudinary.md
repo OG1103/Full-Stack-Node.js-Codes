@@ -1,183 +1,287 @@
-# File Uploads to Cloudinary with Multer in Node.js
+# 🚀 Cloudinary File Uploads with Multer in Node.js
 
-## 1. Installing Cloudinary and Multer
+This guide explains how to:
 
-Cloudinary is a cloud-based media storage service. To upload files using Cloudinary in a Node.js Express application, install the necessary packages:
+- **Set up Multer** to handle form-data and store files locally before uploading.
+- **Upload files to Cloudinary** and delete them locally after successful upload.
+- **Ensure efficient storage management** by automatically removing files from the local system.
+
+---
+
+## **📈 Step 1: Install Required Packages**
+
+Before starting, install the necessary dependencies:
 
 ```sh
-npm install cloudinary multer
+npm install express multer cloudinary dotenv fs uuid
 ```
 
-## 2. Configuring Cloudinary
+---
 
-To interact with Cloudinary, import the package and configure it with your account credentials:
+## **📈 Step 2: Configure Multer to Handle Form Data**
 
-```javascript
-import { v2 as cloudinary } from "cloudinary";
+Multer processes **multipart/form-data**, allowing us to extract both **text fields** and **files**.
 
-cloudinary.config({
-  cloud_name: "your_cloud_name",
-  api_key: "your_api_key",
-  api_secret: "your_api_secret",
-});
-```
-
-### **Explanation:**
-
-- **`cloud_name`**: Your Cloudinary account name.
-- **`api_key`**: The API key from your Cloudinary dashboard.
-- **`api_secret`**: The API secret key for authentication.
-
-## 3. Configuring Multer Storage for Cloudinary
-
-Multer is used to handle file uploads, but instead of storing files locally, we send them to Cloudinary.
+### 🔹 **Create `multerConfig.js`**
 
 ```javascript
 import multer from "multer";
-import { v2 as cloudinary } from "cloudinary";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
+import path from "path";
 import { v4 as uuidv4 } from "uuid";
 
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: async (req, file) => {
-    const format = file.mimetype.split("/")[1]; // Extract file format dynamically
-    const uniqueFilename = `${uuidv4()}-${file.originalname.split(".")[0]}`; // Combine UUID with part of the original filename
-    return {
-      folder: "uploads", // Folder in Cloudinary where files will be stored
-      format: format, // Use original file format
-      public_id: uniqueFilename, // More unique filename using UUID + original name part
-    };
+
+const uploadDir = "./uploads";
+
+// Ensure the directory exists
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadDir); // Ensure this folder exists
+  }, // destination is optional
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname); // Get file extension
+    const uniqueFilename = `${uuidv4()}-${file.originalname.split(".")[0]}${ext}`;
+    cb(null, uniqueFilename);
   },
 });
-```
 
-### **Explanation of Storage Configuration:**
-
-1. **`cloudinary`**: Uses the configured Cloudinary instance.
-2. **`params.folder`**: Defines the Cloudinary folder where files will be stored.
-3. **`params.format`**: Extracts the original file format dynamically.
-4. **`params.public_id`**: Uses a combination of a unique ID (`uuidv4()`) and part of the original filename to ensure uniqueness.
-
-## 4. Applying File Filters
-
-To allow only specific file types, define a filter function before setting up Multer:
-
-```javascript
+// ✅ Allow only images and PDFs
 const fileFilter = (req, file, cb) => {
   const allowedTypes = ["image/jpeg", "image/png", "image/gif", "application/pdf"];
+
   if (allowedTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
     cb(new Error("Invalid file type. Only JPEG, PNG, GIF, and PDF are allowed."), false);
   }
 };
+
+// ✅ Export Multer configuration
+export const uploadDisk = multer({ storage, fileFilter });
 ```
 
-### **Explanation:**
+---
 
-- **`allowedTypes`**: Defines the acceptable file formats.
-- **`cb(null, true)`**: Accepts the file if it matches the allowed types.
-- **`cb(new Error(...), false)`**: Rejects the file with an error message if the type is invalid.
+## **📈 Step 3: Configure Cloudinary**
 
-## 5. Setting the Upload Function
+Cloudinary is a cloud-based media storage service. We configure it to handle file uploads.
 
-Using the configured storage and file filter, create an upload middleware:
+### 🔹 **Create `cloudinaryConfig.js`**
 
 ```javascript
-const upload = multer({ storage, fileFilter });
-```
+import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
 
-## 6. Handling File Uploads in Routes
+dotenv.config(); // Load environment variables
 
-Using Multer and Cloudinary, we can create routes to handle file uploads:
-
-### **Uploading a Single File**
-
-```javascript
-app.post("/upload", upload.single("file"), (req, res) => {
-  res.json({ url: req.file.path });
+// ✅ Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
+
+export default cloudinary;
 ```
 
-### **Uploading Multiple Files**
+---
+
+## **📈 Step 4: Create `.env` File for Credentials**
+
+Store your Cloudinary API keys securely in a `.env` file.
+
+### 🔹 **Create `.env` file**
+
+```plaintext
+# Cloudinary API Credentials
+CLOUDINARY_CLOUD_NAME=dz5xk4l6b
+CLOUDINARY_API_KEY=875524885737893
+CLOUDINARY_SECRET_KEY=your_cloudinary_secret_key
+```
+
+**⚠️ Do not commit your `.env` file to GitHub!** Add it to `.gitignore`:
+
+```plaintext
+.env
+```
+
+---
+
+## **📈 Step 5: Upload File to Cloudinary and Delete Local File**
+
+Once a file is uploaded to Cloudinary, **we delete it from local storage** using `fs.unlink()`.
+
+### 🔹 **Create `uploadController.js`**
 
 ```javascript
-app.post("/upload-multiple", upload.array("files", 5), (req, res) => {
-  const urls = req.files.map((file) => file.path);
-  res.json({ urls });
-});
-```
+import cloudinary from "../config/cloudinaryConfig.js";
+import { BadRequestError } from "../../Errors/index.js";
+import fs from "fs";
 
-### **Explanation:**
+export const uploadToCloudinary = async (req) => {
+  let files = [];
+  try {
+    // Handle both single and multiple file uploads
+    if (req.file) {
+      files = [req.file]; // Convert single file to array
+    } else if (req.files && req.files.length > 0) {
+      files = req.files;
+    } else {
+      throw new NotFoundError("File(s) not found");
+    }
 
-- `upload.single("file")` handles single file uploads.
-- `upload.array("files", 5)` allows up to 5 files to be uploaded at once.
-- The `req.file.path` or `req.files.map((file) => file.path)` contains the Cloudinary file URLs.
+    const uploadPromises = files.map((file) =>
+      cloudinary.uploader.upload(file.path, { folder: "E-Commerce" })
+    );
 
-## 7. Accessing Uploaded Files in Cloudinary
+    const results = await Promise.all(uploadPromises);
 
-Once uploaded, files can be accessed from Cloudinary’s **Media Library** or via the returned URL in `req.file.path`.
-
-## 8. Overwriting Files with the Same `public_id`
-
-If you upload another file with the same `public_id`, it **replaces** the existing file in Cloudinary.
-
-```javascript
-cloudinary.uploader.upload("path_to_file", { public_id: "existing_file_id" });
-```
-
-This helps maintain updated versions of files without cluttering storage.
-
-## 9. Understanding `req.file` vs. `req.files`
-
-### **`req.file`** (For Single File Uploads)
-
-```json
-{
-  "fieldname": "file",
-  "originalname": "image.png",
-  "encoding": "7bit",
-  "mimetype": "image/png",
-  "path": "https://res.cloudinary.com/your_cloud_name/image/upload/v12345678/image.png",
-  "size": 12345
-}
-```
-
-### **Attributes of `req.file`:**
-
-- `fieldname`: Form field name.
-- `originalname`: Original filename.
-- `encoding`: Encoding type.
-- `mimetype`: File type.
-- `path`: URL of the uploaded file in Cloudinary.
-- `size`: File size in bytes.
-
-### **`req.files`** (For Multiple File Uploads)
-
-```json
-[
-  {
-    "fieldname": "files",
-    "originalname": "image1.jpg",
-    "path": "https://res.cloudinary.com/your_cloud_name/image/upload/v12345678/image1.jpg"
-  },
-  {
-    "fieldname": "files",
-    "originalname": "image2.jpg",
-    "path": "https://res.cloudinary.com/your_cloud_name/image/upload/v12345678/image2.jpg"
+    return results.map((result) => result.secure_url);
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      throw error;
+    } else {
+      throw new BadRequestError("File upload failed");
+    }
+  } finally {
+    // Ensure all uploaded files are deleted after processing
+    if (files.length > 0) {
+      files.forEach((file) => {
+        if (file.path) {
+          fs.unlink(file.path, (err) => {
+            if (err) console.error("Error deleting file:", err);
+          });
+        }
+      });
+    }
   }
-]
+};
 ```
 
-### **Key Differences Between `req.file` and `req.files`:**
+---
 
-| Feature        | `req.file` (Single) | `req.files` (Multiple) |
-| -------------- | ------------------- | ---------------------- |
-| Data Type      | Object              | Array of Objects       |
-| Used With      | `upload.single()`   | `upload.array()`       |
-| Stores         | One file            | Multiple files         |
-| Access Example | `req.file.path`     | `req.files[0].path`    |
+## **📈 Step 6: Create an API Route for Uploads**
 
-This guide covers file uploads to Cloudinary using Multer in a Node.js Express application. 🚀
+We will create an Express route to handle **file uploads**.
 
+### 🔹 **Create `uploadRoutes.js`**
+
+```javascript
+import express from "express";
+import { uploadDisk } from "../middlewares/multerConfig.js"; // Multer middleware
+import { uploadToCloudinary } from "../controllers/uploadController.js"; // Upload controller
+
+const router = express.Router();
+
+// ✅ Upload file to Cloudinary
+router.post("/upload", uploadDisk.single("file"), async (req, res) => {
+  try {
+    const url = await uploadToCloudinary(req);
+    res.status(201).json({ message: "File uploaded successfully", url });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+export default router;
+```
+
+---
+
+## **📈 Step 7: Understanding `cloudinary.uploader.upload()`**
+
+The `cloudinary.uploader.upload()` method **uploads a file to Cloudinary** and returns metadata about the uploaded file.
+
+### **📌 Method Signature**
+
+```javascript
+await cloudinary.uploader.upload(file, options);
+```
+
+### **📌 Parameters**
+
+1. **`file`** (String)
+
+   - **Required.** The local path to the file or a **remote URL**.
+   - Example: `"uploads/sample.jpg"` or `"https://example.com/image.jpg"`.
+
+2. **`options`** (Object)
+   - **Optional.** Specifies transformation settings, folder locations, and metadata.
+
+### **📌 Common Options in `upload()`**
+
+| Option           | Type    | Description                                                          |
+| ---------------- | ------- | -------------------------------------------------------------------- |
+| `folder`         | String  | Specifies the Cloudinary folder to store the file.                   |
+| `public_id`      | String  | Custom identifier instead of an auto-generated name.                 |
+| `resource_type`  | String  | Defaults to `"image"`. Set `"video"` or `"raw"` for different files. |
+| `transformation` | Object  | Applies transformations (resize, crop, etc.).                        |
+| `tags`           | Array   | Assigns tags to the uploaded file.                                   |
+| `overwrite`      | Boolean | Whether to overwrite files with the same `public_id`.                |
+| `use_filename`   | Boolean | Uses the original file name instead of a generated ID.               |
+
+### **📌 Examples of `upload()` Usage**
+
+#### **🚀 Basic Upload**
+
+```javascript
+const result = await cloudinary.uploader.upload("uploads/image.jpg", {
+  folder: "E-Commerce",
+});
+
+console.log(result.secure_url); // Cloudinary file URL
+```
+
+#### **🖼️ Upload with a Custom Filename**
+
+```javascript
+const result = await cloudinary.uploader.upload("uploads/image.jpg", {
+  folder: "E-Commerce",
+  public_id: "custom-file-name",
+  use_filename: true,
+});
+```
+
+#### **🔄 Resize and Crop Before Uploading**
+
+```javascript
+const result = await cloudinary.uploader.upload("uploads/image.jpg", {
+  folder: "E-Commerce",
+  transformation: [{ width: 500, height: 500, crop: "fill" }],
+});
+```
+
+---
+
+Modify your `server.js` or `app.js` to use the **upload route**.
+
+```javascript
+import express from "express";
+import dotenv from "dotenv";
+import uploadRoutes from "./routes/uploadRoutes.js";
+
+dotenv.config();
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ✅ Use upload routes
+app.use("/api", uploadRoutes);
+
+// ✅ Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+```
+
+---
+
+**When uploading files to the cloud using Multer, the common approach is:**
+
+1. Upload Locally → Use Multer to temporarily store the file.
+2. Upload to Cloud → Read the file from local storage and upload it to cloud storage (e.g., AWS S3, Firebase, Cloudinary).
+3. Delete Local File → Remove the file from local storage after successful upload.
+4. Additionally, Multer enables multipart/form-data parsing, which is required for handling file uploads in Express.
