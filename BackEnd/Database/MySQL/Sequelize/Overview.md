@@ -31,6 +31,8 @@ const sequelize = new Sequelize("database_name", "username", "password", {
   dialect: "mysql",
 });
 
+// For dev the username is root and password is ""
+
 // Test the connection
 (async () => {
   try {
