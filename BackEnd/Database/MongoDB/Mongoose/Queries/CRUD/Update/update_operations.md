@@ -64,6 +64,7 @@ await User.findOneAndUpdate(
 
 ### ✅ Description
 - Increments (or decrements) a number field.
+- To increment just leave the number s it is (+ve) if decrementing ad a -before the number
 
 ### 📌 Example:
 ```js

@@ -42,6 +42,34 @@ app.get('/api/items', (req, res) => {
 });
 ```
 - If the URL is `/api/items?category=books`, `req.query.category` will be `"books"`.
+Here’s the content formatted properly in `.md` (Markdown) format so you can paste it directly:
+
+````md
+#### Multiple Values for the Same Query Key
+
+```javascript
+req.query.tags; // ['a', 'b']
+````
+
+#### Safe Handling of Query Arrays
+
+To always work safely with single or multiple query values:
+
+```javascript
+const tags = req.query.tags;
+const tagsArray = Array.isArray(tags) ? tags : tags ? [tags] : [];
+```
+
+This ensures `tagsArray` is always an array whether the query was:
+
+* `/api/items?tags=a` → `['a']`
+* `/api/items?tags=a&tags=b` → `['a', 'b']`
+* not included → `[]`
+
+```
+
+```
+
 
 ---
 

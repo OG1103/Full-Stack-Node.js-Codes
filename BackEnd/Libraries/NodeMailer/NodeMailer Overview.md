@@ -40,7 +40,7 @@ const transporter = nodemailer.createTransport({
         // This is the sender email authentication / details 
         user: 'your-email@gmail.com',
         // Use password alias instead of actual password of the gmail however, this alias can not be used to login your actual gmail account
-        // To create the alias : 1.go to manage account in your gmail, 2. go to security & enable 2 step verfication 3. In search type app-password 4. Create an app and it will generate your password alias and remove spacing
+        // To create the alias : 1.go to manage account in your gmail, 2. go to security & enable 2 step verfication 3. In search type app-password 4. Create an app and it will generate your password alias and remove spacing 
         pass: 'your-email-password-alias',
     },
 });

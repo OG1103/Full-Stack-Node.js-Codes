@@ -27,7 +27,7 @@ import { Sequelize } from "sequelize";
 
 // Create a Sequelize instance
 const sequelize = new Sequelize("database_name", "username", "password", {
-  host: "localhost",
+  host: "localhost", // if using rds then rds endpoint
   dialect: "mysql",
 });
 

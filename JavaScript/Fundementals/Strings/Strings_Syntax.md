@@ -66,12 +66,32 @@ str.replace("world", "there"); // Output: "Hello, there!"
 str.replaceAll("o", "0"); // Output: "Hell0, w0rld!"
 ```
 
+Here’s the updated `.md` section with an explanation of what happens if the string **does not contain the splitter**:
+
+---
+
 ### Splitting Strings
+
 Split a string into an array of substrings.
+
 ```javascript
 let fruits = "apple,banana,orange".split(",");
 console.log(fruits); // Output: ['apple', 'banana', 'orange']
 ```
+
+#### 🔍 What if the string doesn't contain the splitter?
+
+If the string **does not contain the splitter**, the entire string is returned as a **single-element array**:
+
+```javascript
+let singleFruit = "apple".split(",");
+console.log(singleFruit); // Output: ['apple']
+```
+
+> ✅ `.split()` will always return an array. If the separator is **not found**, no splitting occurs — the original string becomes the only item in the resulting array.
+
+---
+
 
 ### Joining Strings
 Use `.concat()` or template literals.

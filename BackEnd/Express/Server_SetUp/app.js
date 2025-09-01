@@ -4,6 +4,18 @@ const app = express();
 
 const port = 8000;
 
+// are global error handlers in Node.js for catching serious, application-wide errors that aren’t handled elsewhere. 
+
+process.on('uncaughtException', (error) => {
+    console.error("errors in the code",error)
+  })// Catches synchronous errors thrown outside of a try...catch block anywhere in your code.
+  
+  process.on('unhandledRejection', (error) => {
+    console.error("error out of express",error)
+  }) // // No .catch(), so this triggers 'unhandledRejection'
+
+
+
 app.use(express.json());// Middleware to parse json 
 // can use cors as well  
 

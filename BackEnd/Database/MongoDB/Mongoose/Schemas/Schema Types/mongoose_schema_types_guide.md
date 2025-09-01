@@ -166,31 +166,34 @@ metadata: {
 ### 📌 Example:
 
 ```js
-posts: [
-  {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Post", // Reference to the Post model
-  },
-];
+reviewIds: {
+  type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+  default: []
+}
+
+
 ```
 
 ---
 
-## 10. Direct Array of ObjectIds
+## 10. Direct Array of ObjectIds With No additonal options
 
 ### ✅ Description
 
 - Stores an array of `ObjectId`s directly.
 - `ref` is applied to the entire array instead of individual elements.
 - Use when i want a direct array of objectIds
+- No Other options like default 
 
 ### 📌 Example:
 
 ```js
-wishlist: {
-  type: [mongoose.Schema.Types.ObjectId], // Direct array of ObjectId
-  ref: "Product"
-}
+posts: [
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post", // Reference to the Post model
+  },
+];
 ```
 
 ---
@@ -249,10 +252,10 @@ const userSchema = new mongoose.Schema(
     role: { type: String, enum: ["user", "admin"], default: "user" },
     metadata: { type: mongoose.Schema.Types.Mixed, default: {} },
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
-    wishlist: {
-      type: [mongoose.Schema.Types.ObjectId],
+    wishlist: [{
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
-    },
+    }],
   },
   { timestamps: true }
 );

@@ -126,6 +126,7 @@ const userSchema = new mongoose.Schema({
 ### ✅ Description
 - Modifies how documents are converted to JSON or plain objects.
 - `getters: true` applies **custom transformations**.
+- or apply virtuals to the json object
 
 ### 📌 Example:
 ```js
