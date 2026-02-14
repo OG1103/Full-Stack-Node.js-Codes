@@ -2,6 +2,7 @@
 
 ## 1. Introduction
 Instead of using `props.property`, **destructuring** allows extracting values directly, making the code **cleaner and more readable**.
+Becasue In React by default, props are passed to a component as a single object called props. So it's bvetter to destruct
 
 ## 2. Destructuring Normal Props
 

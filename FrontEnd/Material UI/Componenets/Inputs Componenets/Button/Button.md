@@ -42,6 +42,8 @@ This creates a **primary button with a solid background**.
 | `outlined`  | Transparent button with a border. |
 | `text`      | A button with no background or border. |
 
+if no variant is used it defaults to text
+
 ### 🔹 Example:
 
 ```jsx

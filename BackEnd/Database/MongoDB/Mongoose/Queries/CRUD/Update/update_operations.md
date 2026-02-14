@@ -237,6 +237,18 @@ await User.findOneAndUpdate(
 | **`$pop`** | Removes first/last array item | `{ $pop: { wishlist: -1 } }` |
 | **`$rename`** | Renames a field | `{ $rename: { oldField: "newField" } }` |
 
+## Example Of Updating Multiple Things at once 
+```js
+await User.updateOne(
+  { _id: "123" },
+  {
+    $set: { "profile.city": "Dubai", isActive: false },  // set new values
+    $inc: { points: 10, age: 1 },                        // increment numbers, adds 10 to points and 1 to age
+    $unset: { "profile.bio": "" }                        // remove a field
+  }
+);
+
+```
 ---
 
 ## Conclusion

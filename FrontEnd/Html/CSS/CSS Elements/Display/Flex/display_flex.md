@@ -137,7 +137,19 @@ Changes the order of elements **without modifying HTML**.
 🔸 **Default Value:** `0` (lower values appear first).
 
 ### ✅ `flex-grow` (Expands items to fill space)
-Defines how much an item **grows** relative to other items.
+Defines how much an item **grows** relative to other items. Basically defining how much left over space from the parent is assigned to that child. 
+
+When you have a flex container (display: flex), the children are laid out in a row or column. After they take up their natural size (or any size you give them), there may be leftover empty space inside the parent.
+👉 flex-grow tells the browser how to distribute that leftover space among the children.
+
+When you make a navbar with flexbox, you usually have three parts: a left section (like a logo), a middle section (like menu links), and a right section (like login buttons).
+
+By default, these three just sit next to each other.
+
+When you give the middle section flex-grow, you’re telling it:
+➡️ “Stretch and take up all the empty space between the left and right.”
+
+Because the middle grows wide, it pushes the left part all the way to the left and the right part all the way to the right. Inside that stretched middle section, you can center its content — which makes the menu stay right in the middle of the navbar.
 
 ```css
 .item {
