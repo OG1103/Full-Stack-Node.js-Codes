@@ -1,6 +1,0 @@
-What is Node.js?
------------------
-- Environment to run JS outside Browser
-- Built on chrome's V8 JS engine
-- Supports Full Stack 
-- Single Threaded , asynchronous
