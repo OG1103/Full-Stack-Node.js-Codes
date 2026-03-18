@@ -18,6 +18,8 @@
 
 `next()` is a function provided by Express that, when called, passes control from the current middleware or route handler to the **next** matching middleware or route handler in the stack. It is the mechanism that allows Express to chain multiple functions together to process a single request.
 
+Always `return next()` to stop execution when code exists after it — without `return` the code **keeps running** after `next()` which causes bugs, crashes and double `next()` calls. If `next()` is the **last line** in the block, `return` is optional but still good practice 🎯
+
 ```js
 import express from "express";
 const app = express();
@@ -366,6 +368,29 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message });
 });
 ```
+### Mistake 5: Not Returning `next()` When Code Exists After It
+
+```js
+// BUG: Code keeps running after next(error) causing double next() calls and crashes
+app.use((req, res, next) => {
+  if (!req.cookies.token) {
+    next(new UnauthenticatedError("Token missing"));
+    // Execution continues here even after error is passed ❌
+  }
+  next(); // called AGAIN = double next() calls = bugs
+});
+
+// FIX: Always return next() to stop execution when code exists after it
+app.use((req, res, next) => {
+  if (!req.cookies.token) {
+    return next(new UnauthenticatedError("Token missing"));
+    // return stops execution immediately ✅
+  }
+  next();
+});
+```
+
+ **Rule:** Always `return next()` to stop execution when code exists after it — without `return` the code **keeps running** after `next()` which causes bugs, crashes and double `next()` calls. If `next()` is the **last line** in the block, `return` is optional but still good practice 🎯
 
 ---
 
