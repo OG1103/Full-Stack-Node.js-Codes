@@ -26,8 +26,8 @@ eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxMjM0NSJ9.DGk4wsCHYj4FRVK8X6mN1WJjMeaP-FcSJJ
 
 ```json
 {
-  "alg": "HS256",    // Signing algorithm
-  "typ": "JWT"       // Token type
+  "alg": "HS256", // Signing algorithm
+  "typ": "JWT" // Token type
 }
 ```
 
@@ -38,19 +38,19 @@ eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxMjM0NSJ9.DGk4wsCHYj4FRVK8X6mN1WJjMeaP-FcSJJ
   "userId": "12345",
   "email": "user@example.com",
   "role": "admin",
-  "iat": 1696000000,     // Issued at (auto-added)
-  "exp": 1696086400      // Expires at
+  "iat": 1696000000, // Issued at (auto-added)
+  "exp": 1696086400 // Expires at
 }
 ```
 
 The payload contains **claims** — pieces of information about the user. Common claims:
 
-| Claim | Name | Description |
-|-------|------|-------------|
-| `iat` | Issued At | When the token was created (auto-added) |
-| `exp` | Expiration | When the token expires |
-| `sub` | Subject | Usually the user ID |
-| `iss` | Issuer | Who created the token |
+| Claim | Name       | Description                             |
+| ----- | ---------- | --------------------------------------- |
+| `iat` | Issued At  | When the token was created (auto-added) |
+| `exp` | Expiration | When the token expires                  |
+| `sub` | Subject    | Usually the user ID                     |
+| `iss` | Issuer     | Who created the token                   |
 
 ### Signature
 
@@ -96,34 +96,34 @@ JWT_LIFETIME=7d
 
 ### Secret Key Guidelines
 
-| Guideline | Detail |
-|-----------|--------|
-| Length | At least 32 characters |
-| Content | Random alphanumeric string |
-| Storage | Environment variable only (never in code) |
+| Guideline  | Detail                                              |
+| ---------- | --------------------------------------------------- |
+| Length     | At least 32 characters                              |
+| Content    | Random alphanumeric string                          |
+| Storage    | Environment variable only (never in code)           |
 | Uniqueness | Different for each environment (dev, staging, prod) |
 
 ### Lifetime Options
 
-| Value | Meaning |
-|-------|---------|
-| `'15m'` | 15 minutes |
-| `'1h'` | 1 hour |
-| `'7d'` | 7 days |
-| `'30d'` | 30 days |
-| `3600` | 3600 seconds (1 hour) |
+| Value   | Meaning               |
+| ------- | --------------------- |
+| `'15m'` | 15 minutes            |
+| `'1h'`  | 1 hour                |
+| `'7d'`  | 7 days                |
+| `'30d'` | 30 days               |
+| `3600`  | 3600 seconds (1 hour) |
 
 ---
 
 ## 5. Sign (Create a Token)
 
 ```javascript
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 const token = jwt.sign(
-  { userId: '12345', email: 'user@example.com' },  // Payload
-  process.env.JWT_SECRET,                            // Secret key
-  { expiresIn: '7d' }                               // Options
+  { userId: "12345", email: "user@example.com" }, // Payload
+  process.env.JWT_SECRET, // Secret key
+  { expiresIn: "7d" }, // Options
 );
 
 console.log(token);
@@ -134,10 +134,11 @@ console.log(token);
 
 ```javascript
 jwt.sign(payload, secret, {
-  expiresIn: '7d',          // Token lifetime
-  algorithm: 'HS256',       // Signing algorithm (default)
-  issuer: 'my-app',         // Optional: who issued the token
-  subject: '12345',         // Optional: user ID
+  expiresIn: "7d", // Token lifetime
+  algorithm: "HS256", // Signing algorithm (default)
+  notBefore: "1h"  // 👈 token won't be valid for the first hour
+  issuer: "my-app", // Optional: who issued the token
+  subject: "12345", // Optional: user ID
 });
 ```
 
@@ -153,31 +154,32 @@ try {
   console.log(decoded);
   // { userId: '12345', email: 'user@example.com', iat: 1696000000, exp: 1696604800 }
 } catch (err) {
-  console.log('Invalid token');
+  console.log("Invalid token");
 }
 ```
 
 `jwt.verify()` does two things:
+
 1. **Checks the signature** — ensures the token hasn't been tampered with
 2. **Checks expiration** — ensures the token hasn't expired
 
 ### Common Errors
 
-| Error | Cause |
-|-------|-------|
-| `JsonWebTokenError` | Invalid token or wrong secret |
-| `TokenExpiredError` | Token has expired |
-| `NotBeforeError` | Token not yet active (`nbf` claim) |
+| Error               | Cause                              |
+| ------------------- | ---------------------------------- |
+| `JsonWebTokenError` | Invalid token or wrong secret      |
+| `TokenExpiredError` | Token has expired                  |
+| `NotBeforeError`    | Token not yet active (`nbf` claim) |
 
 ```javascript
 try {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 } catch (err) {
-  if (err.name === 'TokenExpiredError') {
-    return res.status(401).json({ error: 'Token expired' });
+  if (err.name === "TokenExpiredError") {
+    return res.status(401).json({ error: "Token expired" });
   }
-  if (err.name === 'JsonWebTokenError') {
-    return res.status(401).json({ error: 'Invalid token' });
+  if (err.name === "JsonWebTokenError") {
+    return res.status(401).json({ error: "Invalid token" });
   }
 }
 ```
@@ -198,18 +200,18 @@ console.log(decoded);
 
 ## 8. Summary
 
-| Method | Purpose | Verifies Signature? |
-|--------|---------|-------------------|
-| `jwt.sign(payload, secret, options)` | Create a token | — |
-| `jwt.verify(token, secret)` | Validate and decode a token | Yes |
-| `jwt.decode(token)` | Read payload without validation | No |
+| Method                               | Purpose                         | Verifies Signature? |
+| ------------------------------------ | ------------------------------- | ------------------- |
+| `jwt.sign(payload, secret, options)` | Create a token                  | —                   |
+| `jwt.verify(token, secret)`          | Validate and decode a token     | Yes                 |
+| `jwt.decode(token)`                  | Read payload without validation | No                  |
 
 ### JWT vs Sessions
 
-| Feature | JWT | Sessions |
-|---------|-----|---------|
-| Server storage | None (stateless) | Server-side (database/memory) |
-| Scalability | Scales easily (no shared state) | Requires shared session store |
-| Revocation | Difficult (token is self-contained) | Easy (delete from store) |
-| Data location | In the token (client-side) | On the server |
-| Best for | APIs, microservices, mobile apps | Traditional web apps |
+| Feature        | JWT                                 | Sessions                      |
+| -------------- | ----------------------------------- | ----------------------------- |
+| Server storage | None (stateless)                    | Server-side (database/memory) |
+| Scalability    | Scales easily (no shared state)     | Requires shared session store |
+| Revocation     | Difficult (token is self-contained) | Easy (delete from store)      |
+| Data location  | In the token (client-side)          | On the server                 |
+| Best for       | APIs, microservices, mobile apps    | Traditional web apps          |
