@@ -6,13 +6,13 @@ Mongoose provides multiple ways to update documents, each with different behavio
 
 ## 1. Update Methods Overview
 
-| Method | Returns | Hooks | Validation | Use Case |
-|--------|---------|-------|-----------|----------|
-| `findByIdAndUpdate()` | Updated doc | Query hooks | Optional | Update by ID, get result |
-| `findOneAndUpdate()` | Updated doc | Query hooks | Optional | Update by filter, get result |
-| `updateOne()` | Write result | Query hooks | Optional | Update one, don't need doc back |
-| `updateMany()` | Write result | Query hooks | Optional | Bulk update |
-| `doc.save()` | Document | Document hooks | Always | Full document control |
+| Method                | Returns      | Hooks          | Validation | Use Case                        |
+| --------------------- | ------------ | -------------- | ---------- | ------------------------------- |
+| `findByIdAndUpdate()` | Updated doc  | Query hooks    | Optional   | Update by ID, get result        |
+| `findOneAndUpdate()`  | Updated doc  | Query hooks    | Optional   | Update by filter, get result    |
+| `updateOne()`         | Write result | Query hooks    | Optional   | Update one, don't need doc back |
+| `updateMany()`        | Write result | Query hooks    | Optional   | Bulk update                     |
+| `doc.save()`          | Document     | Document hooks | Always     | Full document control           |
 
 ---
 
@@ -20,16 +20,16 @@ Mongoose provides multiple ways to update documents, each with different behavio
 
 ```javascript
 const user = await User.findByIdAndUpdate(
-  userId,                            // ID to find
-  { name: 'John Updated', age: 29 }, // Update data
+  userId, // ID to find
+  { name: "John Updated", age: 29 }, // Update data
   {
-    new: true,             // Return the UPDATED document (default: returns old)
-    runValidators: true,   // Run schema validators on update
-  }
+    new: true, // Return the UPDATED document (default: returns old)
+    runValidators: true, // Run schema validators on update
+  },
 );
 
 if (!user) {
-  console.log('User not found');
+  console.log("User not found");
 }
 ```
 
@@ -53,16 +53,16 @@ Same as `findByIdAndUpdate` but accepts any filter:
 
 ```javascript
 const user = await User.findOneAndUpdate(
-  { email: 'john@example.com' },     // Filter
-  { $inc: { loginCount: 1 } },       // Update
-  { new: true, runValidators: true }
+  { email: "john@example.com" }, // Filter
+  { $inc: { loginCount: 1 } }, // Update
+  { new: true, runValidators: true },
 );
 
 // More complex filter
 const product = await Product.findOneAndUpdate(
-  { slug: 'laptop-pro', isActive: true },
+  { slug: "laptop-pro", isActive: true },
   { $set: { price: 899 } },
-  { new: true }
+  { new: true },
 );
 ```
 
@@ -73,10 +73,7 @@ const product = await Product.findOneAndUpdate(
 Returns a write result, not the document:
 
 ```javascript
-const result = await User.updateOne(
-  { _id: userId },
-  { $set: { isActive: false } }
-);
+const result = await User.updateOne({ _id: userId }, { $set: { isActive: false } });
 
 console.log(result);
 // {
@@ -98,7 +95,7 @@ Update all documents matching a filter:
 // Deactivate all users who haven't logged in for 90 days
 const result = await User.updateMany(
   { lastLogin: { $lt: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000) } },
-  { $set: { isActive: false } }
+  { $set: { isActive: false } },
 );
 
 console.log(`Deactivated ${result.modifiedCount} users`);
@@ -113,10 +110,10 @@ Find, modify, and save — triggers all document middleware:
 ```javascript
 const user = await User.findById(userId);
 
-user.name = 'Updated Name';
+user.name = "Updated Name";
 user.age = 30;
 
-await user.save();  // Triggers pre('save'), validates, post('save')
+await user.save(); // Triggers pre('save'), validates, post('save')
 ```
 
 ### When to Use `save()` Over Update Methods
@@ -133,18 +130,15 @@ await user.save();  // Triggers pre('save'), validates, post('save')
 ### `$set` — Set Field Values
 
 ```javascript
-await User.updateOne(
-  { _id: userId },
-  { $set: { name: 'New Name', 'address.city': 'New York' } }
-);
+await User.updateOne({ _id: userId }, { $set: { name: "New Name", "address.city": "New York" } });
 ```
 
 **Note:** When using `findByIdAndUpdate()`, Mongoose wraps your update in `$set` automatically if you don't use operators:
 
 ```javascript
 // These are equivalent:
-await User.findByIdAndUpdate(id, { name: 'John' });
-await User.findByIdAndUpdate(id, { $set: { name: 'John' } });
+await User.findByIdAndUpdate(id, { name: "John" });
+await User.findByIdAndUpdate(id, { $set: { name: "John" } });
 ```
 
 ### `$unset` — Remove a Field
@@ -152,7 +146,7 @@ await User.findByIdAndUpdate(id, { $set: { name: 'John' } });
 ```javascript
 await User.updateOne(
   { _id: userId },
-  { $unset: { phone: '', tempField: '' } }  // Value doesn't matter
+  { $unset: { phone: "", tempField: "" } }, // Value doesn't matter
 );
 // Removes 'phone' and 'tempField' from the document
 ```
@@ -167,26 +161,17 @@ await Product.updateOne({ _id: productId }, { $inc: { views: 1 } });
 await Product.updateOne({ _id: productId }, { $inc: { stock: -1 } });
 
 // Increment multiple fields
-await User.updateOne(
-  { _id: userId },
-  { $inc: { loginCount: 1, points: 10 } }
-);
+await User.updateOne({ _id: userId }, { $inc: { loginCount: 1, points: 10 } });
 ```
 
 ### `$push` — Add to Array
 
 ```javascript
 // Push one item
-await User.updateOne(
-  { _id: userId },
-  { $push: { hobbies: 'swimming' } }
-);
+await User.updateOne({ _id: userId }, { $push: { hobbies: "swimming" } });
 
 // Push multiple items
-await User.updateOne(
-  { _id: userId },
-  { $push: { hobbies: { $each: ['swimming', 'hiking'] } } }
-);
+await User.updateOne({ _id: userId }, { $push: { hobbies: { $each: ["swimming", "hiking"] } } });
 
 // Push and keep only the last 10 items
 await User.updateOne(
@@ -194,34 +179,31 @@ await User.updateOne(
   {
     $push: {
       notifications: {
-        $each: [{ message: 'New alert', date: new Date() }],
-        $slice: -10,     // Keep only last 10
+        $each: [{ message: "New alert", date: new Date() }],
+        $slice: -10, // Keep only last 10
         $sort: { date: -1 },
       },
     },
-  }
+  },
 );
 
 // Push a subdocument
 await Order.updateOne(
   { _id: orderId },
-  { $push: { items: { product: productId, quantity: 2, price: 29.99 } } }
+  { $push: { items: { product: productId, quantity: 2, price: 29.99 } } },
 );
 ```
 
 ### `$addToSet` — Add to Array (No Duplicates)
 
 ```javascript
-await User.updateOne(
-  { _id: userId },
-  { $addToSet: { roles: 'moderator' } }
-);
+await User.updateOne({ _id: userId }, { $addToSet: { roles: "moderator" } });
 // Only adds 'moderator' if it's not already in the array
 
 // Add multiple (no duplicates)
 await User.updateOne(
   { _id: userId },
-  { $addToSet: { tags: { $each: ['node', 'react', 'mongo'] } } }
+  { $addToSet: { tags: { $each: ["node", "react", "mongo"] } } },
 );
 ```
 
@@ -229,23 +211,14 @@ await User.updateOne(
 
 ```javascript
 // Remove a specific value
-await User.updateOne(
-  { _id: userId },
-  { $pull: { hobbies: 'swimming' } }
-);
+await User.updateOne({ _id: userId }, { $pull: { hobbies: "swimming" } });
 
 // Remove by condition
-await User.updateOne(
-  { _id: userId },
-  { $pull: { notifications: { read: true } } }
-);
+await User.updateOne({ _id: userId }, { $pull: { notifications: { read: true } } });
 // Removes all notifications where read is true
 
 // Remove an ObjectId reference
-await User.updateOne(
-  { _id: userId },
-  { $pull: { friends: friendId } }
-);
+await User.updateOne({ _id: userId }, { $pull: { friends: friendId } });
 ```
 
 ### `$pop` — Remove First or Last Array Element
@@ -261,10 +234,7 @@ await User.updateOne({ _id: userId }, { $pop: { hobbies: -1 } });
 ### `$rename` — Rename a Field
 
 ```javascript
-await User.updateMany(
-  {},
-  { $rename: { 'oldFieldName': 'newFieldName' } }
-);
+await User.updateMany({}, { $rename: { oldFieldName: "newFieldName" } });
 ```
 
 ---
@@ -280,7 +250,7 @@ This is critical to understand for nested objects:
 
 await User.updateOne(
   { _id: userId },
-  { address: { city: 'Boston' } }   // Direct replacement
+  { address: { city: "Boston" } }, // Direct replacement
 );
 
 // After: { address: { city: 'Boston' } }
@@ -292,10 +262,7 @@ await User.updateOne(
 ```javascript
 // Before: { address: { street: '123 Main', city: 'NYC', zip: '10001' } }
 
-await User.updateOne(
-  { _id: userId },
-  { $set: { 'address.city': 'Boston' } }
-);
+await User.updateOne({ _id: userId }, { $set: { "address.city": "Boston" } });
 
 // After: { address: { street: '123 Main', city: 'Boston', zip: '10001' } }
 // Only city changed, street and zip preserved!
@@ -303,10 +270,10 @@ await User.updateOne(
 
 ### The Rule
 
-| Method | Behavior |
-|--------|---------|
-| `{ nestedObj: newValue }` | **Replaces** the entire nested object |
-| `{ $set: { 'nested.field': value } }` | **Updates** only the specified field |
+| Method                                | Behavior                              |
+| ------------------------------------- | ------------------------------------- |
+| `{ nestedObj: newValue }`             | **Replaces** the entire nested object |
+| `{ $set: { 'nested.field': value } }` | **Updates** only the specified field  |
 
 Always use **dot notation with `$set`** when updating specific nested fields.
 
@@ -318,11 +285,11 @@ Always use **dot notation with `$set`** when updating specific nested fields.
 const replaced = await User.findOneAndReplace(
   { _id: userId },
   {
-    name: 'Completely New',
-    email: 'new@example.com',
+    name: "Completely New",
+    email: "new@example.com",
     // All other fields are removed!
   },
-  { new: true }
+  { new: true },
 );
 ```
 
@@ -332,16 +299,16 @@ Unlike `findOneAndUpdate()`, this replaces the entire document (except `_id`).
 
 ## 10. Summary
 
-| Operator | Purpose | Example |
-|----------|---------|---------|
-| `$set` | Set field values | `{ $set: { name: 'John' } }` |
-| `$unset` | Remove fields | `{ $unset: { temp: '' } }` |
-| `$inc` | Increment/decrement | `{ $inc: { count: 1 } }` |
-| `$push` | Add to array | `{ $push: { tags: 'new' } }` |
+| Operator    | Purpose             | Example                          |
+| ----------- | ------------------- | -------------------------------- |
+| `$set`      | Set field values    | `{ $set: { name: 'John' } }`     |
+| `$unset`    | Remove fields       | `{ $unset: { temp: '' } }`       |
+| `$inc`      | Increment/decrement | `{ $inc: { count: 1 } }`         |
+| `$push`     | Add to array        | `{ $push: { tags: 'new' } }`     |
 | `$addToSet` | Add unique to array | `{ $addToSet: { tags: 'new' } }` |
-| `$pull` | Remove from array | `{ $pull: { tags: 'old' } }` |
-| `$pop` | Remove first/last | `{ $pop: { tags: 1 } }` |
-| `$rename` | Rename field | `{ $rename: { old: 'new' } }` |
+| `$pull`     | Remove from array   | `{ $pull: { tags: 'old' } }`     |
+| `$pop`      | Remove first/last   | `{ $pop: { tags: 1 } }`          |
+| `$rename`   | Rename field        | `{ $rename: { old: 'new' } }`    |
 
 ### Key Points
 
