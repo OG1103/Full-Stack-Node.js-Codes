@@ -1,617 +1,255 @@
-# MongoDB $group & Accumulators — Deep Notes
+# MongoDB `$group` & Accumulators
 
----
-
-## 1. Overview
-
-`$group` collapses many documents into fewer documents by grouping them on a shared key, then computing aggregate values (sum, average, max, min, etc.) across each group. It solves the problem of answering questions like "what is the total revenue per category?" or "how many orders did each customer place?" — which regular `find()` queries cannot answer.
-
-**Why aggregation `$group` instead of application-level grouping?**
-- Processing happens on the database server — no need to transfer all documents to Node.js
-- Accumulators can handle millions of documents in a single pass
-- Expressions inside accumulators can perform math, dates, conditionals before accumulating
-
----
-
-## 2. Stage-by-Stage Breakdown
-
-### `$group` — The Core Stage
+`$group` collapses many documents into one per group, computing aggregates (sum, average, max, count...) across each group. It answers questions like "total revenue per category?" or "orders per customer?" that `find()` cannot.
 
 ```javascript
 {
   $group: {
-    _id: <grouping expression>,           // Required — defines the group key
-    outputField1: { <accumulator>: <expression> },
-    outputField2: { <accumulator>: <expression> },
+    _id: <grouping key>,                        // REQUIRED — what to group by
+    outputField: { <accumulator>: <expression> }, // computed per group
   }
 }
 ```
 
-**`_id` rules:**
-- `_id: '$fieldName'` — group by one field
-- `_id: { key1: '$field1', key2: '$field2' }` — group by multiple fields (compound key)
-- `_id: null` — aggregate the entire collection as one group (no grouping)
-- `_id: { $year: '$createdAt' }` — group by expression result
-
-**What position matters:**
-- `$group` must come AFTER `$match` (if filtering original fields) and AFTER `$unwind` (if grouping on array elements)
-- `$group` must come BEFORE any `$sort`, `$limit`, or `$project` that operate on the grouped output
-- Any `$match` after `$group` can only reference the **output fields** of `$group` (`_id` and the accumulator fields), not the original document fields
-
-**Performance implication:** `$group` requires MongoDB to hold documents in memory (or on disk with `allowDiskUse`) while it processes the entire input stream. It cannot produce output until it has seen every input document. This makes `$group` a "blocking" stage — always place `$match` before it to reduce input size.
-
 ---
 
-### `$unwind` (used before `$group` for array analytics)
+## 1. The `_id` Grouping Key
+
+| Pattern | Example | Groups by |
+|---------|---------|-----------|
+| Single field | `_id: '$category'` | Each unique category |
+| `null` | `_id: null` | Whole collection = one group |
+| Multiple fields | `_id: { cat: '$category', status: '$status' }` | Each unique combination |
+| Expression | `_id: { $year: '$createdAt' }` | Each unique year |
 
 ```javascript
-{ $unwind: '$items' }
-// Converts: { _id: 1, items: ['a', 'b', 'c'] }
-// Into three docs: { _id: 1, items: 'a' }, { _id: 1, items: 'b' }, { _id: 1, items: 'c' }
-```
-
-Use `$unwind` before `$group` when you need to group on individual array elements:
-
-```javascript
-// Count occurrences of each tag across all posts
-await Post.aggregate([
-  { $unwind: '$tags' },           // One doc per tag
-  { $group: { _id: '$tags', count: { $sum: 1 } } },
-  { $sort: { count: -1 } },
+// Count per category
+await Product.aggregate([
+  { $group: { _id: '$category', count: { $sum: 1 } } },
 ]);
-```
+// → [{ _id: 'Electronics', count: 12 }, { _id: 'Books', count: 7 }, ...]
 
----
+// Whole-collection stats (one output doc)
+await Product.aggregate([
+  { $group: { _id: null, total: { $sum: 1 }, avgPrice: { $avg: '$price' } } },
+]);
+// → [{ _id: null, total: 150, avgPrice: 89.5 }]
 
-## 3. Data Flow — Step-by-Step
-
-**Scenario:** Sales report by category from order items.
-
-**Input documents (after `$unwind: '$items'`):**
-```javascript
-{ orderId: 1, status: 'completed', items: { category: 'Electronics', price: 200, quantity: 2 } }
-{ orderId: 1, status: 'completed', items: { category: 'Clothing',    price: 50,  quantity: 3 } }
-{ orderId: 2, status: 'completed', items: { category: 'Electronics', price: 150, quantity: 1 } }
-{ orderId: 3, status: 'completed', items: { category: 'Clothing',    price: 80,  quantity: 2 } }
-{ orderId: 4, status: 'completed', items: { category: 'Books',       price: 25,  quantity: 4 } }
-```
-
-**Pipeline:**
-```javascript
+// Group by year + month
 await Order.aggregate([
-  { $match: { status: 'completed' } },
-  { $unwind: '$items' },
-  {
-    $group: {
-      _id: '$items.category',
-      totalRevenue: { $sum: { $multiply: ['$items.price', '$items.quantity'] } },
-      itemsSold: { $sum: '$items.quantity' },
-      avgPrice: { $avg: '$items.price' },
-      orderCount: { $sum: 1 },
-    },
-  },
-  { $sort: { totalRevenue: -1 } },
+  { $group: {
+      _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
+      revenue: { $sum: '$total' },
+  } },
+  { $sort: { '_id.year': 1, '_id.month': 1 } },   // nested _id needs quoted dot-paths
 ]);
 ```
-
-**After `$group`:**
-```javascript
-{ _id: 'Electronics', totalRevenue: 550, itemsSold: 3, avgPrice: 175, orderCount: 2 }
-//   200*2 + 150*1 = 550; qty: 2+1=3; avg: (200+150)/2=175; count: 2 docs
-{ _id: 'Clothing',    totalRevenue: 310, itemsSold: 5, avgPrice: 65,  orderCount: 2 }
-//   50*3 + 80*2 = 310; qty: 3+2=5; avg: (50+80)/2=65; count: 2 docs
-{ _id: 'Books',       totalRevenue: 100, itemsSold: 4, avgPrice: 25,  orderCount: 1 }
-```
-
-**After `$sort: { totalRevenue: -1 }`:**
-```javascript
-[
-  { _id: 'Electronics', totalRevenue: 550, itemsSold: 3, avgPrice: 175, orderCount: 2 },
-  { _id: 'Clothing',    totalRevenue: 310, itemsSold: 5, avgPrice: 65,  orderCount: 2 },
-  { _id: 'Books',       totalRevenue: 100, itemsSold: 4, avgPrice: 25,  orderCount: 1 },
-]
-```
-
----
-
-## 4. Operators Deep Dive
-
-### `$sum` — Sum Values or Count Documents
-
-**Full syntax:**
-```javascript
-// Sum a numeric field
-{ fieldName: { $sum: '$numericField' } }
-
-// Count documents in each group (sum 1 for each document)
-{ count: { $sum: 1 } }
-
-// Sum the result of an expression
-{ totalRevenue: { $sum: { $multiply: ['$price', '$quantity'] } } }
-
-// Sum with conditional
-{ paidCount: { $sum: { $cond: ['$isPaid', 1, 0] } } }
-```
-
-**Return value:** Number. If the field is missing on some documents, those documents contribute 0 to the sum (no error).
 
 **Edge cases:**
-- If ALL documents in a group have missing field: sum is 0
-- If the field is a string: ignored (contributes 0)
-- If the field is an array: sum of array elements (if numeric)
+- Grouping by a field that's missing on some docs → those docs form a group with `_id: null` (merged with actual-null values).
+- After `$group`, the ONLY fields that exist are `_id` + your accumulators. Everything else is gone.
+- On an empty input (nothing survived `$match`), `$group` outputs `[]` — even `_id: null` produces no document. `result[0]?.total ?? 0` is the safe read.
 
 ---
 
-### `$avg` — Arithmetic Mean
+## 2. Accumulators — What Each Returns
+
+| Accumulator | Purpose | Returns | Missing-field behavior |
+|------------|---------|---------|------------------------|
+| `$sum` | Sum / count | Number | Contributes **0** (never errors) |
+| `$avg` | Average | Number or `null` | **Excluded** from the average (NOT counted as 0) |
+| `$max` / `$min` | Extremes | Input type | All missing → `null` |
+| `$push` | Collect all values | Array (with duplicates) | Pushes `null` |
+| `$addToSet` | Collect unique values | Array (no duplicates, unordered) | At most one `null` |
+| `$first` / `$last` | First/last doc's value | Any | **Arbitrary without a prior `$sort`!** |
+| `$count: {}` | Count docs (v5+) | Number | Same as `$sum: 1` |
+
+### `$sum` — Sum or Count
 
 ```javascript
-{ averageRating: { $avg: '$rating' } }
-{ avgOrderValue: { $avg: '$total' } }
-
-// Average of a computed expression
-{ avgRevenue: { $avg: { $multiply: ['$price', '$quantity'] } } }
+{ totalRevenue: { $sum: '$total' } }        // sum a field
+{ orderCount: { $sum: 1 } }                  // count docs (sum 1 per doc)
+{ revenue: { $sum: { $multiply: ['$price', '$quantity'] } } }   // sum an expression
+{ paidCount: { $sum: { $cond: ['$isPaid', 1, 0] } } }           // conditional count
 ```
 
-**Return value:** Number (float). If all values are missing/null: returns `null`.
+**Edge case:** `{ count: { $sum: '$price' } }` sums prices — it does NOT count. To count, sum the constant `1`. Non-numeric values (strings) contribute 0 silently.
 
-**Edge case:** Documents where the field is missing are **excluded** from the average calculation (not treated as 0). This is different from `$sum` behavior.
+### `$avg` — the Missing-Field Difference
 
 ```javascript
-// Group: { docs: [{rating: 5}, {rating: 3}, {}] }
-// $avg: '$rating' → (5+3)/2 = 4  (missing field excluded)
-// $sum: '$rating' → 5+3+0 = 8   (missing field treated as 0)
+// Group has docs: {rating: 5}, {rating: 3}, {no rating field}
+{ $avg: '$rating' }   // (5+3)/2 = 4     — missing EXCLUDED
+{ $sum: '$rating' }   // 5+3+0 = 8       — missing counts as 0
 ```
 
----
+This asymmetry means `sum / count ≠ avg` when fields are missing — be deliberate about which you want.
 
-### `$max` / `$min` — Maximum / Minimum
+### `$max` / `$min`
 
 ```javascript
 { highestPrice: { $max: '$price' } }
-{ lowestPrice:  { $min: '$price' } }
-{ newestOrder:  { $max: '$createdAt' } }  // Works with dates too
-{ oldestOrder:  { $min: '$createdAt' } }
+{ newestOrder: { $max: '$createdAt' } }    // works on dates and strings too
 ```
 
-**Return value:** The highest/lowest value in the group (respects type comparison: numbers < strings < objects < arrays).
-
-**Edge cases:**
-- If all values are missing: returns `null`
-- Works on dates, strings, numbers
-
----
-
-### `$push` — Collect All Values into Array
+### `$push` / `$addToSet` — Collect Into Arrays
 
 ```javascript
-{ orderTotals: { $push: '$total' } }
-// Collects ALL values, including duplicates
-// { _id: 'Alice', orderTotals: [100, 200, 100, 350] }
-
-// Collect entire documents
-{ allOrders: { $push: '$$ROOT' } }
-// { _id: 'Alice', allOrders: [{_id:1, customer:'Alice', total:100, ...}, ...] }
-
-// Collect a sub-object
-{ items: { $push: { product: '$product', qty: '$quantity' } } }
+{ orderTotals: { $push: '$total' } }              // all values, duplicates kept, order preserved
+{ uniqueCustomers: { $addToSet: '$customer' } }   // deduplicated, order NOT guaranteed
+{ items: { $push: { product: '$product', qty: '$quantity' } } }   // collect sub-objects
+{ allDocs: { $push: '$$ROOT' } }                  // collect ENTIRE documents
 ```
 
-**Return value:** Array (may contain duplicates, preserves insertion order).
-
-**Edge cases:**
-- If the expression is null/missing for a document: `null` is pushed into the array
-- Memory concern: `$push` builds arrays in memory. Pushing `$$ROOT` (entire documents) across millions of records can exhaust memory. Use `allowDiskUse: true` if needed.
-
----
-
-### `$$ROOT` — Reference to the Entire Input Document
-
-`$$ROOT` is a system variable (double `$`) that refers to the complete document currently being processed:
+**`$$ROOT`** is a system variable meaning "the whole current document":
 
 ```javascript
-{ $push: '$$ROOT' }    // Collect complete documents
-{ $first: '$$ROOT' }   // Get the first complete document in the group
-```
-
-```javascript
-// Get the most expensive product per category (full document)
+// Most expensive product per category — full doc
 await Product.aggregate([
   { $sort: { price: -1 } },
   { $group: { _id: '$category', topProduct: { $first: '$$ROOT' } } },
 ]);
-// topProduct contains the entire document object
 ```
 
----
+**Edge cases:**
+- `$push: '$$ROOT'` on huge groups builds massive in-memory arrays — the classic aggregation memory blow-up. `$project` only the needed fields first, and/or use `allowDiskUse`.
+- `$addToSet` treats `1` (number) and `'1'` (string) as different values.
 
-### `$addToSet` — Unique Values Only
-
-```javascript
-{ uniqueCustomers: { $addToSet: '$customer' } }
-// Like $push but deduplicates
-// { _id: 'Electronics', uniqueCustomers: ['Alice', 'Bob', 'Carol'] }
-// (each customer appears once regardless of how many Electronics orders they placed)
-```
-
-**Return value:** Array with no duplicates. Order is not guaranteed.
-
-**Edge case:**
-- `null` values: if multiple documents have a missing field, only one `null` is added to the set
-- Different types: `1` (number) and `"1"` (string) are considered different values
-
-**`$push` vs `$addToSet`:**
-- `$push`: keeps all values including duplicates — use when you want the full list
-- `$addToSet`: deduplicated — use when you want unique values (e.g., unique customers, unique tags)
-
----
-
-### `$first` / `$last` — First or Last Value in Group
+### `$first` / `$last` — Sort First or Get Garbage
 
 ```javascript
-// The order within a group depends on the sort BEFORE $group
-{ firstOrder:  { $first: '$total' } }   // Total of the first doc in the group
-{ latestOrder: { $first: '$total' } }   // If sorted by createdAt: -1, this is the newest
-{ oldestOrder: { $last: '$total' } }    // The last doc in the group
-```
-
-**Critical rule:** `$first` and `$last` are meaningful ONLY when you sort BEFORE `$group`. Without a preceding `$sort`, the "first" document in each group is arbitrary (depends on storage order).
-
-```javascript
-// CORRECT — get each customer's most recent order total
+// CORRECT — each customer's most recent order total
 await Order.aggregate([
-  { $sort: { createdAt: -1 } },                                    // Newest first
-  { $group: { _id: '$customer', latestTotal: { $first: '$total' } } }, // First = newest
+  { $sort: { createdAt: -1 } },                                       // sort FIRST
+  { $group: { _id: '$customer', latestTotal: { $first: '$total' } } }, // first = newest
 ]);
 
-// WRONG — latestTotal is arbitrary without sort
+// WRONG — no sort → "first" is whatever storage order gives you (arbitrary!)
 await Order.aggregate([
   { $group: { _id: '$customer', latestTotal: { $first: '$total' } } },
 ]);
 ```
 
----
-
-### `$count` Accumulator (MongoDB 5.0+)
-
-```javascript
-{ docCount: { $count: {} } }
-// Equivalent to: { docCount: { $sum: 1 } }
-// Newer syntax — cleaner intent
-```
+This is the most common silent-wrong-answer bug in `$group` — the query runs fine and returns plausible numbers that are simply not "the latest."
 
 ---
 
-### Mathematical Expressions Inside Accumulators
+## 3. Expressions Inside Accumulators
 
-These are expression operators (not accumulators themselves) but they can be nested inside any accumulator:
-
-#### `$multiply`
-```javascript
-{ totalRevenue: { $sum: { $multiply: ['$price', '$quantity'] } } }
-// Multiplies price × quantity for each doc, then sums across the group
-```
-
-#### `$divide`
-```javascript
-{ avgPricePerUnit: { $avg: { $divide: ['$totalPrice', '$quantity'] } } }
-```
-
-#### `$subtract`
-```javascript
-{ totalProfit: { $sum: { $subtract: ['$sellingPrice', '$costPrice'] } } }
-```
-
-#### `$year` / `$month` inside `_id` for time-based grouping
-```javascript
-{
-  $group: {
-    _id: {
-      year:  { $year:  '$createdAt' },
-      month: { $month: '$createdAt' },
-    },
-    revenue:    { $sum: '$total' },
-    orderCount: { $sum: 1 },
-  }
-}
-// Groups all orders from the same year+month into one record
-```
-
-#### `$cond` inside accumulators — Conditional Count
-```javascript
-{ activeCount: { $sum: { $cond: ['$isActive', 1, 0] } } }
-// Counts only documents where isActive is truthy
-
-{ premiumRevenue: { $sum: { $cond: [{ $eq: ['$tier', 'premium'] }, '$total', 0] } } }
-// Sum total only for premium orders; non-premium contribute 0
-```
-
----
-
-## 5. Advanced Concepts
-
-### Grouping by `null` — Whole-Collection Aggregation
-
-```javascript
-await Product.aggregate([
-  {
-    $group: {
-      _id: null,             // No grouping — all docs form one group
-      totalProducts: { $sum: 1 },
-      averagePrice: { $avg: '$price' },
-      maxPrice: { $max: '$price' },
-      minPrice: { $min: '$price' },
-      allCategories: { $addToSet: '$category' },
-    },
-  },
-]);
-// Returns ONE document with stats across the entire collection
-// [{ _id: null, totalProducts: 150, averagePrice: 89.5, ... }]
-```
-
-### Compound Grouping Key
+Math/date/conditional operators nest inside any accumulator:
 
 ```javascript
 {
   $group: {
-    _id: {
-      category: '$category',
-      status: '$status',
+    _id: '$category',
+    revenue:  { $sum: { $multiply: ['$price', '$quantity'] } },
+    profit:   { $sum: { $subtract: ['$sellingPrice', '$costPrice'] } },
+    activeCount: { $sum: { $cond: ['$isActive', 1, 0] } },   // count only active
+    premiumRevenue: {
+      $sum: { $cond: [{ $eq: ['$tier', 'premium'] }, '$total', 0] },  // sum only premium
     },
-    count: { $sum: 1 },
   }
 }
-// Creates one group per unique (category, status) combination
-// Access after: sort by '_id.category', filter by '_id.status'
 ```
 
-To sort by a nested `_id` field, quote the dot-notation path:
-```javascript
-{ $sort: { '_id.year': 1, '_id.month': 1 } }
-```
-
-### Two-Stage `$match` Pattern
-
-The first `$match` filters on original document fields. A second `$match` after `$group` filters on computed/accumulated fields:
+Date extraction in the grouping key:
 
 ```javascript
-// Customers who placed 5+ orders AND spent over $500
-await Order.aggregate([
-  { $match: { status: 'completed' } },           // Stage 1: filter originals
-  { $group: {
-    _id: '$customer',
-    orderCount: { $sum: 1 },
-    totalSpent: { $sum: '$total' },
-  }},
-  { $match: { orderCount: { $gte: 5 }, totalSpent: { $gt: 500 } } }, // Stage 2: filter groups
-]);
+_id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } }
+// $month → 1–12, $year → e.g. 2024, $dayOfWeek → 1 (Sun) – 7 (Sat)
+// Edge case: null/missing dates → these operators return null, no error
 ```
-
-### Memory and Performance
-
-- `$group` must consume the entire input before producing any output (blocking stage)
-- Default memory limit: 100MB per pipeline stage
-- For large datasets: add `.option({ allowDiskUse: true })`
-- To reduce memory: always `$match` before `$group` to reduce input size
-- `$project` before `$group` can also help: exclude fields you don't need in the accumulation
 
 ---
 
-## 6. Use Cases
+## 4. `$unwind` Before `$group` — Array Analytics
 
-### Simple — Count Documents per Category
+To group on individual **array elements**, unwind first (one doc per element):
+
 ```javascript
-await Product.aggregate([
-  { $group: { _id: '$category', count: { $sum: 1 } } },
+// Count tag usage across all posts
+await Post.aggregate([
+  { $unwind: '$tags' },                              // { tags: ['a','b'] } → 2 docs
+  { $group: { _id: '$tags', count: { $sum: 1 } } },
   { $sort: { count: -1 } },
 ]);
 ```
 
-### Simple — Overall Collection Stats
-```javascript
-await Product.aggregate([
-  {
-    $group: {
-      _id: null,
-      total: { $sum: 1 },
-      avgPrice: { $avg: '$price' },
-      maxPrice: { $max: '$price' },
-      minPrice: { $min: '$price' },
-    },
-  },
-]);
-```
+Full sales-report pattern:
 
-### Intermediate — Monthly Sales Trend
 ```javascript
 await Order.aggregate([
   { $match: { status: 'completed' } },
-  {
-    $group: {
-      _id: { year: { $year: '$createdAt' }, month: { $month: '$createdAt' } },
-      revenue: { $sum: '$total' },
-      orders: { $sum: 1 },
-      avgOrder: { $avg: '$total' },
-    },
-  },
-  { $sort: { '_id.year': 1, '_id.month': 1 } },
-]);
-```
-
-### Intermediate — Top 10 Customers
-```javascript
-await Order.aggregate([
-  { $match: { status: 'completed' } },
-  {
-    $group: {
-      _id: '$customer',
-      totalSpent: { $sum: '$total' },
-      orderCount: { $sum: 1 },
-      avgOrderValue: { $avg: '$total' },
-      lastOrder: { $max: '$createdAt' },
-    },
-  },
-  { $sort: { totalSpent: -1 } },
-  { $limit: 10 },
-]);
-```
-
-### Advanced — User Activity by Role with Conditional Count
-```javascript
-await User.aggregate([
-  {
-    $group: {
-      _id: '$role',
-      total: { $sum: 1 },
-      activeCount: { $sum: { $cond: ['$isActive', 1, 0] } },
-      avgAge: { $avg: '$age' },
-      names: { $push: '$name' },
-      uniqueCities: { $addToSet: '$city' },
-    },
-  },
-  {
-    $addFields: {
-      inactiveCount: { $subtract: ['$total', '$activeCount'] },
-      activePercent: {
-        $round: [{ $multiply: [{ $divide: ['$activeCount', '$total'] }, 100] }, 1],
-      },
-    },
-  },
-]);
-```
-
-### Advanced — Sales Report with Array Item Grouping
-```javascript
-await Order.aggregate([
-  { $match: { status: 'completed' } },
-  { $unwind: '$items' },
-  {
-    $group: {
+  { $unwind: '$items' },                             // one doc per order item
+  { $group: {
       _id: '$items.category',
-      totalSales: { $sum: { $multiply: ['$items.price', '$items.quantity'] } },
+      totalRevenue: { $sum: { $multiply: ['$items.price', '$items.quantity'] } },
       itemsSold: { $sum: '$items.quantity' },
       avgPrice: { $avg: '$items.price' },
+  } },
+  { $sort: { totalRevenue: -1 } },
+]);
+```
+
+(Unwind edge cases — empty/missing arrays get **dropped** by default — are covered in `04_Lookup_And_Joins.md`.)
+
+---
+
+## 5. Two-Stage `$match` — Filtering on Aggregated Values
+
+First `$match` filters original fields; a **second** `$match` after `$group` filters on the computed results:
+
+```javascript
+// Customers with 5+ completed orders AND over $500 spent
+await Order.aggregate([
+  { $match: { status: 'completed' } },                    // filter originals
+  { $group: {
+      _id: '$customer',
       orderCount: { $sum: 1 },
-    },
-  },
-  { $sort: { totalSales: -1 } },
+      totalSpent: { $sum: '$total' },
+  } },
+  { $match: { orderCount: { $gte: 5 }, totalSpent: { $gt: 500 } } },   // filter groups
 ]);
 ```
+
+This is the aggregation equivalent of SQL's `HAVING`.
 
 ---
 
-## 7. Common Mistakes
+## 6. Performance Notes
 
-### 1. Filtering Original Fields AFTER `$group`
-```javascript
-// WRONG — 'status' doesn't exist after $group
-await Order.aggregate([
-  { $group: { _id: '$customer', total: { $sum: '$total' } } },
-  { $match: { status: 'completed' } },  // Error or no results
-]);
-
-// CORRECT
-await Order.aggregate([
-  { $match: { status: 'completed' } },  // Filter before grouping
-  { $group: { _id: '$customer', total: { $sum: '$total' } } },
-]);
-```
-
-### 2. Using `$first`/`$last` Without Prior `$sort`
-```javascript
-// WRONG — result is arbitrary
-await Order.aggregate([
-  { $group: { _id: '$customer', latest: { $first: '$createdAt' } } },
-]);
-
-// CORRECT
-await Order.aggregate([
-  { $sort: { createdAt: -1 } },
-  { $group: { _id: '$customer', latest: { $first: '$createdAt' } } },
-]);
-```
-
-### 3. Referencing `$group` Output Fields Incorrectly
-```javascript
-// After $group, field names are exactly what you defined
-await Order.aggregate([
-  { $group: { _id: '$customer', totalSpent: { $sum: '$total' } } },
-  { $sort: { total: -1 } },         // WRONG — field is 'totalSpent', not 'total'
-  { $sort: { totalSpent: -1 } },    // CORRECT
-]);
-```
-
-### 4. Forgetting Nested `_id` Access Requires Quotes
-```javascript
-// WRONG
-{ $sort: { _id.year: 1 } }
-
-// CORRECT — dot-notation in object keys must be quoted
-{ $sort: { '_id.year': 1, '_id.month': 1 } }
-```
-
-### 5. Expecting `$sum: '$field'` to Count Documents
-```javascript
-// WRONG — this sums the 'price' field values, not document count
-{ count: { $sum: '$price' } }
-
-// CORRECT — to count docs, sum constant 1
-{ count: { $sum: 1 } }
-
-// CORRECT — to sum a field
-{ totalRevenue: { $sum: '$total' } }
-```
-
-### 6. `$push: '$$ROOT'` Memory Blow-up
-```javascript
-// DANGEROUS on large collections
-await Order.aggregate([
-  { $group: { _id: '$status', allOrders: { $push: '$$ROOT' } } },
-  // If 'completed' has 500k orders, the 'allOrders' array holds 500k full documents
-]);
-
-// SOLUTION — add allowDiskUse, or project only needed fields first
-await Order.aggregate([
-  { $project: { status: 1, total: 1, customer: 1 } },  // Reduce document size first
-  { $group: { _id: '$status', allOrders: { $push: '$$ROOT' } } },
-]).option({ allowDiskUse: true });
-```
+- `$group` is a **blocking stage** — it must see ALL input before emitting anything. Always `$match` first to shrink the input.
+- 100MB per-stage memory limit → `.option({ allowDiskUse: true })` for big groups.
+- `$project` away large unused fields *before* `$group` when pushing `$$ROOT` or grouping huge docs.
 
 ---
 
-## 8. Quick Reference
+## 7. Summary
 
-### `$group` Accumulators
+### Common Mistakes
 
-| Accumulator | Purpose | Returns | Null behavior |
-|------------|---------|---------|---------------|
-| `$sum` | Sum / Count | Number | Missing field → 0 |
-| `$avg` | Average | Number or null | Missing field excluded from avg |
-| `$max` | Maximum | Same type as input | All missing → null |
-| `$min` | Minimum | Same type as input | All missing → null |
-| `$push` | Collect all into array | Array | Missing → null pushed |
-| `$addToSet` | Collect unique into array | Array (unordered) | One null per group max |
-| `$first` | First value in group | Any | Needs prior `$sort` to be meaningful |
-| `$last` | Last value in group | Any | Needs prior `$sort` to be meaningful |
-| `$count` | Count docs (v5.0+) | Number | N/A |
+```javascript
+// 1. Filtering original fields AFTER $group — they no longer exist → silently []
+{ $group: {...} }, { $match: { status: 'completed' } }   // WRONG ORDER
 
-### `$group` Expression Operators (for nesting inside accumulators)
+// 2. $first/$last without a prior $sort → arbitrary results, no error
 
-| Operator | Syntax | Purpose |
-|----------|--------|---------|
-| `$multiply` | `{ $multiply: [a, b] }` | Multiply |
-| `$divide` | `{ $divide: [a, b] }` | Divide |
-| `$subtract` | `{ $subtract: [a, b] }` | Subtract |
-| `$add` | `{ $add: [a, b] }` | Add |
-| `$year` | `{ $year: '$date' }` | Extract year |
-| `$month` | `{ $month: '$date' }` | Extract month |
-| `$cond` | `{ $cond: [if, then, else] }` | Conditional value |
-| `$$ROOT` | `$$ROOT` | Full document reference |
+// 3. Wrong field name after $group — outputs are EXACTLY what you named
+{ $group: { _id: '$customer', totalSpent: {...} } },
+{ $sort: { total: -1 } }        // WRONG — field is 'totalSpent'
 
-### `$group` `_id` Patterns
+// 4. Nested _id sort needs quotes
+{ $sort: { '_id.year': 1 } }    // correct — unquoted _id.year is a JS syntax error
 
-| Pattern | Example | Groups By |
-|---------|---------|-----------|
-| Single field | `'$category'` | Each unique category value |
-| `null` | `null` | Entire collection as one group |
-| Multiple fields | `{ year: { $year: '$date' }, month: { $month: '$date' } }` | Each year+month combination |
-| Expression result | `{ $year: '$createdAt' }` | Each unique year |
+// 5. { $sum: '$price' } does NOT count docs — { $sum: 1 } does
+```
+
+### Key Points
+
+1. `_id` is required; `_id: null` = aggregate the entire collection into one doc.
+2. After `$group`, only `_id` + accumulator fields exist.
+3. `$sum` treats missing as 0; `$avg` excludes missing — different denominators.
+4. `$first`/`$last` are meaningless without a `$sort` immediately before the `$group`.
+5. `$push` keeps duplicates; `$addToSet` dedupes (and loses order).
+6. Empty input → `$group` outputs `[]`, even with `_id: null` — read results with `result[0]?.field ?? fallback`.
+7. Second `$match` after `$group` = SQL `HAVING`.
